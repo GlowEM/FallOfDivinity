@@ -1,1 +1,2 @@
 Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\obj\x86\Debug\FallOfDivinityContent.contentprojResolveAssemblyReference.cache
+C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\obj\x86\Debug\FallOfDivinityContent.contentprojResolveAssemblyReference.cache

@@ -7,3 +7,5 @@ C:\Users\Gloria\Desktop\github\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapE
 C:\Users\Gloria\Desktop\github\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapEditor.csproj.GenerateResource.Cache
 C:\Users\Gloria\Desktop\github\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapEditor.exe
 C:\Users\Gloria\Desktop\github\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapEditor.pdb
+Z:\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapEditor.exe
+Z:\FallOfDivinity\MapEditor\MapEditor\obj\Debug\MapEditor.pdb

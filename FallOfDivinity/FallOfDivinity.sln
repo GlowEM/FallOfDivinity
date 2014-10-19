@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FallOfDivinity", "FallOfDivinity\FallOfDivinity\FallOfDivinity.csproj", "{7451F5F2-3207-4FED-80E6-D3A041F1D16B}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "FallOfDivinityContent", "FallOfDivinity\FallOfDivinityContent\FallOfDivinityContent.contentproj", "{BD6D08A5-A171-4770-845A-5C2D55EBC7FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7451F5F2-3207-4FED-80E6-D3A041F1D16B}.Debug|x86.ActiveCfg = Debug|x86
+		{7451F5F2-3207-4FED-80E6-D3A041F1D16B}.Debug|x86.Build.0 = Debug|x86
+		{7451F5F2-3207-4FED-80E6-D3A041F1D16B}.Release|x86.ActiveCfg = Release|x86
+		{7451F5F2-3207-4FED-80E6-D3A041F1D16B}.Release|x86.Build.0 = Release|x86
+		{BD6D08A5-A171-4770-845A-5C2D55EBC7FF}.Debug|x86.ActiveCfg = Debug|x86
+		{BD6D08A5-A171-4770-845A-5C2D55EBC7FF}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

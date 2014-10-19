@@ -1,0 +1,6 @@
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.exe
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.pdb
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.csprojResolveAssemblyReference.cache
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.exe
+Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.pdb

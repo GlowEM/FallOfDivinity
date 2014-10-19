@@ -5,7 +5,12 @@ using System.Text;
 
 namespace FallOfDivinity
 {
-    class Enemy : Character
+    abstract class Enemy : Character
     {
+
+        //constructor
+        public Enemy()
+        { }
+
     }
 }

@@ -10,3 +10,9 @@ C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\Fall
 C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.exe
 C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.pdb
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.csprojResolveAssemblyReference.cache
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.exe
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.pdb
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.exe
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.pdb

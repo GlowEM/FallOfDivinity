@@ -1,2 +1,3 @@
 Z:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\obj\x86\Debug\FallOfDivinityContent.contentprojResolveAssemblyReference.cache
 C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\obj\x86\Debug\FallOfDivinityContent.contentprojResolveAssemblyReference.cache
+\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\obj\x86\Debug\FallOfDivinityContent.contentprojResolveAssemblyReference.cache

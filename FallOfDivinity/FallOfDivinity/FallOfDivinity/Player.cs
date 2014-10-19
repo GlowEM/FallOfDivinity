@@ -7,5 +7,9 @@ namespace FallOfDivinity
 {
     class Player : Character
     {
+
+        //constructor
+        public Player()
+        { }
     }
 }

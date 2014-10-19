@@ -5,7 +5,11 @@ using System.Text;
 
 namespace FallOfDivinity
 {
-    class Character : MovableGameObject
+    abstract class Character : MovableGameObject
     {
+
+        //constructor
+        public Character()
+        { }
     }
 }

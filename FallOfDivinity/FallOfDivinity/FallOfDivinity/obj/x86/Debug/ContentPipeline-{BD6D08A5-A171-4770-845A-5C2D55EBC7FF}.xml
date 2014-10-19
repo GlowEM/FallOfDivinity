@@ -8,15 +8,15 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
+      <LoggerRootDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
+      <IntermediateDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-10-18T21:00:56.4630982-04:00</Value>
+        <Value>2014-10-18T20:54:58.3404027-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

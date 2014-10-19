@@ -7,5 +7,9 @@ namespace FallOfDivinity
 {
     class Henchmen : Enemy
     {
+
+        //constructor
+        public Henchmen()
+        { }
     }
 }

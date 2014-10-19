@@ -7,5 +7,10 @@ namespace FallOfDivinity
 {
     class Background : GameObject
     {
+
+        //constructor
+        public Background()
+        { }
+
     }
 }

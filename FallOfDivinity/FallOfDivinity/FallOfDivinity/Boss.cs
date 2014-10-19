@@ -7,5 +7,9 @@ namespace FallOfDivinity
 {
     class Boss : Enemy
     {
+
+        //constructor
+        public Boss()
+        { }
     }
 }

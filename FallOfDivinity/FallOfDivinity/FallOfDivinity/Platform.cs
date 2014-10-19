@@ -7,5 +7,14 @@ namespace FallOfDivinity
 {
     class Platform : GameObject
     {
+
+        //constructor
+        public Platform()
+        { }
+
+
+
+
+
     }
 }

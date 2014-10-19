@@ -5,7 +5,13 @@ using System.Text;
 
 namespace FallOfDivinity
 {
-    class GameObject
+    abstract class GameObject
     {
+
+        //constructor
+        public GameObject()
+        { }
+
+
     }
 }

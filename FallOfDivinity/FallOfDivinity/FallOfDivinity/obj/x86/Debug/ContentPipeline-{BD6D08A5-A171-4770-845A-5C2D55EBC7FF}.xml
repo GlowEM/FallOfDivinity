@@ -8,15 +8,15 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
-      <LoggerRootDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>Z:\GitHub\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
+      <LoggerRootDirectory>Z:\GitHub\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
+      <IntermediateDirectory>Z:\GitHub\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>Z:\GitHub\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2014-10-18T20:54:58.3404027-04:00</Value>
+        <Value>2014-10-18T20:41:21.7305555-04:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

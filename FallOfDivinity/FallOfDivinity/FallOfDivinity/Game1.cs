@@ -19,6 +19,10 @@ namespace FallOfDivinity
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // Attribute
+        Texture2D character;
+        Vector2 v2;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -34,6 +38,7 @@ namespace FallOfDivinity
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            v2 = new Vector2(30, 60);
 
             base.Initialize();
         }
@@ -48,6 +53,7 @@ namespace FallOfDivinity
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            character = Content.Load<Texture2D>("Character");
         }
 
         /// <summary>
@@ -73,6 +79,7 @@ namespace FallOfDivinity
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+            ProcessInput();
         }
 
         /// <summary>
@@ -85,7 +92,36 @@ namespace FallOfDivinity
 
             // TODO: Add your drawing code here
 
+            //Begin
+            spriteBatch.Begin();
+            spriteBatch.Draw(character, v2, Color.White);
+            spriteBatch.End();
+
             base.Draw(gameTime);
+        }
+
+        public void ProcessInput()
+        {
+            KeyboardState ks = Keyboard.GetState();
+            if (ks.IsKeyDown(Keys.W))
+            {
+                v2.Y = v2.Y - 1;
+            }
+
+            if (ks.IsKeyDown(Keys.A))
+            {
+                v2.X = v2.X - 1;
+            }
+
+            if (ks.IsKeyDown(Keys.S))
+            {
+                v2.Y = v2.Y + 1;
+            }
+
+            if (ks.IsKeyDown(Keys.D))
+            {
+                v2.X = v2.X + 1;
+            }
         }
     }
 }

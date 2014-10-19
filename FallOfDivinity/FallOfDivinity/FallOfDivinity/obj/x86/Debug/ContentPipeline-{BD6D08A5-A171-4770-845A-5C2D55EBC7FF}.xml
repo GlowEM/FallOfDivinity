@@ -8,10 +8,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
-      <LoggerRootDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
-      <IntermediateDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>\\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinityContent\</RootDirectory>
+      <LoggerRootDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\</LoggerRootDirectory>
+      <IntermediateDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

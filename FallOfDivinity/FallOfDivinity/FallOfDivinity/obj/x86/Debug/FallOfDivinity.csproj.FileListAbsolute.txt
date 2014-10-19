@@ -16,3 +16,9 @@ C:\Users\Gloria\Desktop\github\FallOfDivinity\FallOfDivinity\FallOfDivinity\Fall
 \\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.pdb
 \\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.exe
 \\banner.main.ad.rit.edu\students\gem8864\IGMProfile\Desktop\Fall of Divinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.pdb
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.exe
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\bin\x86\Debug\FallOfDivinity.pdb
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.csprojResolveAssemblyReference.cache
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.exe
+D:\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\FallOfDivinity\obj\x86\Debug\FallOfDivinity.pdb

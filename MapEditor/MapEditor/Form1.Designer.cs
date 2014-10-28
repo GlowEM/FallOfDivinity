@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.platButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
+            this.longPlatButton = new System.Windows.Forms.Button();
+            this.platButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // platButton
-            // 
-            this.platButton.BackgroundImage = global::MapEditor.Properties.Resources.Platform;
-            this.platButton.Location = new System.Drawing.Point(71, 398);
-            this.platButton.Name = "platButton";
-            this.platButton.Size = new System.Drawing.Size(69, 44);
-            this.platButton.TabIndex = 0;
-            this.platButton.Text = "Platform";
-            this.platButton.UseVisualStyleBackColor = true;
-            this.platButton.Click += new System.EventHandler(this.platButton_Click);
             // 
             // saveButton
             // 
@@ -75,11 +65,34 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // longPlatButton
+            // 
+            this.longPlatButton.BackgroundImage = global::MapEditor.Properties.Resources.Long_Platform;
+            this.longPlatButton.Location = new System.Drawing.Point(174, 389);
+            this.longPlatButton.Name = "longPlatButton";
+            this.longPlatButton.Size = new System.Drawing.Size(69, 44);
+            this.longPlatButton.TabIndex = 4;
+            this.longPlatButton.Text = "Long Platform";
+            this.longPlatButton.UseVisualStyleBackColor = true;
+            this.longPlatButton.Click += new System.EventHandler(this.longPlatButton_Click);
+            // 
+            // platButton
+            // 
+            this.platButton.BackgroundImage = global::MapEditor.Properties.Resources.Platform;
+            this.platButton.Location = new System.Drawing.Point(71, 398);
+            this.platButton.Name = "platButton";
+            this.platButton.Size = new System.Drawing.Size(69, 44);
+            this.platButton.TabIndex = 0;
+            this.platButton.Text = "Platform";
+            this.platButton.UseVisualStyleBackColor = true;
+            this.platButton.Click += new System.EventHandler(this.platButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 481);
+            this.Controls.Add(this.longPlatButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.saveButton);
@@ -96,6 +109,7 @@
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button longPlatButton;
     }
 }
 

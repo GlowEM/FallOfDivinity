@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MapEditor
 {
@@ -217,6 +218,103 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(platformStuff[p]);
             p++;
+        }
+
+
+        StreamWriter output = null;
+
+        private string fileName = "";
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            fileName = "map.txt";
+
+            try
+            {
+                // create the streamwriter object
+                output = new StreamWriter(fileName);
+
+                // finds all the platformStuff pictureBoxes
+                foreach (PictureBox picP in platformStuff)
+                {
+                    if (picP != null && picP.Visible == true)
+                    {
+                        // writes the type of image, the x and y coordinates with the width and height
+                        output.WriteLine("Type: platform," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height);
+                        string P = "Type: platform, " + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height;
+                        string[] plat = P.Split(',');
+                    }
+                }
+                output.Close();
+            }
+            catch (IOException ioe)
+            {
+                Console.WriteLine("Output Message: " + ioe.Message);
+                Console.WriteLine("Output StackTrace: " + ioe.StackTrace);
+            }
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            StreamReader input = null;
+
+            try
+            {
+                // open file for reading
+                input = new StreamReader("map.txt");
+
+                // read and list all of the data
+                string text = "";
+                while ((text = input.ReadLine()) != null)
+                {
+                    Console.WriteLine(text);
+                    string[] ls = text.Split(',');
+
+                    // loads all the platform objects
+                    if (ls[0].Contains("platform"))
+                    {
+                        int x;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        int y;
+                        parsed = int.TryParse(ls[4], out y);
+                        // creates a new picturebox and puts
+                        // it into the platformStuff array
+                        platformStuff[p] = new PictureBox();
+                        platformStuff[p].Visible = true;
+                        platformStuff[p].Name = "platform" + p;
+                        // sets the image to the pictureBox
+                        image = Properties.Resources.Platform;
+                        platformStuff[p].Image = image;
+                        platformStuff[p].Size = new System.Drawing.Size(image.Width, image.Height);
+                        // puts the pictureBox in the top left corner
+                        platformStuff[p].Location = new Point(x, y);
+                        // mouseEvents
+                        platformStuff[p].MouseDown += new MouseEventHandler(this.mouseDown);
+                        platformStuff[p].MouseUp += new MouseEventHandler(this.mouseUp);
+                        platformStuff[p].MouseMove += new MouseEventHandler(this.mouseMove);
+                        // adds pictureBox to form
+                        this.Controls.Add(platformStuff[p]);
+                        p++;
+                    }
+                }
+                input.Close();
+            }
+            catch (IOException ioe)
+            {
+                Console.WriteLine("Input Message: " + ioe.Message);
+                Console.WriteLine("Input Stack Trace: " + ioe.StackTrace);
+            }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            foreach (PictureBox picP in platformStuff)
+            {
+                if (picP != null)
+                {
+                    picP.Image = null;
+                }
+            }
         }
     }
 }

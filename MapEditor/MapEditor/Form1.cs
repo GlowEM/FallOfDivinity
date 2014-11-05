@@ -16,6 +16,7 @@ namespace MapEditor
     {
         PictureBox[] platformStuff = new PictureBox[1000];
         PictureBox[] longPlatStuff = new PictureBox[1000];
+        PictureBox[] vinesStuff = new PictureBox[1000];
 
         //attributes
         private int currentXB, currentYB;
@@ -27,6 +28,7 @@ namespace MapEditor
         Image image;
         int p = 0;
         int l = 0;
+        int v = 0;
 
         public Form1()
         {
@@ -71,6 +73,29 @@ namespace MapEditor
                 var mouseLocation = Cursor.Position;
 
                 if (picL != null && picL.ClientRectangle.Contains(picL.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = true;
+                    }
+                    // true if F key is down
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = true;
+                    }
+                    // true if B key is down
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = true;
+                    }
+                }
+            }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
                 {
                     // true if left mouse button is down
                     if (e.KeyCode == Keys.D)
@@ -145,7 +170,34 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is up
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = false;
+                    }
+                    // true if F key is up
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = false;
+                    }
+                    // true if B key is up
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = false;
+                    }
+                }
+            }
         }
+
         private void keyPress(object sender, KeyPressEventArgs e)
         {
             foreach (PictureBox picP in platformStuff)
@@ -208,6 +260,36 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
+                {
+                    // if D key is pressed hides
+                    // the pictureBox from the user
+                    if (isPressedD)
+                    {
+                        picV.Hide();
+                    }
+                    // if F key is pressed brings
+                    // pictureBox to front
+                    if (isPressedF)
+                    {
+                        picV.BringToFront();
+                    }
+                    // if B key is pressed brings
+                    // pictureBox to the back
+                    if (isPressedB)
+                    {
+                        picV.SendToBack();
+                    }
+                }
+            }
         }
         private void mouseDown(object sender, MouseEventArgs e)
         {
@@ -234,7 +316,7 @@ namespace MapEditor
                     }
                 }
             }
-            // loops through platform
+            // loops through long platform
             // which is an array of
             // picuterboxes
             foreach (PictureBox picL in longPlatStuff)
@@ -252,6 +334,26 @@ namespace MapEditor
                     {
                         isDragging = true;
                         curBox = picL;
+                        currentXB = e.X;
+                        currentYB = e.Y;
+                    }
+                }
+            }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = true;
+                        curBox = picV;
                         currentXB = e.X;
                         currentYB = e.Y;
                     }
@@ -285,6 +387,22 @@ namespace MapEditor
 
                 // will stop moving the pictureBox
                 if (picL != null && picL.ClientRectangle.Contains(picL.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = false;
+                        curBox = null;
+                    }
+
+                }
+            }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // will stop moving the pictureBox
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -339,6 +457,26 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the pictureBox
+                if (picV != null && picV.ClientRectangle.Contains(picV.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        // moves the pictureBox with the mouse
+                        if (isDragging && picV == curBox)
+                        {
+                            picV.BringToFront();
+                            picV.Top = picV.Top + (e.Y - currentYB);
+                            picV.Left = picV.Left + (e.X - currentXB);
+                        }
+                    }
+                }
+            }
         }
 
         private void platButton_Click(object sender, EventArgs e)
@@ -347,7 +485,7 @@ namespace MapEditor
             // it into the platformStuff array
             platformStuff[p] = new PictureBox();
             platformStuff[p].Visible = true;
-            platformStuff[p].Name = "platform" + p;
+            platformStuff[p].Name = "platforms" + p;
             // sets the image to the pictureBox
             image = Properties.Resources.Platform;
             platformStuff[p].Image = image;
@@ -383,8 +521,8 @@ namespace MapEditor
                     if (picP != null && picP.Visible == true)
                     {
                         // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: platform," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height);
-                        string P = "Type: platform, " + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height;
+                        output.WriteLine("Type: platforms," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height);
+                        string P = "Type: platforms, " + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height;
                         string[] plat = P.Split(',');
                     }
                 }
@@ -395,6 +533,16 @@ namespace MapEditor
                         // writes the type of image, the x and y coordinates with the width and height
                         output.WriteLine("Type: long platform," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " ,Height, " + picL.Height);
                         string L = "Type: long platform, " + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " ,Height, " + picL.Height;
+                        string[] longP = L.Split(',');
+                    }
+                }
+                foreach (PictureBox picV in vinesStuff)
+                {
+                    if (picV != null && picV.Visible == true)
+                    {
+                        // writes the type of image, the x and y coordinates with the width and height
+                        output.WriteLine("Type: vines," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " ,Height, " + picV.Height);
+                        string L = "Type: vines, " + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " ,Height, " + picV.Height;
                         string[] longP = L.Split(',');
                     }
                 }
@@ -424,7 +572,7 @@ namespace MapEditor
                     string[] ls = text.Split(',');
 
                     // loads all the platform objects
-                    if (ls[0].Contains("platform"))
+                    if (ls[0].Contains("platforms"))
                     {
                         int x;
                         Boolean parsed = int.TryParse(ls[2], out x);
@@ -434,7 +582,7 @@ namespace MapEditor
                         // it into the platformStuff array
                         platformStuff[p] = new PictureBox();
                         platformStuff[p].Visible = true;
-                        platformStuff[p].Name = "platform" + p;
+                        platformStuff[p].Name = "platforms" + p;
                         // sets the image to the pictureBox
                         image = Properties.Resources.Platform;
                         platformStuff[p].Image = image;
@@ -459,7 +607,7 @@ namespace MapEditor
                         // it into the platformStuff array
                         longPlatStuff[l] = new PictureBox();
                         longPlatStuff[l].Visible = true;
-                        longPlatStuff[l].Name = "long platform" + p;
+                        longPlatStuff[l].Name = "long platform" + l;
                         // sets the image to the pictureBox
                         image = Properties.Resources.Long_Platform;
                         longPlatStuff[l].Image = image;
@@ -473,6 +621,31 @@ namespace MapEditor
                         // adds pictureBox to form
                         this.Controls.Add(longPlatStuff[l]);
                         l++;
+                    }
+                    if (ls[0].Contains("vines"))
+                    {
+                        int x;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        int y;
+                        parsed = int.TryParse(ls[4], out y);
+                        // creates a new picturebox and puts
+                        // it into the vinesStuff array
+                        vinesStuff[v] = new PictureBox();
+                        vinesStuff[v].Visible = true;
+                        vinesStuff[v].Name = "vines" + l;
+                        // sets the image to the pictureBox
+                        image = Properties.Resources.Vines;
+                        vinesStuff[v].Image = image;
+                        vinesStuff[v].Size = new System.Drawing.Size(image.Width, image.Height);
+                        // puts the pictureBox in the top left corner
+                        vinesStuff[v].Location = new Point(x, y);
+                        // mouseEvents
+                        vinesStuff[v].MouseDown += new MouseEventHandler(this.mouseDown);
+                        vinesStuff[v].MouseUp += new MouseEventHandler(this.mouseUp);
+                        vinesStuff[v].MouseMove += new MouseEventHandler(this.mouseMove);
+                        // adds pictureBox to form
+                        this.Controls.Add(vinesStuff[v]);
+                        v++;
                     }
                 }
                 input.Close();
@@ -491,6 +664,7 @@ namespace MapEditor
                 if (picP != null)
                 {
                     picP.Image = null;
+                    picP.Controls.Clear();
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -498,6 +672,7 @@ namespace MapEditor
                 if (picL != null)
                 {
                     picL.Image = null;
+                    picL.Controls.Clear();
                 }
             }
         }
@@ -508,7 +683,7 @@ namespace MapEditor
             // it into the platformStuff array
             longPlatStuff[l] = new PictureBox();
             longPlatStuff[l].Visible = true;
-            longPlatStuff[l].Name = "long platform" + p;
+            longPlatStuff[l].Name = "long platform" + l;
             // sets the image to the pictureBox
             image = Properties.Resources.Long_Platform;
             longPlatStuff[l].Image = image;
@@ -521,6 +696,28 @@ namespace MapEditor
             longPlatStuff[l].MouseMove += new MouseEventHandler(this.mouseMove);
             // adds pictureBox to form
             this.Controls.Add(longPlatStuff[l]);
+            p++;
+        }
+
+        private void vinesButton_Click(object sender, EventArgs e)
+        {
+            // creates a new picturebox and puts
+            // it into the vinesStuff array
+            vinesStuff[v] = new PictureBox();
+            vinesStuff[v].Visible = true;
+            vinesStuff[v].Name = "vines" + v;
+            // sets the image to the pictureBox
+            image = Properties.Resources.Vines;
+            vinesStuff[v].Image = image;
+            vinesStuff[v].Size = new System.Drawing.Size(image.Width, image.Height);
+            // puts the pictureBox in the top left corner
+            vinesStuff[v].Location = new Point(1, 1);
+            // mouseEvents
+            vinesStuff[v].MouseDown += new MouseEventHandler(this.mouseDown);
+            vinesStuff[v].MouseUp += new MouseEventHandler(this.mouseUp);
+            vinesStuff[v].MouseMove += new MouseEventHandler(this.mouseMove);
+            // adds pictureBox to form
+            this.Controls.Add(vinesStuff[v]);
             p++;
         }
     }

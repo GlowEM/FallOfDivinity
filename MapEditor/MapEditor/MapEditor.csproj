@@ -79,16 +79,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Platform.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Platform.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Long Platform.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Long Platform1.png" />
+    <Content Include="Resources\Vines.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

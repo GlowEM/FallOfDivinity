@@ -31,8 +31,10 @@
             this.saveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
+            this.vinesButton = new System.Windows.Forms.Button();
             this.longPlatButton = new System.Windows.Forms.Button();
             this.platButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveButton
@@ -65,9 +67,22 @@
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
+            // vinesButton
+            // 
+            this.vinesButton.BackgroundImage = global::MapEditor.Properties.Resources.Vines;
+            this.vinesButton.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.vinesButton.Location = new System.Drawing.Point(283, 376);
+            this.vinesButton.Name = "vinesButton";
+            this.vinesButton.Size = new System.Drawing.Size(69, 44);
+            this.vinesButton.TabIndex = 5;
+            this.vinesButton.Text = "Vines";
+            this.vinesButton.UseVisualStyleBackColor = true;
+            this.vinesButton.Click += new System.EventHandler(this.vinesButton_Click);
+            // 
             // longPlatButton
             // 
             this.longPlatButton.BackgroundImage = global::MapEditor.Properties.Resources.Long_Platform;
+            this.longPlatButton.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.longPlatButton.Location = new System.Drawing.Point(174, 389);
             this.longPlatButton.Name = "longPlatButton";
             this.longPlatButton.Size = new System.Drawing.Size(69, 44);
@@ -79,6 +94,7 @@
             // platButton
             // 
             this.platButton.BackgroundImage = global::MapEditor.Properties.Resources.Platform;
+            this.platButton.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.platButton.Location = new System.Drawing.Point(71, 398);
             this.platButton.Name = "platButton";
             this.platButton.Size = new System.Drawing.Size(69, 44);
@@ -87,18 +103,28 @@
             this.platButton.UseVisualStyleBackColor = true;
             this.platButton.Click += new System.EventHandler(this.platButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(283, 376);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 44);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Vines";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 481);
+            this.Controls.Add(this.vinesButton);
             this.Controls.Add(this.longPlatButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.platButton);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Map Editor";
             this.ResumeLayout(false);
 
         }
@@ -110,6 +136,8 @@
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button longPlatButton;
+        private System.Windows.Forms.Button vinesButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 

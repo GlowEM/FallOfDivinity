@@ -514,37 +514,43 @@ namespace MapEditor
             {
                 // create the streamwriter object
                 output = new StreamWriter(fileName);
-
+                int t = 0;
+                int u = 0;
+                int v = 0;
                 // finds all the platformStuff pictureBoxes
                 foreach (PictureBox picP in platformStuff)
                 {
+                    
                     if (picP != null && picP.Visible == true)
                     {
                         // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: platforms," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height);
-                        string P = "Type: platforms, " + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " ,Height, " + picP.Height;
+                        output.WriteLine("Type: platforms " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height);
+                        string P = "Type: platforms  " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height;
                         string[] plat = P.Split(',');
                     }
+                    t++;
                 }
                 foreach (PictureBox picL in longPlatStuff)
                 {
                     if (picL != null && picL.Visible == true)
                     {
                         // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: long platform," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " ,Height, " + picL.Height);
-                        string L = "Type: long platform, " + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " ,Height, " + picL.Height;
+                        output.WriteLine("Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height);
+                        string L = "Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height;
                         string[] longP = L.Split(',');
                     }
+                    u++;
                 }
                 foreach (PictureBox picV in vinesStuff)
                 {
                     if (picV != null && picV.Visible == true)
                     {
                         // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: vines," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " ,Height, " + picV.Height);
-                        string L = "Type: vines, " + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " ,Height, " + picV.Height;
+                        output.WriteLine("Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height);
+                        string L = "Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height;
                         string[] longP = L.Split(',');
                     }
+                    v++;
                 }
                 output.Close();
             }

@@ -19,6 +19,20 @@ namespace FallOfDivinity
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //enum
+        enum GameState
+        {
+            MainMenu,
+            Options,
+            Playing,
+        }
+        GameState CurrentGameState = GameState.MainMenu;
+
+        //Screen Adjustments
+        int screenWidth = 800, screenHeight = 600;
+
+        Button playButton;
+
         // Attribute
         Texture2D character;
         Vector2 v2;
@@ -54,6 +68,15 @@ namespace FallOfDivinity
 
             // TODO: use this.Content to load your game content here
             character = Content.Load<Texture2D>("Character");
+
+            // Screen stuff
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.ApplyChanges();
+            IsMouseVisible = true;
+
+            playButton = new Button(Content.Load <Texture2D>("Play"), graphics.GraphicsDevice);
+            playButton.setPosition(new Vector2(20, 20));
         }
 
         /// <summary>
@@ -72,11 +95,21 @@ namespace FallOfDivinity
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
+            MouseState mouse = Mouse.GetState();
 
             // TODO: Add your update logic here
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    if (playButton.isClicked == true)
+                    {
+                        CurrentGameState = GameState.Playing;
+                    }
+                    playButton.Update(mouse);
+                    break;
+                case GameState.Playing:
+                    break;
+            }
 
             base.Update(gameTime);
             ProcessInput();
@@ -95,6 +128,15 @@ namespace FallOfDivinity
             //Begin
             spriteBatch.Begin();
             spriteBatch.Draw(character, v2, Color.White);
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    spriteBatch.Draw(Content.Load<Texture2D>("MainMenu"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    playButton.Draw(spriteBatch);
+                    break;
+                case GameState.Playing:
+                    break;
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

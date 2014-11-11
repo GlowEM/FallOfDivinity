@@ -76,7 +76,7 @@ namespace FallOfDivinity
             IsMouseVisible = true;
 
             playButton = new Button(Content.Load <Texture2D>("Play"), graphics.GraphicsDevice);
-            playButton.setPosition(new Vector2(20, 20));
+            playButton.SetPosition(new Vector2(20, 20));
         }
 
         /// <summary>

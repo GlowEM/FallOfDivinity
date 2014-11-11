@@ -42,7 +42,7 @@ namespace FallOfDivinity
                 }
             }
         }
-        public void setPosition(Vector2 newPosition)
+        public void SetPosition(Vector2 newPosition)
         {
             position = newPosition;
         }

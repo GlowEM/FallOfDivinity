@@ -128,7 +128,7 @@ namespace FallOfDivinity
 
             //Begin
             spriteBatch.Begin();
-            spriteBatch.Draw(character, v2, Color.White);
+            
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
@@ -137,6 +137,7 @@ namespace FallOfDivinity
                     break;
                 case GameState.Playing:
                     spriteBatch.Draw(Content.Load<Texture2D>("Background"), new Rectangle(0,0, screenWidth,screenHeight), Color.White);
+                    spriteBatch.Draw(character, v2, Color.White);
                     break;
             }
             spriteBatch.End();

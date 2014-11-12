@@ -29,7 +29,7 @@ namespace FallOfDivinity
         GameState CurrentGameState = GameState.MainMenu;
 
         //Screen Adjustments
-        int screenWidth = 800, screenHeight = 600;
+        int screenWidth = 1280, screenHeight = 800;
 
         Button playButton;
 
@@ -136,6 +136,7 @@ namespace FallOfDivinity
                     playButton.Draw(spriteBatch);
                     break;
                 case GameState.Playing:
+                    spriteBatch.Draw(Content.Load<Texture2D>("Background"), new Rectangle(0,0, screenWidth,screenHeight), Color.White);
                     break;
             }
             spriteBatch.End();

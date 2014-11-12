@@ -52,8 +52,7 @@ namespace FallOfDivinity
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            v2 = new Vector2(30, 60);
-
+            v2 = new Vector2(300, 600);
             base.Initialize();
         }
 

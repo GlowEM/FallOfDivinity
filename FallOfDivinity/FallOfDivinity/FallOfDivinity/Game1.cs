@@ -34,8 +34,38 @@ namespace FallOfDivinity
         Button playButton;
 
         // Attribute
-        Texture2D character;
-        Vector2 v2;
+        //HUMAN
+        public Rectangle blit;//blitting rectangle for spritesheet
+        KeyboardState ks;
+        KeyboardState previousState;
+
+        //HUMAN
+        public Vector2 charPos;//character position
+        public Vector2 charAcc;//gravity on character
+        public Vector2 charVel;//velocity for jumping
+        public Vector2 humanSheetSize; //size of sprite sheet for human
+        public Texture2D spriteHuman;
+        public int columnCountH;
+        public int rowcountH;
+        public bool contact; //contact with ground (jump)
+        public bool vine; //contact with vine (climb)
+        public int msHuman = 200;
+        public int msdel;
+
+        //ENEMY
+        Texture2D spriteEnemy;
+        public Vector2 enemyPos; //basic enemy position
+        public int columnCountE;
+        public int rowcountE;
+        int msEnemy = 200;
+        public Rectangle blitEnemy;
+        int walkCountE;
+        string dirE;
+        int msdelEnemy;
+
+
+        Vector2 minAccess;//edge of screen minimum X, Y
+        Vector2 maxAccess;//edge of screen maximum X,Y
 
         public Game1()
         {
@@ -52,8 +82,35 @@ namespace FallOfDivinity
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            v2 = new Vector2(300, 600);
+           // v2 = new Vector2(300, 600);
             base.Initialize();
+            //change size of screen
+            graphics.PreferredBackBufferWidth = 1400;
+            graphics.PreferredBackBufferHeight = 800;
+           // graphics.ApplyChanges();
+
+            //limit of any character movement
+            minAccess.X = 0;
+            minAccess.Y = 0;
+            maxAccess.X = graphics.PreferredBackBufferWidth - 75;
+            maxAccess.Y = graphics.PreferredBackBufferHeight - 85;//90
+
+            //HUMAN
+            //contact = true;
+            vine = false;
+            charPos.X = graphics.PreferredBackBufferWidth / 2;
+            charPos.Y = graphics.PreferredBackBufferHeight / 2;
+            humanSheetSize.Y = spriteHuman.Bounds.Height;
+            humanSheetSize.X = spriteHuman.Bounds.Width;
+            columnCountH = 0;
+            rowcountH = 3;
+            blit.Height = (int)humanSheetSize.Y / 7;
+            blit.Width = (int)humanSheetSize.X / 12;
+            msdel = 0;
+            charAcc.Y = (float)0.3;
+            charVel.Y = (float)0.0;
+            charAcc.X = (float)0.0;
+            charVel.X = (float)0.0;
         }
 
         /// <summary>
@@ -66,7 +123,8 @@ namespace FallOfDivinity
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            character = Content.Load<Texture2D>("Character");
+            //character = Content.Load<Texture2D>("Character");
+            spriteHuman = Content.Load<Texture2D>("spriteHuman");
 
             // Screen stuff
             graphics.PreferredBackBufferWidth = screenWidth;
@@ -111,6 +169,18 @@ namespace FallOfDivinity
                     break;
             }
 
+            //human blitting
+            msdel += gameTime.ElapsedGameTime.Milliseconds;
+            blit.Y = rowcountH * blit.Width;
+            blit.X = columnCountH * blit.Height;
+
+            //check buffer edge
+            if (charPos.Y < minAccess.Y) { charPos.Y = minAccess.Y; }//top of screen
+            if (charPos.X < minAccess.X) { charPos.X = minAccess.X; }//far left of screen
+            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
+            if (charPos.X > maxAccess.X) { charPos.X = maxAccess.X; }//far right of screen
+            previousState = ks;
+
             base.Update(gameTime);
             ProcessInput();
         }
@@ -127,6 +197,9 @@ namespace FallOfDivinity
 
             //Begin
             spriteBatch.Begin();
+
+            
+            
             
             switch (CurrentGameState)
             {
@@ -136,7 +209,10 @@ namespace FallOfDivinity
                     break;
                 case GameState.Playing:
                     spriteBatch.Draw(Content.Load<Texture2D>("Background"), new Rectangle(0,0, screenWidth,screenHeight), Color.White);
-                    spriteBatch.Draw(character, v2, Color.White);
+                    //spriteBatch.Draw(character, v2, Color.White);
+                    //human
+                    if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
+                    spriteBatch.Draw(spriteHuman, charPos, blit, Color.White);
                     break;
             }
             spriteBatch.End();
@@ -146,25 +222,131 @@ namespace FallOfDivinity
 
         public void ProcessInput()
         {
-            KeyboardState ks = Keyboard.GetState();
-            if (ks.IsKeyDown(Keys.W))
-            {
-                v2.Y = v2.Y - 1;
-            }
+            ks = Keyboard.GetState();
 
+            charPos.X += charVel.X + (float)charAcc.X / 2;
+            charPos.Y += charVel.Y + (float)charAcc.Y / 2;
+            charVel.X += charAcc.X;
+            charVel.Y += charAcc.Y;
+
+            //W key = Up
+            //jump if not near vine
+            //climb if near vine
+            if (previousState.IsKeyDown(Keys.W))
+            {
+                //climb
+                if (vine == true)
+                {
+                    charPos.Y = charPos.Y - 1;
+                    rowcountH = 4;
+                    //columnCountH = 0;
+                    if (msdel > msHuman)
+                    {
+
+                        columnCountH++;
+                        if (columnCountH > 7) { columnCountH = 0; }
+                        msdel = 0;
+                    }
+                }
+
+                //jump
+                if (contact == true)//no double jumps
+                {
+                    contact = false;
+                    //jumping with +X Accerleration
+                    if (previousState.IsKeyDown(Keys.W) && ks.IsKeyDown(Keys.D))
+                    {
+                        charAcc.X = (float)0.2;
+                    }
+
+                    //Jumping with -X Accerleration
+                    if (previousState.IsKeyDown(Keys.W) && ks.IsKeyDown(Keys.A))
+                    {
+                        charAcc.X = (float)-0.2;
+                    }
+
+                    //Jumping with no X accel added
+                    charVel.Y = (float)-5.5;
+
+                }//end jump
+
+            }//end W key
+
+            //A key = left
             if (ks.IsKeyDown(Keys.A))
             {
-                v2.X = v2.X - 1;
+
+                //walking on ground
+                if (contact == true)
+                {
+                    charPos.X = charPos.X - 1;
+                    rowcountH = 0;
+                    //columnCountH = 0;
+                    if (msdel > msHuman)
+                    {
+                        columnCountH++;
+                        if (columnCountH > 11) { columnCountH = 0; }
+                        msdel = 0;
+                    }
+                }
+
             }
 
-            if (ks.IsKeyDown(Keys.S))
+            //S key = down
+            if (previousState.IsKeyDown(Keys.S))
             {
-                v2.Y = v2.Y + 1;
+                //climbing down vine
+                if (vine == true)
+                {
+                    charPos.Y = charPos.Y + 1;
+                    rowcountH = 4;
+                    if (columnCountH == 0) { columnCountH = 7; }
+                    //columnCountH = 0;
+                    if (msdel > msHuman)
+                    {
+                        columnCountH--;
+                        msdel = 0;
+                    }
+                }
             }
 
+            //D key = right
             if (ks.IsKeyDown(Keys.D))
             {
-                v2.X = v2.X + 1;
+                //walking on ground
+                if (contact == true)
+                {
+                    charPos.X = charPos.X + 1;
+                    rowcountH = 1;
+                    //columnCountH = 0;
+                    if (msdel > msHuman)
+                    {
+                        columnCountH++;
+                        if (columnCountH > 11) { columnCountH = 0; }
+                        msdel = 0;
+                    }
+                }
+            }
+
+            //return to stand position based on previous get state and current
+
+            //facing left standing
+            if (previousState.IsKeyDown(Keys.A) && ks.IsKeyUp(Keys.A) && ks.IsKeyUp(Keys.W) && ks.IsKeyUp(Keys.D) && ks.IsKeyUp(Keys.S))
+            {
+                columnCountH = 0;
+                rowcountH = 2;
+                charAcc.X = (float)0.0;
+                charVel.X = (float)0.0;
+                charVel.Y = (float)0.0;
+            }
+            //facing right standing
+            if (previousState.IsKeyDown(Keys.D) && ks.IsKeyUp(Keys.A) && ks.IsKeyUp(Keys.W) && ks.IsKeyUp(Keys.D) && ks.IsKeyUp(Keys.S))
+            {
+                columnCountH = 0;
+                rowcountH = 3;
+                charAcc.X = (float)0.0;
+                charVel.X = (float)0.0;
+                charVel.Y = (float)0.0;
             }
         }
     }

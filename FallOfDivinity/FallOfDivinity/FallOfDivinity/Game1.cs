@@ -85,9 +85,14 @@ namespace FallOfDivinity
            // v2 = new Vector2(300, 600);
             base.Initialize();
             //change size of screen
-            graphics.PreferredBackBufferWidth = 1400;
-            graphics.PreferredBackBufferHeight = 800;
+           // graphics.PreferredBackBufferWidth = 1400;
+           // graphics.PreferredBackBufferHeight = 800;
            // graphics.ApplyChanges();
+
+            // Screen stuff
+            graphics.PreferredBackBufferWidth = screenWidth;
+            graphics.PreferredBackBufferHeight = screenHeight;
+            graphics.ApplyChanges();
 
             //limit of any character movement
             minAccess.X = 0;
@@ -126,10 +131,7 @@ namespace FallOfDivinity
             //character = Content.Load<Texture2D>("Character");
             spriteHuman = Content.Load<Texture2D>("spriteHuman");
 
-            // Screen stuff
-            graphics.PreferredBackBufferWidth = screenWidth;
-            graphics.PreferredBackBufferHeight = screenHeight;
-            graphics.ApplyChanges();
+            
             IsMouseVisible = true;
 
             // Brings in button and places at top left corner
@@ -179,6 +181,8 @@ namespace FallOfDivinity
             if (charPos.X < minAccess.X) { charPos.X = minAccess.X; }//far left of screen
             if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
             if (charPos.X > maxAccess.X) { charPos.X = maxAccess.X; }//far right of screen
+            if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
+            else if (contact == false) { charAcc.Y = (float)0.3; }
             previousState = ks;
 
             base.Update(gameTime);

@@ -16,7 +16,7 @@ namespace FallOfDivinity
         //fields
         private Platform locPlatform;  //platform bound enemies require a platform to be bound to.
         private int yValue;  //once set, this is constant
-        //***********REPLACE ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
+        //***********REPLACE NEXT TWO FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
         private static int SizeWidth = 10;
         private static int SizeHeight = 10;
         private Random rand = new Random();
@@ -32,8 +32,8 @@ namespace FallOfDivinity
             //no default
 
             //requires:  platform, player
-        public PlatformBoundEnemy(Platform platform, Player newPlayer)
-            :base(new Rectangle(0,0,0,0))       //location of enemy is replaced within constructor
+        public PlatformBoundEnemy(Platform platform, Player newPlayer, Game1 game)
+            :base(new Rectangle(0,0,0,0), game)       //location of enemy is replaced within constructor
         {
                 //set attributes
             player = newPlayer;

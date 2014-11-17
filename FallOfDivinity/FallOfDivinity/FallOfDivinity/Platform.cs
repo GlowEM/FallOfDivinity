@@ -16,8 +16,8 @@ namespace FallOfDivinity
 
 
         //constructor
-        public Platform()
-            : base(new Rectangle(0,0,0,0))
+        public Platform(Game1 game)
+            : base(new Rectangle(0,0,0,0), game)
         { }
 
 

@@ -15,8 +15,8 @@ namespace FallOfDivinity
     {
 
         //constructor
-        public Character(Rectangle loc)
-            :base(loc)
+        public Character(Rectangle loc, Game1 game)
+            :base(loc, game)
         { }
     }
 }

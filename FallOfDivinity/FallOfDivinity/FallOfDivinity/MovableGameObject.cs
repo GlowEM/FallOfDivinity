@@ -15,8 +15,8 @@ namespace FallOfDivinity
     {
 
         //constructor
-        public MovableGameObject(Rectangle loc)
-            :base(loc)
+        public MovableGameObject(Rectangle loc, Game1 game)
+            :base(loc, game)
         { }
 
 

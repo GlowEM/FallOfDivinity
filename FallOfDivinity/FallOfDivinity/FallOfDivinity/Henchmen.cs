@@ -15,8 +15,8 @@ namespace FallOfDivinity
     {
 
         //constructor
-        public Henchmen()
-            :base(new Rectangle(0,0,0,0))
+        public Henchmen(Game1 game)
+            :base(new Rectangle(0,0,0,0), game)
         { }
     }
 }

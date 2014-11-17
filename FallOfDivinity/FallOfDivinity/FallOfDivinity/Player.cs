@@ -15,12 +15,20 @@ namespace FallOfDivinity
     {
         //fields
         private int health;
+        //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
+        private static int SizeWidth = 0;
+        private static int SizeHeight = 0;
         
 
         //constructor
-        public Player()
-            :base(new Rectangle(0,0,0,0))
+            //default, in the case that map doesn't load in correctly
+        public Player(Game1 game)
+            :base(new Rectangle(0, 0, SizeWidth, SizeHeight), game)
+                    
         { }
+
+        
+
 
 
         //methods

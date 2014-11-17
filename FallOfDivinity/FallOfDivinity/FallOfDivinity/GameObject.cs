@@ -14,7 +14,9 @@ namespace FallOfDivinity
     abstract class GameObject
     {
         //FIELDS
-        
+        Game1 game;
+        Viewport viewport;
+
         //location
         private Rectangle location;
 
@@ -22,9 +24,10 @@ namespace FallOfDivinity
         public Rectangle Location { get { return location; } set { location = value; } }  
 
         //constructor
-        public GameObject(Rectangle loc)
+        public GameObject(Rectangle loc, Game1 game)
         {
             location = loc;
+            game = this.game;
         }
 
 

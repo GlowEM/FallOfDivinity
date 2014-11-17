@@ -13,10 +13,26 @@ namespace FallOfDivinity
 {
     class Player : Character
     {
+        //fields
+        private int health;
+        
 
         //constructor
         public Player()
             :base(new Rectangle(0,0,0,0))
         { }
+
+
+        //methods
+
+        public void LoseHealth(int dammageTaken)
+        {
+            health = health - dammageTaken;
+
+            if (health <= 0)
+            { 
+                //game over
+            }
+        }
     }
 }

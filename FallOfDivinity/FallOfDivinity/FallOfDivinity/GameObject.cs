@@ -16,8 +16,10 @@ namespace FallOfDivinity
         //FIELDS
         
         //location
-        Rectangle location;
+        private Rectangle location;
 
+        //property
+        public Rectangle Location { get { return location; } set { location = value; } }  
 
         //constructor
         public GameObject(Rectangle loc)

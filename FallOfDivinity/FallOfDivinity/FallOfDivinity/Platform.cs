@@ -14,6 +14,7 @@ namespace FallOfDivinity
     class Platform : GameObject
     {
 
+
         //constructor
         public Platform()
             : base(new Rectangle(0,0,0,0))

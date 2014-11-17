@@ -14,8 +14,8 @@ namespace FallOfDivinity
     {
 
         //constructor
-        public Boss(Game1 game)
-            : base(new Rectangle(0,0,0,0), game)
+        public Boss(Player player,Game1 game)
+            : base(new Rectangle(0,0,0,0),player,game)
         { }
     }
 }

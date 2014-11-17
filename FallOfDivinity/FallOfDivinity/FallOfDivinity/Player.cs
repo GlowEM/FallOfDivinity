@@ -23,9 +23,17 @@ namespace FallOfDivinity
         //constructor
             //default, in the case that map doesn't load in correctly
         public Player(Game1 game)
-            :base(new Rectangle(0, 0, SizeWidth, SizeHeight), game)
-                    
+            :base(new Rectangle(0, game.GraphicsDevice.Viewport.Height, SizeWidth, SizeHeight), game)
+                    //sets the character in the lower right hand corner
         { }
+
+        public Player(Rectangle loc, Game1 game)
+            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game)
+        {
+            health = 10;  //for now
+
+
+        }
 
         
 
@@ -34,6 +42,7 @@ namespace FallOfDivinity
         //methods
 
         public void LoseHealth(int dammageTaken)
+            //called by PlatformBoundEnemy.Attack, Henchmen.Attack
         {
             health = health - dammageTaken;
 

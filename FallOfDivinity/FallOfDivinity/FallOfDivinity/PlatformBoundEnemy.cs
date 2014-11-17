@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Media;
 
 namespace FallOfDivinity
 {
+
+            //*** This enemy walks back and forth on the platform, attacking when it comes into contact with the player.
     class PlatformBoundEnemy : Enemy
     {
         //fields
@@ -20,7 +22,6 @@ namespace FallOfDivinity
         private static int SizeWidth = 10;
         private static int SizeHeight = 10;
         private Random rand = new Random();
-        private Player player;
         private static int dammage = 1;     //amount of health player loses when attacked by this enemy
         private int direction;  //0 is left, 1 is right.
 
@@ -32,11 +33,10 @@ namespace FallOfDivinity
             //no default
 
             //requires:  platform, player
-        public PlatformBoundEnemy(Platform platform, Player newPlayer, Game1 game)
-            :base(new Rectangle(0,0,0,0), game)       //location of enemy is replaced within constructor
+        public PlatformBoundEnemy(Platform platform, Player player, Game1 game)
+            :base(new Rectangle(0,0,0,0),player,game)       //location of enemy is replaced within constructor
         {
                 //set attributes
-            player = newPlayer;
             locPlatform = platform;
                 //determine initial location of enemy
                     //determine x

@@ -13,9 +13,11 @@ namespace FallOfDivinity
 {
     abstract class Enemy : Character
     {
+        //fields
+        protected Player player;
 
         //constructor
-        public Enemy(Rectangle loc, Game1 game)
+        public Enemy(Rectangle loc, Player curPlayer, Game1 game)
             : base(loc, game)
         { }
 

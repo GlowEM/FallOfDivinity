@@ -19,6 +19,11 @@ namespace FallOfDivinity
         private static int SizeWidth = 0;
         private static int SizeHeight = 0;
         private static int BaseDammage = 1;
+            //attack timer  ---  NEEDS ACTUAL animationTime ADDED
+        private float lastTime;
+        private float animationTime = 1f;
+        private float currentTime = 0f;
+       
         
 
         //constructor
@@ -26,13 +31,15 @@ namespace FallOfDivinity
         public Player(Game1 game)
             :base(new Rectangle(0, game.GraphicsDevice.Viewport.Height, SizeWidth, SizeHeight), game)
                     //sets the character in the lower right hand corner
-        { }
+        {
+            lastTime = 0f;
+        }
 
         public Player(Rectangle loc, Game1 game)
             :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game)
         {
             health = 10;  //for now
-
+            lastTime = 0f;
 
 
         }
@@ -44,10 +51,19 @@ namespace FallOfDivinity
         //methods
         ///<summary>
         ///if an enemy is within the player's picture box, and in front of the character, does base dammage.
+        ///only availiable every ___ seconds  *******NUMBER BASED UPON ANIMATION CAST******
         ///</summary>
-        public void Attack()
+        public void Attack(float elapsedGameTime)
         { 
-            
+            //check timer to see if character can attack
+            currentTime += elapsedGameTime;
+
+            if ((currentTime - lastTime) >= animationTime)
+            {
+                //ATTACK
+                //reset Timer
+                lastTime = currentTime;
+            }
         }
         
         

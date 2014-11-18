@@ -63,6 +63,9 @@ namespace FallOfDivinity
         string dirE;
         int msdelEnemy;
 
+        //Player
+        Player player;
+
 
         Vector2 minAccess;//edge of screen minimum X, Y
         Vector2 maxAccess;//edge of screen maximum X,Y
@@ -116,6 +119,9 @@ namespace FallOfDivinity
             charVel.Y = (float)0.0;
             charAcc.X = (float)0.0;
             charVel.X = (float)0.0;
+
+            //PLAYER
+            player = new Player(this);
         }
 
         /// <summary>
@@ -186,7 +192,7 @@ namespace FallOfDivinity
             previousState = ks;
 
             base.Update(gameTime);
-            ProcessInput();
+            ProcessInput(gameTime);
         }
 
         /// <summary>
@@ -224,7 +230,7 @@ namespace FallOfDivinity
             base.Draw(gameTime);
         }
 
-        public void ProcessInput()
+        public void ProcessInput(GameTime gameTime)
         {
             ks = Keyboard.GetState();
 
@@ -329,6 +335,17 @@ namespace FallOfDivinity
                         if (columnCountH > 11) { columnCountH = 0; }
                         msdel = 0;
                     }
+                }
+            }
+
+            //K key = attack
+            if (ks.IsKeyDown(Keys.K))
+            { 
+                //on ground
+                if (contact == true)
+                {
+                    
+                    player.Attack((float)gameTime.ElapsedGameTime.TotalSeconds);
                 }
             }
 

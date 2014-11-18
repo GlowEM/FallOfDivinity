@@ -19,7 +19,9 @@ namespace FallOfDivinity
         //constructor
         public Enemy(Rectangle loc, Player curPlayer, Game1 game)
             : base(loc, game)
-        { }
+        {
+            player = curPlayer;
+        }
 
     }
 }

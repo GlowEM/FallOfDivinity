@@ -18,6 +18,7 @@ namespace FallOfDivinity
         //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
         private static int SizeWidth = 0;
         private static int SizeHeight = 0;
+        private static int BaseDammage = 1;
         
 
         //constructor
@@ -33,6 +34,7 @@ namespace FallOfDivinity
             health = 10;  //for now
 
 
+
         }
 
         
@@ -40,7 +42,16 @@ namespace FallOfDivinity
 
 
         //methods
-
+        ///<summary>
+        ///if an enemy is within the player's picture box, and in front of the character, does base dammage.
+        ///</summary>
+        public void Attack()
+        { 
+            
+        }
+        
+        
+        
         public void LoseHealth(int dammageTaken)
             //called by PlatformBoundEnemy.Attack, Henchmen.Attack
         {

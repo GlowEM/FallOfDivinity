@@ -24,6 +24,7 @@ namespace FallOfDivinity
         private Random rand = new Random();
         private static int dammage = 1;     //amount of health player loses when attacked by this enemy
         private int direction;  //0 is left, 1 is right.
+        private bool isAlive;
 
         //properites
         public Platform LocPlatform { get { return locPlatform; } }
@@ -48,6 +49,8 @@ namespace FallOfDivinity
             this.Location = new Rectangle(x, yValue, SizeWidth, SizeHeight);
                 //randomize direction
             direction = rand.Next(0, 2);
+                //ativate
+            isAlive = true;
         }
 
 
@@ -60,6 +63,12 @@ namespace FallOfDivinity
             {
                 player.LoseHealth(dammage);
             }
+        }
+
+        public void TakeDammage()  //if hit by any player-attack, this henchmen dies.  Therefore:
+        { 
+            //take dammage
+            isAlive = false;
         }
 
         public void Move()

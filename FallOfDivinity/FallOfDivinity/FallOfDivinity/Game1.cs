@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.IO;
 
 namespace FallOfDivinity
 {
@@ -34,6 +35,15 @@ namespace FallOfDivinity
         Button playButton;
 
         // Attribute
+        //Map Assets
+        Texture2D platTexture;
+        Texture2D longTexture;
+        Texture2D vineTexture;
+        int p = 0;
+        Rectangle[] plRecs = new Rectangle[1000];
+        Rectangle[] lRecs = new Rectangle[1000];
+        Rectangle[] vineRecs = new Rectangle[1000];
+
         //HUMAN
         public Rectangle blit;//blitting rectangle for spritesheet
         KeyboardState ks;
@@ -97,6 +107,54 @@ namespace FallOfDivinity
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.ApplyChanges();
 
+            //Read in map
+            StreamReader input = new StreamReader("map.txt");
+            string text = "";
+            while ((text = input.ReadLine()) != null)
+            {
+                string[] ls = text.Split(',');
+
+                if (ls[0].Contains("platforms"))
+                {
+                    int x;
+                    int y;
+                    int w;
+                    int h;
+                    Boolean parsed = int.TryParse(ls[2], out x);
+                    parsed = int.TryParse(ls[4], out y);
+                    parsed = int.TryParse(ls[6], out w);
+                    parsed = int.TryParse(ls[8], out h);
+                    plRecs[p] = new Rectangle(x, y, w, h);
+                    p++;
+                }
+                if (ls[0].Contains("long platform"))
+                {
+                    int x;
+                    int y;
+                    int w;
+                    int h;
+                    Boolean parsed = int.TryParse(ls[2], out x);
+                    parsed = int.TryParse(ls[4], out y);
+                    parsed = int.TryParse(ls[6], out w);
+                    parsed = int.TryParse(ls[8], out h);
+                    lRecs[p] = new Rectangle(x, y, w, h);
+                    p++;
+                }
+                if (ls[0].Contains("vines"))
+                {
+                    int x;
+                    int y;
+                    int w;
+                    int h;
+                    Boolean parsed = int.TryParse(ls[2], out x);
+                    parsed = int.TryParse(ls[4], out y);
+                    parsed = int.TryParse(ls[6], out w);
+                    parsed = int.TryParse(ls[8], out h);
+                    vineRecs[p] = new Rectangle(x, y, w, h);
+                    p++;
+                }
+            }
+
             //limit of any character movement
             minAccess.X = 0;
             minAccess.Y = 0;
@@ -136,6 +194,9 @@ namespace FallOfDivinity
             // TODO: use this.Content to load your game content here
             //character = Content.Load<Texture2D>("Character");
             spriteHuman = Content.Load<Texture2D>("spriteHuman");
+            platTexture = this.Content.Load<Texture2D>("Platform");
+            longTexture = this.Content.Load<Texture2D>("Long Platform");
+            vineTexture = this.Content.Load<Texture2D>("Vines");
 
             
             IsMouseVisible = true;
@@ -223,6 +284,18 @@ namespace FallOfDivinity
                     //human
                     if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
                     spriteBatch.Draw(spriteHuman, charPos, blit, Color.White);
+                    foreach (Rectangle plRec in plRecs)
+                    {
+                        spriteBatch.Draw(platTexture, plRec, Color.White);
+                    }
+                    foreach (Rectangle lRec in lRecs)
+                    {
+                        spriteBatch.Draw(longTexture, lRec, Color.White);
+                    }
+                    foreach (Rectangle vineRec in vineRecs)
+                    {
+                        spriteBatch.Draw(vineTexture, vineRec, Color.White);
+                    }
                     break;
             }
             spriteBatch.End();

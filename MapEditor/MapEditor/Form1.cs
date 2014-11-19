@@ -638,7 +638,7 @@ namespace MapEditor
                         // it into the vinesStuff array
                         vinesStuff[v] = new PictureBox();
                         vinesStuff[v].Visible = true;
-                        vinesStuff[v].Name = "vines" + l;
+                        vinesStuff[v].Name = "vines" + v;
                         // sets the image to the pictureBox
                         image = Properties.Resources.Vines;
                         vinesStuff[v].Image = image;
@@ -706,6 +706,10 @@ namespace MapEditor
         }
 
         private void vinesButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void vinesButton_Click_1(object sender, EventArgs e)
         {
             // creates a new picturebox and puts
             // it into the vinesStuff array

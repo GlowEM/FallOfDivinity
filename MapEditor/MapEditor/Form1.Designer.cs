@@ -85,6 +85,7 @@
             this.vinesButton.TabIndex = 5;
             this.vinesButton.Text = "Vines";
             this.vinesButton.UseVisualStyleBackColor = true;
+            this.vinesButton.Click += new System.EventHandler(this.vinesButton_Click_1);
             // 
             // longPlatButton
             // 

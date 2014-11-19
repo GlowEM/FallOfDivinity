@@ -15,6 +15,8 @@ namespace FallOfDivinity
     {
         //FIELDS
         protected Game1 game;
+
+        //asset width and height should be added here.
         
 
         //location

@@ -39,7 +39,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(370, 446);
+            this.saveButton.Location = new System.Drawing.Point(617, 704);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             // loadButton
             // 
-            this.loadButton.Location = new System.Drawing.Point(487, 446);
+            this.loadButton.Location = new System.Drawing.Point(729, 704);
             this.loadButton.Name = "loadButton";
             this.loadButton.Size = new System.Drawing.Size(75, 23);
             this.loadButton.TabIndex = 2;
@@ -59,7 +59,7 @@
             // 
             // clearButton
             // 
-            this.clearButton.Location = new System.Drawing.Point(247, 446);
+            this.clearButton.Location = new System.Drawing.Point(487, 704);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 3;
@@ -79,7 +79,7 @@
             // vinesButton
             // 
             this.vinesButton.BackgroundImage = global::MapEditor.Properties.Resources.Vines;
-            this.vinesButton.Location = new System.Drawing.Point(283, 376);
+            this.vinesButton.Location = new System.Drawing.Point(269, 693);
             this.vinesButton.Name = "vinesButton";
             this.vinesButton.Size = new System.Drawing.Size(69, 44);
             this.vinesButton.TabIndex = 5;
@@ -90,7 +90,7 @@
             // longPlatButton
             // 
             this.longPlatButton.BackgroundImage = global::MapEditor.Properties.Resources.Long_Platform;
-            this.longPlatButton.Location = new System.Drawing.Point(174, 389);
+            this.longPlatButton.Location = new System.Drawing.Point(146, 693);
             this.longPlatButton.Name = "longPlatButton";
             this.longPlatButton.Size = new System.Drawing.Size(69, 44);
             this.longPlatButton.TabIndex = 4;
@@ -101,7 +101,7 @@
             // platButton
             // 
             this.platButton.BackgroundImage = global::MapEditor.Properties.Resources.Platform;
-            this.platButton.Location = new System.Drawing.Point(71, 398);
+            this.platButton.Location = new System.Drawing.Point(26, 693);
             this.platButton.Name = "platButton";
             this.platButton.Size = new System.Drawing.Size(69, 44);
             this.platButton.TabIndex = 0;
@@ -113,13 +113,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 481);
+            this.BackgroundImage = global::MapEditor.Properties.Resources.Background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1264, 761);
             this.Controls.Add(this.vinesButton);
             this.Controls.Add(this.longPlatButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.platButton);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);

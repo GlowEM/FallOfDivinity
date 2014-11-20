@@ -41,6 +41,7 @@ namespace MapEditor
             this.KeyUp += new KeyEventHandler(keyUp);
             this.KeyPress += new KeyPressEventHandler(keyPress);
             this.KeyPreview = true;
+            this.Size = new System.Drawing.Size(1280, 800);
         }
 
         private void keyDown(object sender, KeyEventArgs e)
@@ -490,6 +491,7 @@ namespace MapEditor
             image = Properties.Resources.Platform;
             platformStuff[p].Image = image;
             platformStuff[p].Size = new System.Drawing.Size(image.Width, image.Height);
+            platformStuff[p].BackColor = Color.Transparent;
             // puts the pictureBox in the top left corner
             platformStuff[p].Location = new Point(1, 1);
             // mouseEvents
@@ -685,23 +687,43 @@ namespace MapEditor
                 {
                     picP.Image = null;
                     picP.Controls.Clear();
+                    picP.Dispose();
                 }
             }
+
+            for (int i = 0; i < platformStuff.Length; ++i)
+            {
+                platformStuff[i] = null;
+            }
+
             foreach (PictureBox picL in longPlatStuff)
             {
                 if (picL != null)
                 {
                     picL.Image = null;
                     picL.Controls.Clear();
+                    picL.Dispose();
                 }
             }
+
+            for (int i = 0; i < longPlatStuff.Length; ++i)
+            {
+                longPlatStuff[i] = null;
+            }
+
             foreach (PictureBox picV in vinesStuff)
             {
                 if (picV != null)
                 {
                     picV.Image = null;
                     picV.Controls.Clear();
+                    picV.Dispose();
                 }
+            }
+
+            for (int i = 0; i < vinesStuff.Length; ++i)
+            {
+                vinesStuff[i] = null;
             }
         }
 
@@ -716,6 +738,7 @@ namespace MapEditor
             image = Properties.Resources.Long_Platform;
             longPlatStuff[l].Image = image;
             longPlatStuff[l].Size = new System.Drawing.Size(image.Width, image.Height);
+            longPlatStuff[l].BackColor = Color.Transparent;
             // puts the pictureBox in the top left corner
             longPlatStuff[l].Location = new Point(1, 1);
             // mouseEvents
@@ -742,6 +765,7 @@ namespace MapEditor
             image = Properties.Resources.Vines;
             vinesStuff[v].Image = image;
             vinesStuff[v].Size = new System.Drawing.Size(image.Width, image.Height);
+            vinesStuff[v].BackColor = Color.Transparent;
             // puts the pictureBox in the top left corner
             vinesStuff[v].Location = new Point(1, 1);
             // mouseEvents

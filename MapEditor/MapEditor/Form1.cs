@@ -508,158 +508,172 @@ namespace MapEditor
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            fileName = "map.txt";
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Map File (*.txt)|*.txt";
+            saveFileDialog.RestoreDirectory = true;
 
-            try
+            if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // create the streamwriter object
-                output = new StreamWriter(fileName);
-                int t = 0;
-                int u = 0;
-                int v = 0;
-                // finds all the platformStuff pictureBoxes
-                foreach (PictureBox picP in platformStuff)
+                fileName = saveFileDialog.FileName;
+
+                try
                 {
-                    
-                    if (picP != null && picP.Visible == true)
+                    // create the streamwriter object
+                    output = new StreamWriter(fileName);
+                    int t = 0;
+                    int u = 0;
+                    int v = 0;
+                    // finds all the platformStuff pictureBoxes
+                    foreach (PictureBox picP in platformStuff)
                     {
-                        // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: platforms " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height);
-                        string P = "Type: platforms  " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height;
-                        string[] plat = P.Split(',');
+
+                        if (picP != null && picP.Visible == true)
+                        {
+                            // writes the type of image, the x and y coordinates with the width and height
+                            output.WriteLine("Type: platforms " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height);
+                            string P = "Type: platforms  " + t + "," + " X Coord, " + picP.Left + ", Y Coord, " + picP.Top + ", Width, " + picP.Width + " , Height, " + picP.Height;
+                            //string[] plat = P.Split(',');
+                        }
+                        t++;
                     }
-                    t++;
+                    foreach (PictureBox picL in longPlatStuff)
+                    {
+                        if (picL != null && picL.Visible == true)
+                        {
+                            // writes the type of image, the x and y coordinates with the width and height
+                            output.WriteLine("Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height);
+                            string L = "Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height;
+                            //string[] longP = L.Split(',');
+                        }
+                        u++;
+                    }
+                    foreach (PictureBox picV in vinesStuff)
+                    {
+                        if (picV != null && picV.Visible == true)
+                        {
+                            // writes the type of image, the x and y coordinates with the width and height
+                            output.WriteLine("Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height);
+                            string V = "Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height;
+                            //string[] vine = V.Split(',');
+                        }
+                        v++;
+                    }
+                    output.Close();
                 }
-                foreach (PictureBox picL in longPlatStuff)
+                catch (IOException ioe)
                 {
-                    if (picL != null && picL.Visible == true)
-                    {
-                        // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height);
-                        string L = "Type: long platform " + u + "," + " X Coord, " + picL.Left + ", Y Coord, " + picL.Top + ", Width, " + picL.Width + " , Height, " + picL.Height;
-                        string[] longP = L.Split(',');
-                    }
-                    u++;
+                    Console.WriteLine("Output Message: " + ioe.Message);
+                    Console.WriteLine("Output StackTrace: " + ioe.StackTrace);
                 }
-                foreach (PictureBox picV in vinesStuff)
-                {
-                    if (picV != null && picV.Visible == true)
-                    {
-                        // writes the type of image, the x and y coordinates with the width and height
-                        output.WriteLine("Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height);
-                        string L = "Type: vines " + v + "," + " X Coord, " + picV.Left + ", Y Coord, " + picV.Top + ", Width, " + picV.Width + " , Height, " + picV.Height;
-                        string[] longP = L.Split(',');
-                    }
-                    v++;
-                }
-                output.Close();
-            }
-            catch (IOException ioe)
-            {
-                Console.WriteLine("Output Message: " + ioe.Message);
-                Console.WriteLine("Output StackTrace: " + ioe.StackTrace);
             }
         }
 
         private void loadButton_Click(object sender, EventArgs e)
         {
-            StreamReader input = null;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Map File (*.txt)|*.txt";
+            openFileDialog.RestoreDirectory = true;
 
-            try
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // open file for reading
-                input = new StreamReader("map.txt");
+                StreamReader input = null;
 
-                // read and list all of the data
-                string text = "";
-                while ((text = input.ReadLine()) != null)
+                try
                 {
-                    Console.WriteLine(text);
-                    string[] ls = text.Split(',');
+                    // open file for reading
+                    input = new StreamReader(openFileDialog.FileName);
 
-                    // loads all the platform objects
-                    if (ls[0].Contains("platforms"))
+                    // read and list all of the data
+                    string text = "";
+                    while ((text = input.ReadLine()) != null)
                     {
-                        int x;
-                        Boolean parsed = int.TryParse(ls[2], out x);
-                        int y;
-                        parsed = int.TryParse(ls[4], out y);
-                        // creates a new picturebox and puts
-                        // it into the platformStuff array
-                        platformStuff[p] = new PictureBox();
-                        platformStuff[p].Visible = true;
-                        platformStuff[p].Name = "platforms" + p;
-                        // sets the image to the pictureBox
-                        image = Properties.Resources.Platform;
-                        platformStuff[p].Image = image;
-                        platformStuff[p].Size = new System.Drawing.Size(image.Width, image.Height);
-                        // puts the pictureBox in the top left corner
-                        platformStuff[p].Location = new Point(x, y);
-                        // mouseEvents
-                        platformStuff[p].MouseDown += new MouseEventHandler(this.mouseDown);
-                        platformStuff[p].MouseUp += new MouseEventHandler(this.mouseUp);
-                        platformStuff[p].MouseMove += new MouseEventHandler(this.mouseMove);
-                        // adds pictureBox to form
-                        this.Controls.Add(platformStuff[p]);
-                        p++;
+                        Console.WriteLine(text);
+                        string[] ls = text.Split(',');
+
+                        // loads all the platform objects
+                        if (ls[0].Contains("platforms"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the platformStuff array
+                            platformStuff[p] = new PictureBox();
+                            platformStuff[p].Visible = true;
+                            platformStuff[p].Name = "platforms" + p;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.Platform;
+                            platformStuff[p].Image = image;
+                            platformStuff[p].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            platformStuff[p].Location = new Point(x, y);
+                            // mouseEvents
+                            platformStuff[p].MouseDown += new MouseEventHandler(this.mouseDown);
+                            platformStuff[p].MouseUp += new MouseEventHandler(this.mouseUp);
+                            platformStuff[p].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(platformStuff[p]);
+                            p++;
+                        }
+                        if (ls[0].Contains("long platform"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the platformStuff array
+                            longPlatStuff[l] = new PictureBox();
+                            longPlatStuff[l].Visible = true;
+                            longPlatStuff[l].Name = "long platform" + l;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.Long_Platform;
+                            longPlatStuff[l].Image = image;
+                            longPlatStuff[l].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            longPlatStuff[l].Location = new Point(x, y);
+                            // mouseEvents
+                            longPlatStuff[l].MouseDown += new MouseEventHandler(this.mouseDown);
+                            longPlatStuff[l].MouseUp += new MouseEventHandler(this.mouseUp);
+                            longPlatStuff[l].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(longPlatStuff[l]);
+                            l++;
+                        }
+                        if (ls[0].Contains("vines"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the vinesStuff array
+                            vinesStuff[v] = new PictureBox();
+                            vinesStuff[v].Visible = true;
+                            vinesStuff[v].Name = "vines" + v;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.Vines;
+                            vinesStuff[v].Image = image;
+                            vinesStuff[v].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            vinesStuff[v].Location = new Point(x, y);
+                            // mouseEvents
+                            vinesStuff[v].MouseDown += new MouseEventHandler(this.mouseDown);
+                            vinesStuff[v].MouseUp += new MouseEventHandler(this.mouseUp);
+                            vinesStuff[v].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(vinesStuff[v]);
+                            v++;
+                        }
                     }
-                    if (ls[0].Contains("long platform"))
-                    {
-                        int x;
-                        Boolean parsed = int.TryParse(ls[2], out x);
-                        int y;
-                        parsed = int.TryParse(ls[4], out y);
-                        // creates a new picturebox and puts
-                        // it into the platformStuff array
-                        longPlatStuff[l] = new PictureBox();
-                        longPlatStuff[l].Visible = true;
-                        longPlatStuff[l].Name = "long platform" + l;
-                        // sets the image to the pictureBox
-                        image = Properties.Resources.Long_Platform;
-                        longPlatStuff[l].Image = image;
-                        longPlatStuff[l].Size = new System.Drawing.Size(image.Width, image.Height);
-                        // puts the pictureBox in the top left corner
-                        longPlatStuff[l].Location = new Point(x, y);
-                        // mouseEvents
-                        longPlatStuff[l].MouseDown += new MouseEventHandler(this.mouseDown);
-                        longPlatStuff[l].MouseUp += new MouseEventHandler(this.mouseUp);
-                        longPlatStuff[l].MouseMove += new MouseEventHandler(this.mouseMove);
-                        // adds pictureBox to form
-                        this.Controls.Add(longPlatStuff[l]);
-                        l++;
-                    }
-                    if (ls[0].Contains("vines"))
-                    {
-                        int x;
-                        Boolean parsed = int.TryParse(ls[2], out x);
-                        int y;
-                        parsed = int.TryParse(ls[4], out y);
-                        // creates a new picturebox and puts
-                        // it into the vinesStuff array
-                        vinesStuff[v] = new PictureBox();
-                        vinesStuff[v].Visible = true;
-                        vinesStuff[v].Name = "vines" + v;
-                        // sets the image to the pictureBox
-                        image = Properties.Resources.Vines;
-                        vinesStuff[v].Image = image;
-                        vinesStuff[v].Size = new System.Drawing.Size(image.Width, image.Height);
-                        // puts the pictureBox in the top left corner
-                        vinesStuff[v].Location = new Point(x, y);
-                        // mouseEvents
-                        vinesStuff[v].MouseDown += new MouseEventHandler(this.mouseDown);
-                        vinesStuff[v].MouseUp += new MouseEventHandler(this.mouseUp);
-                        vinesStuff[v].MouseMove += new MouseEventHandler(this.mouseMove);
-                        // adds pictureBox to form
-                        this.Controls.Add(vinesStuff[v]);
-                        v++;
-                    }
+                    input.Close();
                 }
-                input.Close();
-            }
-            catch (IOException ioe)
-            {
-                Console.WriteLine("Input Message: " + ioe.Message);
-                Console.WriteLine("Input Stack Trace: " + ioe.StackTrace);
+                catch (IOException ioe)
+                {
+                    Console.WriteLine("Input Message: " + ioe.Message);
+                    Console.WriteLine("Input Stack Trace: " + ioe.StackTrace);
+                }
             }
         }
 
@@ -679,6 +693,14 @@ namespace MapEditor
                 {
                     picL.Image = null;
                     picL.Controls.Clear();
+                }
+            }
+            foreach (PictureBox picV in vinesStuff)
+            {
+                if (picV != null)
+                {
+                    picV.Image = null;
+                    picV.Controls.Clear();
                 }
             }
         }
@@ -702,7 +724,7 @@ namespace MapEditor
             longPlatStuff[l].MouseMove += new MouseEventHandler(this.mouseMove);
             // adds pictureBox to form
             this.Controls.Add(longPlatStuff[l]);
-            p++;
+            l++;
         }
 
         private void vinesButton_Click(object sender, EventArgs e)
@@ -728,7 +750,7 @@ namespace MapEditor
             vinesStuff[v].MouseMove += new MouseEventHandler(this.mouseMove);
             // adds pictureBox to form
             this.Controls.Add(vinesStuff[v]);
-            p++;
+            v++;
         }
     }
 }

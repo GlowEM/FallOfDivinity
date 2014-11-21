@@ -15,9 +15,8 @@ namespace FallOfDivinity
     {
         //FIELDS
         protected Game1 game;
-
-        //asset width and height should be added here.
-        
+        protected int assetHeight;
+        protected int assetWidth;
 
         //location
         private Rectangle location;
@@ -30,6 +29,14 @@ namespace FallOfDivinity
         {
             location = loc;
             game = curGame;
+        }
+
+        public GameObject(Rectangle loc, int assetWidth, int assetHeight, Game1 game)
+        {
+            location = loc;
+            assetWidth = this.assetWidth;
+            assetHeight = this.assetHeight;
+            game = this.game;
         }
 
 

@@ -14,6 +14,9 @@ namespace FallOfDivinity
     class Player : Character
     {
         //fields
+        private Projectile earthProj;
+        private bool projActive;
+
 
         public KeyboardState ks;
         public KeyboardState previousState;
@@ -46,6 +49,7 @@ namespace FallOfDivinity
                     //sets the character in the lower right hand corner
         {
             lastTime = 0f;
+            projActive = false;
         }
 
         public Player(Rectangle loc, Game1 game)
@@ -319,9 +323,13 @@ namespace FallOfDivinity
         }
 
         //earth attack
-        public void projAttack()
-        { 
-            
+        public void projAttack()            ///no input triggers this attack as of yet.  TBA
+        {
+            if (projActive != true)
+            {
+                earthProj = new Projectile(BaseDammage, this, game);
+
+            }
         }
         
         public void LoseHealth(int dammageTaken)

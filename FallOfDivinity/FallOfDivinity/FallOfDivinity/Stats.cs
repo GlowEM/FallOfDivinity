@@ -15,13 +15,12 @@ namespace FallOfDivinity
   {
     // HEALTH STATS
     int playerHealth = 100;
-    int basicEnemyHealth = 50;
     int homingEnemyHealth = 90;
     int bossHealth = 400;
     
     // ATTACK STRENGTH STATS
-    int playerMelee = 40;
-    int playerEarth = 20;
+    int playerMeleeAttack = 40;
+    int playerEarthAttack = 20;
     int basicEnemyAttack = 15;
     int homingEnemyAttack = 25;
     int bossRangedAttack = 10;

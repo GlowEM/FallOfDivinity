@@ -29,7 +29,7 @@ namespace FallOfDivinity
         private float lastTime;
         private float animationTime = 1f;
         private float currentTime = 0f;
-       
+      
         
 
         //constructor
@@ -63,6 +63,8 @@ namespace FallOfDivinity
             charVel.X = (float)0.0;
 
         }
+
+        public string Dir { get { return dir; } }
 
        
        /* protected override void LoadContent()
@@ -268,6 +270,12 @@ namespace FallOfDivinity
                 //reset Timer
                 lastTime = currentTime;
             }
+        }
+
+        //earth attack
+        public void projAttack()
+        { 
+            
         }
 
 

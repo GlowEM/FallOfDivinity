@@ -36,6 +36,18 @@ namespace FallOfDivinity
         protected Vector2 maxAccess;//edge of screen maximum X,Y
 
         //constructor
+        public Character(Rectangle loc, Player player, Game1 game)
+            : base(loc, player, game)
+        {
+            //limit of any character movement
+            minAccess.X = 0;
+            minAccess.Y = 0;
+            maxAccess.X = graphics.PreferredBackBufferWidth - 75;
+            maxAccess.Y = graphics.PreferredBackBufferHeight - 85;//90
+            
+        }
+
+                //for player class to inherit from
         public Character(Rectangle loc, Game1 game)
             : base(loc, game)
         {

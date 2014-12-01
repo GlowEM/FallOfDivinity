@@ -36,7 +36,7 @@ namespace FallOfDivinity
         private float lastTime;
         private float animationTime = 1f;
         private float currentTime = 0f;
-       
+      
         
 
         //constructor
@@ -75,6 +75,8 @@ namespace FallOfDivinity
             watBlit.Height = 1500;
             watBlit.Y = 0;
             watCount = 0;        }
+
+        public string Dir { get { return dir; } }
 
        
        
@@ -314,6 +316,12 @@ namespace FallOfDivinity
                 //reset Timer
                 lastTime = currentTime;
             }
+        }
+
+        //earth attack
+        public void projAttack()
+        { 
+            
         }
 
 

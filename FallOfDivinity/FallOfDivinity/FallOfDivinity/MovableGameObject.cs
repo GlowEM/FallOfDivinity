@@ -14,10 +14,22 @@ namespace FallOfDivinity
     abstract class MovableGameObject : GameObject
     {
 
+        public Player player;
+
+
         //constructor
+        public MovableGameObject(Rectangle loc, Player player, Game1 game)
+            :base(loc, game)
+        {
+            player = this.player;
+        }
+
+                //for player class to use
         public MovableGameObject(Rectangle loc, Game1 game)
             :base(loc, game)
-        { }
+        { 
+        
+        }
 
 
 

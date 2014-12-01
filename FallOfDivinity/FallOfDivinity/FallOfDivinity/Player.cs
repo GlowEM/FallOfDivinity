@@ -14,6 +14,12 @@ namespace FallOfDivinity
     class Player : Character
     {
         //fields
+
+        public KeyboardState ks;
+        public KeyboardState previousState;
+        public bool vine; //contact with vine (climb)
+        protected string dir;
+
         private int health;
         //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
         private static int SizeWidth = 0;
@@ -41,13 +47,188 @@ namespace FallOfDivinity
             health = 10;  //for now
             lastTime = 0f;
 
+            vine = false;
+            charPos.X = loc.X;
+            charPos.Y = loc.Y;
+            //spriteSheetSize.Y = spriteHuman.Bounds.Height;
+            //spriteSheetSize.X = spriteHuman.Bounds.Width;
+            columnCount = 0;
+            rowcount = 3;
+            blit.Height = (int)spriteSheetSize.Y / 7;
+            blit.Width = (int)spriteSheetSize.X / 12;
+            msdel = 0;
+            charAcc.Y = (float)0.3;
+            charVel.Y = (float)0.0;
+            charAcc.X = (float)0.0;
+            charVel.X = (float)0.0;
 
         }
 
-        
+       
+       /* protected override void LoadContent()
+        {
+            spriteHuman = Content.Load<Texture2D>("spriteHuman");
+        }*/
+
+
+        public void setCurrent()
+        {
+            previousState = ks;
+            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
+            
+        }
 
 
 
+
+        public void ProcessInput(GameTime gameTime)
+        {
+            ks = Keyboard.GetState();
+
+            charPos.X += charVel.X + (float)charAcc.X / 2;
+            charPos.Y += charVel.Y + (float)charAcc.Y / 2;
+            charVel.X += charAcc.X;
+            charVel.Y += charAcc.Y;
+
+            //W key = Up
+            //jump if not near vine
+            //climb if near vine
+            if (previousState.IsKeyDown(Keys.Space))
+            {
+                //climb
+                if (vine == true)
+                {
+                    charPos.Y = charPos.Y - 1;
+                    rowcount = 4;
+                    //columnCountH = 0;
+                    if (msdel > msAnim)
+                    {
+
+                        columnCount++;
+                        if (columnCount > 7) { columnCount = 0; }
+                        msdel = 0;
+                    }
+                }
+
+                //jump
+                if (contact == true)//no double jumps
+                {
+                    contact = false;
+                    //jumping with +X Accerleration
+                    if (previousState.IsKeyDown(Keys.Space) && ks.IsKeyDown(Keys.D))
+                    {
+                        charAcc.X = (float)0.2;
+                    }
+
+                    //Jumping with -X Accerleration
+                    if (previousState.IsKeyDown(Keys.Space) && ks.IsKeyDown(Keys.A))
+                    {
+                        charAcc.X = (float)-0.2;
+                    }
+
+                    //Jumping with no X accel added
+                    charVel.Y = (float)-5.5;
+
+                }//end jump
+
+            }//end Space key
+
+            //A key = left
+            if (ks.IsKeyDown(Keys.A))
+            {
+
+                //walking on ground
+                if (contact == true)
+                {
+                    charPos.X = charPos.X - 1;
+                    rowcount = 0;
+                    //columnCountH = 0;
+                    if (msdel > msAnim)
+                    {
+                        columnCount++;
+                        if (columnCount > 11) { columnCount = 0; }
+                        msdel = 0;
+                    }
+                }
+
+            }
+
+            //S key = down
+            if (previousState.IsKeyDown(Keys.S))
+            {
+                //climbing down vine
+                if (vine == true)
+                {
+                    charPos.Y = charPos.Y + 1;
+                    rowcount = 4;
+                    if (columnCount == 0) { columnCount = 7; }
+                    //columnCountH = 0;
+                    if (msdel > msAnim)
+                    {
+                        columnCount--;
+                        msdel = 0;
+                    }
+                }
+            }
+
+            //D key = right
+            if (ks.IsKeyDown(Keys.D))
+            {
+                //walking on ground
+                if (contact == true)
+                {
+                    charPos.X = charPos.X + 1;
+                    rowcount = 1;
+                    //columnCountH = 0;
+                    if (msdel > msAnim)
+                    {
+                        columnCount++;
+                        if (columnCount > 11) { columnCount = 0; }
+                        msdel = 0;
+                    }
+                }
+            }
+
+            //K key = attack
+            if (ks.IsKeyDown(Keys.K))
+            {
+                //on ground
+                if (contact == true)
+                {
+
+                    Attack((float)gameTime.ElapsedGameTime.TotalSeconds);
+                }
+            }
+
+            //return to stand position based on previous get state and current
+
+            //facing left standing
+            if (previousState.IsKeyDown(Keys.A) && ks.IsKeyUp(Keys.A) && ks.IsKeyUp(Keys.Space) && ks.IsKeyUp(Keys.D) && ks.IsKeyUp(Keys.S))
+            {
+                
+                columnCount = 0;
+                rowcount = 2;
+                charAcc.X = (float)0.0;
+                charVel.X = (float)0.0;
+                charVel.Y = (float)0.0;
+               
+                //change for attack
+                dir = "left";
+            }
+            //facing right standing
+            if (previousState.IsKeyDown(Keys.D) && ks.IsKeyUp(Keys.A) && ks.IsKeyUp(Keys.Space) && ks.IsKeyUp(Keys.D) && ks.IsKeyUp(Keys.S))
+            {
+
+                columnCount = 0;
+                rowcount = 3;
+                charAcc.X = (float)0.0;
+                charVel.X = (float)0.0;
+                charVel.Y = (float)0.0;
+
+                //change for attack
+                dir = "right";
+            }
+        }
         //methods
         ///<summary>
         ///if an enemy is within the player's picture box, and in front of the character, does base dammage.
@@ -61,12 +242,35 @@ namespace FallOfDivinity
             if ((currentTime - lastTime) >= animationTime)
             {
                 //ATTACK
+                if (contact == true)
+                {
+                    //check for direction
+                    switch (dir)
+                    {
+                        case "left":
+                            rowcount = 6;
+                            break;
+                        case "right":
+                            rowcount = 7;
+                            break;
+                        default://default face left
+                            rowcount = 6;
+                            break;
+                    }
+                    
+                    if (msdel > msAnim)
+                    {
+                        columnCount++;
+                        if (columnCount > 7) { columnCount = 0; }
+                        msdel = 0;
+                    }
+                }
                 //reset Timer
                 lastTime = currentTime;
             }
         }
-        
-        
+
+
         
         public void LoseHealth(int dammageTaken)
             //called by PlatformBoundEnemy.Attack, Henchmen.Attack

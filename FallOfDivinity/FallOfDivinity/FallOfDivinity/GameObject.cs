@@ -18,6 +18,10 @@ namespace FallOfDivinity
         protected int assetHeight;
         protected int assetWidth;
 
+        //change to rectangle
+        protected Vector2 minScreenAccess;
+        protected Vector2 maxScreenAccess;
+
         //location
         private Rectangle location;
 
@@ -37,7 +41,11 @@ namespace FallOfDivinity
             assetWidth = this.assetWidth;
             assetHeight = this.assetHeight;
             game = this.game;
+            
+           
+            
         }
+        
 
 
     }

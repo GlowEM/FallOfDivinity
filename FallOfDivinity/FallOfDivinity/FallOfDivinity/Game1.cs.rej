@@ -1,0 +1,19 @@
+diff a/FallOfDivinity/FallOfDivinity/FallOfDivinity/Game1.cs b/FallOfDivinity/FallOfDivinity/FallOfDivinity/Game1.cs	(rejected hunks)
+@@ -85,10 +85,15 @@
+            // v2 = new Vector2(300, 600);
+             base.Initialize();
+             //change size of screen
+-            graphics.PreferredBackBufferWidth = 1400;
+-            graphics.PreferredBackBufferHeight = 800;
++           // graphics.PreferredBackBufferWidth = 1400;
++           // graphics.PreferredBackBufferHeight = 800;
+            // graphics.ApplyChanges();
+ 
++            // Screen stuff
++            graphics.PreferredBackBufferWidth = screenWidth;
++            graphics.PreferredBackBufferHeight = screenHeight;
++            graphics.ApplyChanges();
++
+             //limit of any character movement
+             minAccess.X = 0;
+             minAccess.Y = 0;

@@ -16,7 +16,7 @@ namespace FallOfDivinity
     class Henchmen : Enemy
     {
         //fields
-        public static int Dammage = Stats.basicEnemyAttack;
+        public static int Dammage = Stats.homingEnemyAttack;
 
 
         //constructor

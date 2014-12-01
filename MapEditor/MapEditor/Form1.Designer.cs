@@ -35,6 +35,7 @@
             this.vinesButton = new System.Windows.Forms.Button();
             this.longPlatButton = new System.Windows.Forms.Button();
             this.platButton = new System.Windows.Forms.Button();
+            this.charButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveButton
@@ -109,6 +110,17 @@
             this.platButton.UseVisualStyleBackColor = true;
             this.platButton.Click += new System.EventHandler(this.platButton_Click);
             // 
+            // charButton
+            // 
+            this.charButton.BackgroundImage = global::MapEditor.Properties.Resources.Haruka;
+            this.charButton.Location = new System.Drawing.Point(369, 693);
+            this.charButton.Name = "charButton";
+            this.charButton.Size = new System.Drawing.Size(69, 44);
+            this.charButton.TabIndex = 6;
+            this.charButton.Text = "Character";
+            this.charButton.UseVisualStyleBackColor = true;
+            this.charButton.Click += new System.EventHandler(this.charButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +128,7 @@
             this.BackgroundImage = global::MapEditor.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 761);
+            this.Controls.Add(this.charButton);
             this.Controls.Add(this.vinesButton);
             this.Controls.Add(this.longPlatButton);
             this.Controls.Add(this.clearButton);
@@ -138,6 +151,7 @@
         private System.Windows.Forms.Button longPlatButton;
         private System.Windows.Forms.Button vinesButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button charButton;
     }
 }
 

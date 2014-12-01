@@ -89,6 +89,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Background.png" />
+    <None Include="Resources\Haruka1.png" />
+    <None Include="Resources\Haruka.png" />
     <None Include="Resources\Background1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

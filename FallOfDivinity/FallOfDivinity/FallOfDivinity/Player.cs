@@ -20,6 +20,13 @@ namespace FallOfDivinity
         public bool vine; //contact with vine (climb)
         protected string dir;
 
+       // water attack - will replace with actual assests
+        public bool water;
+        private int msWaterA;
+        private int msWatDel = 0;
+        public Rectangle watBlit; //for animation 
+        public int watCount;
+
         private int health;
         //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
         private static int SizeWidth = 0;
@@ -62,20 +69,23 @@ namespace FallOfDivinity
             charAcc.X = (float)0.0;
             charVel.X = (float)0.0;
 
-        }
+            //water attack
+            msWaterA = 50;
+            watBlit.Width = 1500;
+            watBlit.Height = 1500;
+            watBlit.Y = 0;
+            watCount = 0;        }
 
        
-       /* protected override void LoadContent()
-        {
-            spriteHuman = Content.Load<Texture2D>("spriteHuman");
-        }*/
-
+       
 
         public void setCurrent()
         {
             previousState = ks;
             if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
             
+            //water attack animation
+            watBlit.X = watCount * watBlit.Width;
         }
 
 
@@ -200,6 +210,20 @@ namespace FallOfDivinity
                 }
             }
 
+            //CAPSLOCK key, will be changed = water attack
+            if (ks.Equals(Keys.CapsLock))
+            {
+                //on ground
+                if (contact == true)
+                {
+                    waterAttack(gameTime, previousState);
+                }
+
+            }
+
+
+
+
             //return to stand position based on previous get state and current
 
             //facing left standing
@@ -234,6 +258,28 @@ namespace FallOfDivinity
         ///if an enemy is within the player's picture box, and in front of the character, does base dammage.
         ///only availiable every ___ seconds  *******NUMBER BASED UPON ANIMATION CAST******
         ///</summary>
+
+        public void waterAttack(GameTime gametime, KeyboardState previousState) {
+            msWatDel += gametime.ElapsedGameTime.Milliseconds;
+
+            //on one down press(same as jump
+            if (previousState.Equals(Keys.CapsLock))
+            {
+                water = true;
+                if (msWatDel > msWaterA)
+                {
+                    watCount++;
+                    if (watCount > 1) { watCount = 0; }
+                }
+            }
+            //once over drawing will stop
+            water = false;
+            
+            
+        }
+
+
+
         public void Attack(float elapsedGameTime)
         { 
             //check timer to see if character can attack

@@ -48,6 +48,7 @@ namespace FallOfDivinity
         //Player
         Player player;
         public Texture2D spriteHuman;
+        public Texture2D spriteWater;
         Rectangle blitHuman;//blitting rectangle for spritesheet for human
 
 
@@ -129,32 +130,10 @@ namespace FallOfDivinity
                     p++;
                 }
             }
-/******
-            //limit of any character movement
-            minAccess.X = 0;
-            minAccess.Y = 0;
-            maxAccess.X = graphics.PreferredBackBufferWidth - 75;
-            maxAccess.Y = graphics.PreferredBackBufferHeight - 85;//90
 
-            //HUMAN
-            //contact = true;
-            vine = false;
-            charPos.X = graphics.PreferredBackBufferWidth / 2;
-            charPos.Y = graphics.PreferredBackBufferHeight / 2;
-            humanSheetSize.Y = spriteHuman.Bounds.Height;
-            humanSheetSize.X = spriteHuman.Bounds.Width;
-            columnCountH = 0;
-            rowcountH = 3;
-            blit.Height = (int)humanSheetSize.Y / 7;
-            blit.Width = (int)humanSheetSize.X / 12;
-            msdel = 0;
-            charAcc.Y = (float)0.3;
-            charVel.Y = (float)0.0;
-            charAcc.X = (float)0.0;
-            charVel.X = (float)0.0;
-            ********/
             //PLAYER
             player = new Player(this);
+            blitHuman = player.blit;
         }
 
         /// <summary>
@@ -169,6 +148,7 @@ namespace FallOfDivinity
             // TODO: use this.Content to load your game content here
             //character = Content.Load<Texture2D>("Character");
             spriteHuman = Content.Load<Texture2D>("spriteHuman");
+            spriteWater = Content.Load<Texture2D>("water_spriteMock");
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
             vineTexture = this.Content.Load<Texture2D>("Vines");
@@ -229,6 +209,10 @@ namespace FallOfDivinity
 
             // TODO: Add your drawing code here
             spriteBatch.Draw(spriteHuman, player.charPos, player.blit, Color.White);
+
+            //if water attack activated
+            if (player.water == true)
+            { spriteBatch.Draw(spriteWater, player.watBlit, Color.White); }
             //Begin
             spriteBatch.Begin();
 

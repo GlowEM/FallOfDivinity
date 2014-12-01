@@ -46,6 +46,7 @@ namespace FallOfDivinity
 
         Platform[] platforms = new Platform[1000];
         Platform[] lPlatforms = new Platform[1000];
+        Vine[] vines = new Vine[1000];
         ///vines currently have no class for some reason...i'll add soon.
  
 
@@ -133,6 +134,7 @@ namespace FallOfDivinity
                     parsed = int.TryParse(ls[6], out w);
                     parsed = int.TryParse(ls[8], out h);
                     vineRecs[p] = new Rectangle(x, y, w, h);
+                    vines[p] = new Vine(new Rectangle(x, y, w, h), this);
                     p++;
                 }
             }

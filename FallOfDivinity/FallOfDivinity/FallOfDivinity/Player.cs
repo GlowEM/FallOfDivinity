@@ -16,9 +16,9 @@ namespace FallOfDivinity
         //fields
         private int health;
         //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
-        private static int SizeWidth = 0;
-        private static int SizeHeight = 0;
-        private static int BaseDammage = 1;
+        private static int SizeWidth = Stats.playerWidth;
+        private static int SizeHeight = Stats.playerHeight;
+        private static int BaseDammage = Stats.playerMeleeAttack;
             //attack timer  ---  NEEDS ACTUAL animationTime ADDED
         private float lastTime;
         private float animationTime = 1f;

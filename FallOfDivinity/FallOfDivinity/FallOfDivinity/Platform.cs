@@ -20,7 +20,10 @@ namespace FallOfDivinity
             : base(new Rectangle(0,0,0,0), game)
         { }
 
-
+            //nondefault
+        public Platform(Rectangle location, Game1 game)
+            : base(location, game)
+        { }
 
 
 

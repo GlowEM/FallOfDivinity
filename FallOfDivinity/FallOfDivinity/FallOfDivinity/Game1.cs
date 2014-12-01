@@ -43,6 +43,10 @@ namespace FallOfDivinity
         Rectangle[] plRecs = new Rectangle[1000];
         Rectangle[] lRecs = new Rectangle[1000];
         Rectangle[] vineRecs = new Rectangle[1000];
+
+        Platform[] platforms = new Platform[1000];
+        Platform[] lPlatforms = new Platform[1000];
+        ///vines currently have no class for some reason...i'll add soon.
  
 
         //Player
@@ -101,6 +105,7 @@ namespace FallOfDivinity
                     parsed = int.TryParse(ls[6], out w);
                     parsed = int.TryParse(ls[8], out h);
                     plRecs[p] = new Rectangle(x, y, w, h);
+                    platforms[p] = new Platform(new Rectangle(x, y, w, h), this);
                     p++;
                 }
                 if (ls[0].Contains("long platform"))
@@ -114,6 +119,7 @@ namespace FallOfDivinity
                     parsed = int.TryParse(ls[6], out w);
                     parsed = int.TryParse(ls[8], out h);
                     lRecs[p] = new Rectangle(x, y, w, h);
+                    lPlatforms[p] = new Platform(new Rectangle(x, y, w, h), this);
                     p++;
                 }
                 if (ls[0].Contains("vines"))

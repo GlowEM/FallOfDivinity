@@ -16,12 +16,14 @@ namespace FallOfDivinity
         private bool isActive;
         private int speed;  ///tba
         private int dammage;  //
-        private int yValue;
+        private int yValue;  //if the yValue is constant, this is used, otherwise, yValue should be taken from Location.Y
+                                        //if yValue = -1, then y value is dynamic
         
 
 
         //constructor
         //no default
+            //if yValue is constant
         public Projectile(int dammage, Player player, Game1 game)
             : base(new Rectangle(player.Location.X, player.Location.Y, /*width*/0, /*length*/0), player, game)
         {
@@ -32,16 +34,28 @@ namespace FallOfDivinity
             isActive = true;
         }
 
-        //requries:
+            //if yValue is not constant
         public Projectile(int x, int y, Player player, Game1 game)
             : base(new Rectangle(x, y, 0, 0), player, game)
         {
-
+            yValue = -1;
         }
 
         //methods
         public void Move()
         {
+            if (yValue != -1)
+            {
+                xMove();
+            }
+            else
+            {
+                xyMove();
+            }
+        }
+
+        public void xMove()  //movement if in only once direction.
+        {               ///currently no collision detection with side of screen.  
             if (player.Dir == "left")  //left
             {
                 int x = this.Location.X;
@@ -55,6 +69,11 @@ namespace FallOfDivinity
                 x++;
                 this.Location = new Rectangle(x, yValue, 0, 0);   //CHANGE ONCE ASSET HAS BEEN ADDED
             }
+        }
+
+        public void xyMove()
+        { 
+            //TBA
         }
     }
 }

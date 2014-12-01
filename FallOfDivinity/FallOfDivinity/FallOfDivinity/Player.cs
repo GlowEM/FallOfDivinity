@@ -323,8 +323,6 @@ namespace FallOfDivinity
         { 
             
         }
-
-
         
         public void LoseHealth(int dammageTaken)
             //called by PlatformBoundEnemy.Attack, Henchmen.Attack

@@ -38,7 +38,7 @@ namespace FallOfDivinity
         public Player(Rectangle loc, Game1 game)
             :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game)
         {
-            health = 10;  //for now
+            health = Stats.playerHealth;
             lastTime = 0f;
 
 

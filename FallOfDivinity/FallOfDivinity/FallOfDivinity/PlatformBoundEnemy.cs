@@ -19,10 +19,10 @@ namespace FallOfDivinity
         private Platform locPlatform;  //platform bound enemies require a platform to be bound to.
         private int yValue;  //once set, this is constant
         //***********REPLACE NEXT TWO FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
-        private static int SizeWidth = 10;
-        private static int SizeHeight = 10;
+        private static int SizeWidth = Stats.EnemyWidth;
+        private static int SizeHeight = Stats.EnemyHeight;
         private Random rand = new Random();
-        private static int dammage = 1;     //amount of health player loses when attacked by this enemy
+        private static int dammage = Stats.basicEnemyAttack;     //amount of health player loses when attacked by this enemy
         private int direction;  //0 is left, 1 is right.
         private bool isAlive;
 

@@ -32,9 +32,9 @@ namespace FallOfDivinity
 
         private int health;
         //***********REPLACE NEXT 2 FIELDS ONCE ASSETS ARE CREATED;  THESE ARE CONSTANT***********
-        private static int SizeWidth = 0;
-        private static int SizeHeight = 0;
-        private static int BaseDammage = 1;
+        private static int SizeWidth = Stats.playerWidth;
+        private static int SizeHeight = Stats.playerHeight;
+        private static int BaseDammage = Stats.playerMeleeAttack;
             //attack timer  ---  NEEDS ACTUAL animationTime ADDED
         private float lastTime;
         private float animationTime = 1f;
@@ -55,7 +55,7 @@ namespace FallOfDivinity
         public Player(Rectangle loc, Game1 game)
             :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game)
         {
-            health = 10;  //for now
+            health = Stats.playerHealth;
             lastTime = 0f;
 
             vine = false;

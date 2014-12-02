@@ -39,14 +39,17 @@ namespace FallOfDivinity
         Texture2D platTexture;
         Texture2D longTexture;
         Texture2D vineTexture;
+        Texture2D charTexture;
         int p = 0;
         Rectangle[] plRecs = new Rectangle[1000];
         Rectangle[] lRecs = new Rectangle[1000];
         Rectangle[] vineRecs = new Rectangle[1000];
+        Rectangle[] charRecs = new Rectangle[1000];
 
         Platform[] platforms = new Platform[1000];
         Platform[] lPlatforms = new Platform[1000];
         Vine[] vines = new Vine[1000];
+        Char[] chars = new Char[1000];
         ///vines currently have no class for some reason...i'll add soon.
  
 
@@ -137,6 +140,20 @@ namespace FallOfDivinity
                     vines[p] = new Vine(new Rectangle(x, y, w, h), this);
                     p++;
                 }
+                if (ls[0].Contains("char"))
+                {
+                    int x;
+                    int y;
+                    int w;
+                    int h;
+                    Boolean parsed = int.TryParse(ls[2], out x);
+                    parsed = int.TryParse(ls[4], out y);
+                    parsed = int.TryParse(ls[6], out w);
+                    parsed = int.TryParse(ls[8], out h);
+                    charRecs[p] = new Rectangle(x, y, w, h);
+                    chars[p] = new Char(new Rectangle(x, y, w, h), this);
+                    p++;
+                }
             }
 
             //PLAYER
@@ -160,6 +177,7 @@ namespace FallOfDivinity
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
             vineTexture = this.Content.Load<Texture2D>("Vines");
+            charTexture = this.Content.Load<Texture2D>("Haruka");
 
             
             IsMouseVisible = true;
@@ -250,6 +268,10 @@ namespace FallOfDivinity
                     foreach (Rectangle vineRec in vineRecs)
                     {
                         spriteBatch.Draw(vineTexture, vineRec, Color.White);
+                    }
+                    foreach (Rectangle charRec in charRecs)
+                    {
+                        spriteBatch.Draw(charTexture, charRec, Color.White);
                     }
                     break;
             }

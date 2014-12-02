@@ -42,8 +42,8 @@ namespace FallOfDivinity
             //limit of any character movement
             minAccess.X = 0;
             minAccess.Y = 0;
-            maxAccess.X = graphics.PreferredBackBufferWidth - 75;
-            maxAccess.Y = graphics.PreferredBackBufferHeight - 85;//90
+            maxAccess.X = game.MaxX - 75;
+            maxAccess.Y = game.MaxY - 85;//90
             
         }
 
@@ -54,8 +54,8 @@ namespace FallOfDivinity
             //limit of any character movement
             minAccess.X = 0;
             minAccess.Y = 0;
-            maxAccess.X = graphics.PreferredBackBufferWidth - 75;
-            maxAccess.Y = graphics.PreferredBackBufferHeight - 85;//90
+            maxAccess.X = game.MaxX - 75;
+            maxAccess.Y = game.MaxY - 85;//90
             
         }
 

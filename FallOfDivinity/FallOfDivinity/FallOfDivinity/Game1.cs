@@ -153,20 +153,21 @@ namespace FallOfDivinity
                         vines[p] = new Vine(new Rectangle(x, y, w, h), this);
                         p++;
                     }
-                }
-                if (ls[0].Contains("char"))
-                {
-                    int x;
-                    int y;
-                    int w;
-                    int h;
-                    Boolean parsed = int.TryParse(ls[2], out x);
-                    parsed = int.TryParse(ls[4], out y);
-                    parsed = int.TryParse(ls[6], out w);
-                    parsed = int.TryParse(ls[8], out h);
-                    charRecs[p] = new Rectangle(x, y, w, h);
-                    chars[p] = new Char(new Rectangle(x, y, w, h), this);
-                    p++;
+
+                    if (ls[0].Contains("char"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        charRecs[p] = new Rectangle(x, y, w, h);
+                        chars[p] = new Char(new Rectangle(x, y, w, h), this);
+                        p++;
+                    }
                 }
             }
             catch(Exception ex)

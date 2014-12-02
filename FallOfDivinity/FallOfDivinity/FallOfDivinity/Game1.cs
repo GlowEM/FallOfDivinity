@@ -32,6 +32,12 @@ namespace FallOfDivinity
         //Screen Adjustments
         int screenWidth = 1280, screenHeight = 800;
 
+        private int maxX;
+        private int maxY;
+
+        public int MaxX { get { return maxX; } }
+        public int MaxY { get { return maxY; } }
+
         Button playButton;
 
         // Attribute
@@ -50,7 +56,6 @@ namespace FallOfDivinity
         Platform[] lPlatforms = new Platform[1000];
         Vine[] vines = new Vine[1000];
         Char[] chars = new Char[1000];
-        ///vines currently have no class for some reason...i'll add soon.
  
 
         //Player
@@ -91,54 +96,63 @@ namespace FallOfDivinity
             graphics.PreferredBackBufferHeight = screenHeight;
             graphics.ApplyChanges();
 
-            //Read in map
-            StreamReader input = new StreamReader("map.txt");
-            string text = "";
-            while ((text = input.ReadLine()) != null)
-            {
-                string[] ls = text.Split(',');
+            //set maxX and maxY
+            maxX = graphics.PreferredBackBufferWidth;
+            maxY = graphics.PreferredBackBufferHeight;
 
-                if (ls[0].Contains("platforms"))
+
+
+            try
+            {
+                //Read in map
+                StreamReader input = new StreamReader("map.txt");
+                string text = "";
+                while ((text = input.ReadLine()) != null)
                 {
-                    int x;
-                    int y;
-                    int w;
-                    int h;
-                    Boolean parsed = int.TryParse(ls[2], out x);
-                    parsed = int.TryParse(ls[4], out y);
-                    parsed = int.TryParse(ls[6], out w);
-                    parsed = int.TryParse(ls[8], out h);
-                    plRecs[p] = new Rectangle(x, y, w, h);
-                    platforms[p] = new Platform(new Rectangle(x, y, w, h), this);
-                    p++;
-                }
-                if (ls[0].Contains("long platform"))
-                {
-                    int x;
-                    int y;
-                    int w;
-                    int h;
-                    Boolean parsed = int.TryParse(ls[2], out x);
-                    parsed = int.TryParse(ls[4], out y);
-                    parsed = int.TryParse(ls[6], out w);
-                    parsed = int.TryParse(ls[8], out h);
-                    lRecs[p] = new Rectangle(x, y, w, h);
-                    lPlatforms[p] = new Platform(new Rectangle(x, y, w, h), this);
-                    p++;
-                }
-                if (ls[0].Contains("vines"))
-                {
-                    int x;
-                    int y;
-                    int w;
-                    int h;
-                    Boolean parsed = int.TryParse(ls[2], out x);
-                    parsed = int.TryParse(ls[4], out y);
-                    parsed = int.TryParse(ls[6], out w);
-                    parsed = int.TryParse(ls[8], out h);
-                    vineRecs[p] = new Rectangle(x, y, w, h);
-                    vines[p] = new Vine(new Rectangle(x, y, w, h), this);
-                    p++;
+                    string[] ls = text.Split(',');
+
+                    if (ls[0].Contains("platforms"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        plRecs[p] = new Rectangle(x, y, w, h);
+                        platforms[p] = new Platform(new Rectangle(x, y, w, h), this);
+                        p++;
+                    }
+                    if (ls[0].Contains("long platform"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        lRecs[p] = new Rectangle(x, y, w, h);
+                        lPlatforms[p] = new Platform(new Rectangle(x, y, w, h), this);
+                        p++;
+                    }
+                    if (ls[0].Contains("vines"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        vineRecs[p] = new Rectangle(x, y, w, h);
+                        vines[p] = new Vine(new Rectangle(x, y, w, h), this);
+                        p++;
+                    }
                 }
                 if (ls[0].Contains("char"))
                 {
@@ -155,9 +169,15 @@ namespace FallOfDivinity
                     p++;
                 }
             }
+            catch(Exception ex)
+            {}
+            finally
+            {
+                //needs a default map.
+            }
 
             //PLAYER
-            player = new Player(this);
+            player = new Player(new Rectangle(0, spriteHuman.Height, spriteHuman.Width, spriteHuman.Height), this);
             blitHuman = player.blit;
         }
 
@@ -234,7 +254,7 @@ namespace FallOfDivinity
             GraphicsDevice.Clear(Color.Crimson);
 
             // TODO: Add your drawing code here
-            spriteBatch.Draw(spriteHuman, player.charPos, player.blit, Color.White);
+            //spriteBatch.Draw(spriteHuman, player.charPos, player.blit, Color.White);
 
             //if water attack activated
             if (player.water == true)

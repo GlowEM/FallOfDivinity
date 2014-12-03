@@ -73,6 +73,16 @@ namespace MapEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Basic_Samurai {
+            get {
+                object obj = ResourceManager.GetObject("Basic Samurai", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Haruka {
             get {
                 object obj = ResourceManager.GetObject("Haruka", resourceCulture);

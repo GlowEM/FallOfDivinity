@@ -18,6 +18,7 @@ namespace MapEditor
         PictureBox[] longPlatStuff = new PictureBox[1000];
         PictureBox[] vinesStuff = new PictureBox[1000];
         PictureBox[] charStuff = new PictureBox[1000];
+        PictureBox[] basicStuff = new PictureBox[1000];
 
         //attributes
         private int currentXB, currentYB;
@@ -31,6 +32,7 @@ namespace MapEditor
         int l = 0;
         int v = 0;
         int c = 0;
+        int b = 0;
 
         public Form1()
         {
@@ -140,6 +142,29 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picB in basicStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = true;
+                    }
+                    // true if F key is down
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = true;
+                    }
+                    // true if B key is down
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = true;
+                    }
+                }
+            }
 
         }
         private void keyUp(object sender, KeyEventArgs e)
@@ -230,6 +255,32 @@ namespace MapEditor
                 // if there is an image, it checks to see if mouse button
                 // is pressed
                 if (picC != null && picC.ClientRectangle.Contains(picC.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is up
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = false;
+                    }
+                    // true if F key is up
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = false;
+                    }
+                    // true if B key is up
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = false;
+                    }
+                }
+            }
+            foreach (PictureBox picB in basicStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
                 {
                     // true if left mouse button is up
                     if (e.KeyCode == Keys.D)
@@ -372,6 +423,36 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picB in basicStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    // if D key is pressed hides
+                    // the pictureBox from the user
+                    if (isPressedD)
+                    {
+                        picB.Hide();
+                    }
+                    // if F key is pressed brings
+                    // pictureBox to front
+                    if (isPressedF)
+                    {
+                        picB.BringToFront();
+                    }
+                    // if B key is pressed brings
+                    // pictureBox to the back
+                    if (isPressedB)
+                    {
+                        picB.SendToBack();
+                    }
+                }
+            }
         }
         private void mouseDown(object sender, MouseEventArgs e)
         {
@@ -461,6 +542,26 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picB in basicStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = true;
+                        curBox = picB;
+                        currentXB = e.X;
+                        currentYB = e.Y;
+                    }
+                }
+            }
         }
         private void mouseUp(object sender, MouseEventArgs e)
         {
@@ -521,6 +622,22 @@ namespace MapEditor
 
                 // will stop moving the pictureBox
                 if (picC != null && picC.ClientRectangle.Contains(picC.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = false;
+                        curBox = null;
+                    }
+
+                }
+            }
+            foreach (PictureBox picB in basicStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // will stop moving the pictureBox
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -611,6 +728,26 @@ namespace MapEditor
                             picC.BringToFront();
                             picC.Top = picC.Top + (e.Y - currentYB);
                             picC.Left = picC.Left + (e.X - currentXB);
+                        }
+                    }
+                }
+            }
+            foreach (PictureBox picB in basicStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the pictureBox
+                if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        // moves the pictureBox with the mouse
+                        if (isDragging && picB == curBox)
+                        {
+                            picB.BringToFront();
+                            picB.Top = picB.Top + (e.Y - currentYB);
+                            picB.Left = picB.Left + (e.X - currentXB);
                         }
                     }
                 }
@@ -707,6 +844,17 @@ namespace MapEditor
                             //string[] vine = V.Split(',');
                         }
                         c++;
+                    }
+                    foreach (PictureBox picB in basicStuff)
+                    {
+                        if (picB != null && picB.Visible == true)
+                        {
+                            // writes the type of image, the x and y coordinates with the width and height
+                            output.WriteLine("Type: basic " + b + "," + " X Coord, " + picB.Left + ", Y Coord, " + picB.Top + ", Width, " + picB.Width + " , Height, " + picB.Height);
+                            string B = "Type: basic " + b + "," + " X Coord, " + picB.Left + ", Y Coord, " + picB.Top + ", Width, " + picB.Width + " , Height, " + picB.Height;
+                            //string[] vine = V.Split(',');
+                        }
+                        b++;
                     }
                     output.Close();
                 }
@@ -845,6 +993,32 @@ namespace MapEditor
                             charStuff[c].BackColor = Color.Transparent;
                             c++;
                         }
+                        if (ls[0].Contains("basic"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the basicStuff array
+                            basicStuff[b] = new PictureBox();
+                            basicStuff[b].Visible = true;
+                            basicStuff[b].Name = "char" + b;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.Basic_Samurai;
+                            basicStuff[b].Image = image;
+                            basicStuff[b].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            basicStuff[b].Location = new Point(x, y);
+                            // mouseEvents
+                            basicStuff[b].MouseDown += new MouseEventHandler(this.mouseDown);
+                            basicStuff[b].MouseUp += new MouseEventHandler(this.mouseUp);
+                            basicStuff[b].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(basicStuff[b]);
+                            basicStuff[b].BackColor = Color.Transparent;
+                            b++;
+                        }
                     }
                     input.Close();
                 }
@@ -916,6 +1090,20 @@ namespace MapEditor
             {
                 charStuff[i] = null;
             }
+            foreach (PictureBox picB in basicStuff)
+            {
+                if (picB != null)
+                {
+                    picB.Image = null;
+                    picB.Controls.Clear();
+                    picB.Dispose();
+                }
+            }
+
+            for (int i = 0; i < charStuff.Length; ++i)
+            {
+                basicStuff[i] = null;
+            }
         }
 
         private void longPlatButton_Click(object sender, EventArgs e)
@@ -971,7 +1159,7 @@ namespace MapEditor
         private void charButton_Click(object sender, EventArgs e)
         {
             // creates a new picturebox and puts
-            // it into the vinesStuff array
+            // it into the basicStuff array
             charStuff[c] = new PictureBox();
             charStuff[c].Visible = true;
             charStuff[c].Name = "char" + v;
@@ -989,6 +1177,29 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(charStuff[c]);
             c++;
+        }
+
+        private void basicButton_Click(object sender, EventArgs e)
+        {
+            // creates a new picturebox and puts
+            // it into the basicStuff array
+            basicStuff[b] = new PictureBox();
+            basicStuff[b].Visible = true;
+            basicStuff[b].Name = "basic" + b;
+            // sets the image to the pictureBox
+            image = Properties.Resources.Basic_Samurai;
+            basicStuff[b].Image = image;
+            basicStuff[b].Size = new System.Drawing.Size(image.Width, image.Height);
+            basicStuff[b].BackColor = Color.Transparent;
+            // puts the pictureBox in the top left corner
+            basicStuff[b].Location = new Point(1, 1);
+            // mouseEvents
+            basicStuff[b].MouseDown += new MouseEventHandler(this.mouseDown);
+            basicStuff[b].MouseUp += new MouseEventHandler(this.mouseUp);
+            basicStuff[b].MouseMove += new MouseEventHandler(this.mouseMove);
+            // adds pictureBox to form
+            this.Controls.Add(basicStuff[b]);
+            b++;
         }
     }
 }

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Basic.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Char.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Henchmen.cs" />
+    <Compile Include="Homing.cs" />
     <Compile Include="MovableGameObject.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="PlatformBoundEnemy.cs" />

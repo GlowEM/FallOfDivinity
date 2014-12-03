@@ -19,6 +19,7 @@ namespace MapEditor
         PictureBox[] vinesStuff = new PictureBox[1000];
         PictureBox[] charStuff = new PictureBox[1000];
         PictureBox[] basicStuff = new PictureBox[1000];
+        PictureBox[] homingStuff = new PictureBox[1000];
 
         //attributes
         private int currentXB, currentYB;
@@ -33,6 +34,7 @@ namespace MapEditor
         int v = 0;
         int c = 0;
         int b = 0;
+        int h = 0;
 
         public Form1()
         {
@@ -147,6 +149,29 @@ namespace MapEditor
                 var mouseLocation = Cursor.Position;
 
                 if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = true;
+                    }
+                    // true if F key is down
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = true;
+                    }
+                    // true if B key is down
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = true;
+                    }
+                }
+            }
+            foreach (PictureBox picH in homingStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
                 {
                     // true if left mouse button is down
                     if (e.KeyCode == Keys.D)
@@ -281,6 +306,32 @@ namespace MapEditor
                 // if there is an image, it checks to see if mouse button
                 // is pressed
                 if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is up
+                    if (e.KeyCode == Keys.D)
+                    {
+                        isPressedD = false;
+                    }
+                    // true if F key is up
+                    if (e.KeyCode == Keys.F)
+                    {
+                        isPressedF = false;
+                    }
+                    // true if B key is up
+                    if (e.KeyCode == Keys.B)
+                    {
+                        isPressedB = false;
+                    }
+                }
+            }
+            foreach (PictureBox picH in homingStuff)
+            {
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
                 {
                     // true if left mouse button is up
                     if (e.KeyCode == Keys.D)
@@ -453,6 +504,36 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picH in homingStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
+                {
+                    // if D key is pressed hides
+                    // the pictureBox from the user
+                    if (isPressedD)
+                    {
+                        picH.Hide();
+                    }
+                    // if F key is pressed brings
+                    // pictureBox to front
+                    if (isPressedF)
+                    {
+                        picH.BringToFront();
+                    }
+                    // if B key is pressed brings
+                    // pictureBox to the back
+                    if (isPressedB)
+                    {
+                        picH.SendToBack();
+                    }
+                }
+            }
         }
         private void mouseDown(object sender, MouseEventArgs e)
         {
@@ -562,6 +643,26 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picH in homingStuff)
+            {
+                // gets the mouse pointer position
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the picturebox
+                // if there is an image, it checks to see if mouse button
+                // is pressed
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
+                {
+                    // true if left mouse button is down
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = true;
+                        curBox = picH;
+                        currentXB = e.X;
+                        currentYB = e.Y;
+                    }
+                }
+            }
         }
         private void mouseUp(object sender, MouseEventArgs e)
         {
@@ -638,6 +739,22 @@ namespace MapEditor
 
                 // will stop moving the pictureBox
                 if (picB != null && picB.ClientRectangle.Contains(picB.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        isDragging = false;
+                        curBox = null;
+                    }
+
+                }
+            }
+            foreach (PictureBox picH in homingStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // will stop moving the pictureBox
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
                 {
                     if (e.Button == MouseButtons.Left)
                     {
@@ -752,6 +869,26 @@ namespace MapEditor
                     }
                 }
             }
+            foreach (PictureBox picH in homingStuff)
+            {
+                // gets position of mouse
+                var mouseLocation = Cursor.Position;
+
+                // checks to see if there is an image in the pictureBox
+                if (picH != null && picH.ClientRectangle.Contains(picH.PointToClient(Control.MousePosition)))
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        // moves the pictureBox with the mouse
+                        if (isDragging && picH == curBox)
+                        {
+                            picH.BringToFront();
+                            picH.Top = picH.Top + (e.Y - currentYB);
+                            picH.Left = picH.Left + (e.X - currentXB);
+                        }
+                    }
+                }
+            }
         }
 
         private void platButton_Click(object sender, EventArgs e)
@@ -855,6 +992,17 @@ namespace MapEditor
                             //string[] vine = V.Split(',');
                         }
                         b++;
+                    }
+                    foreach (PictureBox picH in homingStuff)
+                    {
+                        if (picH != null && picH.Visible == true)
+                        {
+                            // writes the type of image, the x and y coordinates with the width and height
+                            output.WriteLine("Type: homing " + h + "," + " X Coord, " + picH.Left + ", Y Coord, " + picH.Top + ", Width, " + picH.Width + " , Height, " + picH.Height);
+                            string H = "Type: homin " + h + "," + " X Coord, " + picH.Left + ", Y Coord, " + picH.Top + ", Width, " + picH.Width + " , Height, " + picH.Height;
+                            //string[] vine = V.Split(',');
+                        }
+                        h++;
                     }
                     output.Close();
                 }
@@ -1019,6 +1167,32 @@ namespace MapEditor
                             basicStuff[b].BackColor = Color.Transparent;
                             b++;
                         }
+                        if (ls[0].Contains("homing"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the homingStuff array
+                            homingStuff[h] = new PictureBox();
+                            homingStuff[h].Visible = true;
+                            homingStuff[h].Name = "homing" + h;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.Homing_Samurai;
+                            homingStuff[h].Image = image;
+                            homingStuff[h].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            homingStuff[h].Location = new Point(x, y);
+                            // mouseEvents
+                            homingStuff[h].MouseDown += new MouseEventHandler(this.mouseDown);
+                            homingStuff[h].MouseUp += new MouseEventHandler(this.mouseUp);
+                            homingStuff[h].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(homingStuff[h]);
+                            homingStuff[h].BackColor = Color.Transparent;
+                            h++;
+                        }
                     }
                     input.Close();
                 }
@@ -1100,9 +1274,23 @@ namespace MapEditor
                 }
             }
 
-            for (int i = 0; i < charStuff.Length; ++i)
+            for (int i = 0; i < basicStuff.Length; ++i)
             {
                 basicStuff[i] = null;
+            }
+            foreach (PictureBox picH in homingStuff)
+            {
+                if (picH != null)
+                {
+                    picH.Image = null;
+                    picH.Controls.Clear();
+                    picH.Dispose();
+                }
+            }
+
+            for (int i = 0; i < homingStuff.Length; ++i)
+            {
+                homingStuff[i] = null;
             }
         }
 
@@ -1200,6 +1388,29 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(basicStuff[b]);
             b++;
+        }
+
+        private void homingButton_Click(object sender, EventArgs e)
+        {
+            // creates a new picturebox and puts
+            // it into the basicStuff array
+            homingStuff[h] = new PictureBox();
+            homingStuff[h].Visible = true;
+            homingStuff[h].Name = "homing" + h;
+            // sets the image to the pictureBox
+            image = Properties.Resources.Homing_Samurai;
+            homingStuff[h].Image = image;
+            homingStuff[h].Size = new System.Drawing.Size(image.Width, image.Height);
+            homingStuff[h].BackColor = Color.Transparent;
+            // puts the pictureBox in the top left corner
+            homingStuff[h].Location = new Point(1, 1);
+            // mouseEvents
+            homingStuff[h].MouseDown += new MouseEventHandler(this.mouseDown);
+            homingStuff[h].MouseUp += new MouseEventHandler(this.mouseUp);
+            homingStuff[h].MouseMove += new MouseEventHandler(this.mouseMove);
+            // adds pictureBox to form
+            this.Controls.Add(homingStuff[h]);
+            h++;
         }
     }
 }

@@ -93,6 +93,16 @@ namespace MapEditor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Homing_Samurai {
+            get {
+                object obj = ResourceManager.GetObject("Homing Samurai", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Long_Platform {
             get {
                 object obj = ResourceManager.GetObject("Long Platform", resourceCulture);

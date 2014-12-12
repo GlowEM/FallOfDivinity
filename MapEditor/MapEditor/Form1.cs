@@ -28,6 +28,7 @@ namespace MapEditor
         private bool isPressedD = false;
         private bool isPressedF = false;
         private bool isPressedB = false;
+        private bool isPressedC = false;
         Image image;
         int p = 0;
         int l = 0;
@@ -73,6 +74,10 @@ namespace MapEditor
                     {
                         isPressedB = true;
                     }
+                    if (e.KeyCode == Keys.C)
+                    {
+                        isPressedC = true;
+                    }
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -95,6 +100,10 @@ namespace MapEditor
                     if (e.KeyCode == Keys.B)
                     {
                         isPressedB = true;
+                    }
+                    if (e.KeyCode == Keys.C)
+                    {
+                        isPressedC = true;
                     }
                 }
             }
@@ -218,6 +227,10 @@ namespace MapEditor
                     {
                         isPressedB = false;
                     }
+                    if (e.KeyCode == Keys.C)
+                    {
+                        isPressedC = false;
+                    }
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -243,6 +256,10 @@ namespace MapEditor
                     if (e.KeyCode == Keys.B)
                     {
                         isPressedB = false;
+                    }
+                    if (e.KeyCode == Keys.C)
+                    {
+                        isPressedC = false;
                     }
                 }
             }
@@ -382,6 +399,13 @@ namespace MapEditor
                     {
                         picP.SendToBack();
                     }
+                    if (isPressedC)
+                    {
+                        if (charStuff[0] != null)
+                        {
+                            charStuff[0].Location = new Point(picP.Location.X, picP.Location.Y - charStuff[0].Size.Height);
+                        }
+                    }
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -411,6 +435,13 @@ namespace MapEditor
                     if (isPressedB)
                     {
                         picL.SendToBack();
+                    }
+                    if (isPressedC)
+                    {
+                        if (charStuff[0] != null)
+                        {
+                            charStuff[0].Location = new Point(picL.Location.X, picL.Location.Y - charStuff[0].Size.Height);
+                        }
                     }
                 }
             }

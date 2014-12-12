@@ -212,7 +212,7 @@ namespace FallOfDivinity
             }
 
             //PLAYER
-            player = new Player(new Rectangle(0, spriteHuman.Height, spriteHuman.Width, spriteHuman.Height), this);
+            player = new Player(new Rectangle(0, charTexture.Height, charTexture.Width, charTexture.Height), this);
             blitHuman = player.blit;
         }
 
@@ -227,7 +227,7 @@ namespace FallOfDivinity
 
             // TODO: use this.Content to load your game content here
             //character = Content.Load<Texture2D>("Character");
-            spriteHuman = Content.Load<Texture2D>("spriteHuman");
+            //spriteHuman = Content.Load<Texture2D>("spriteHuman");
             spriteWater = Content.Load<Texture2D>("water_spriteMock");
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
@@ -293,9 +293,7 @@ namespace FallOfDivinity
             // TODO: Add your drawing code here
             //spriteBatch.Draw(spriteHuman, player.charPos, player.blit, Color.White);
 
-            //if water attack activated
-            if (player.water == true)
-            { spriteBatch.Draw(spriteWater, player.watBlit, Color.White); }
+           
             //Begin
             spriteBatch.Begin();
 
@@ -313,7 +311,7 @@ namespace FallOfDivinity
                     //spriteBatch.Draw(character, v2, Color.White);
                     //human
                     //**if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
-                    //**spriteBatch.Draw(spriteHuman, charPos, blit, Color.White);
+                    //spriteBatch.Draw(spriteHuman, charPos, blit, Color.White);
                     foreach (Rectangle plRec in plRecs)
                     {
                         spriteBatch.Draw(platTexture, plRec, Color.White);
@@ -328,7 +326,7 @@ namespace FallOfDivinity
                     }
                     foreach (Rectangle charRec in charRecs)
                     {
-                        spriteBatch.Draw(charTexture, charRec, Color.White);
+                        spriteBatch.Draw(charTexture, player.charPos, Color.White);
                     }
                     foreach (Rectangle basicRec in basicRecs)
                     {
@@ -338,6 +336,9 @@ namespace FallOfDivinity
                     {
                         spriteBatch.Draw(basicTexture, homingRec, Color.White);
                     }
+                    //if water attack activated
+                    if (player.water == true)
+                    { spriteBatch.Draw(spriteWater, player.watBlit, Color.White); }
                     break;
             }
             spriteBatch.End();

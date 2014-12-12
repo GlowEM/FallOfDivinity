@@ -82,7 +82,7 @@ namespace FallOfDivinity
 
         public string Dir { get { return dir; } }
 
-       
+        //public Vector2 charPos { get { return charPos; } }
        
 
         public void setCurrent()

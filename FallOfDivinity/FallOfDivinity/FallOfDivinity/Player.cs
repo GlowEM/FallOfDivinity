@@ -88,8 +88,8 @@ namespace FallOfDivinity
         public void setCurrent()
         {
             previousState = ks;
-            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
-            
+            //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
+            //else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
             //water attack animation
             watBlit.X = watCount * watBlit.Width;
         }

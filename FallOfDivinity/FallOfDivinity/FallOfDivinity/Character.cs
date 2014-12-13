@@ -62,7 +62,7 @@ namespace FallOfDivinity
 
         
 
-            protected virtual void Check(GameTime gameTime) {
+            public virtual void Check(GameTime gameTime) {
 
             //for blitting
             msdel += gameTime.ElapsedGameTime.Milliseconds;

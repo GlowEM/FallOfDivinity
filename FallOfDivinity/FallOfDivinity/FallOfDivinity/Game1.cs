@@ -49,7 +49,7 @@ namespace FallOfDivinity
         Texture2D basicTexture;
         Texture2D homingTexture;
         int p = 0;
-        Rectangle[] plRecs = new Rectangle[1000];
+        public Rectangle[] plRecs = new Rectangle[1000];
         Rectangle[] lRecs = new Rectangle[1000];
         Rectangle[] vineRecs = new Rectangle[1000];
         Rectangle[] charRecs = new Rectangle[1000];
@@ -308,10 +308,7 @@ namespace FallOfDivinity
                     break;
                 case GameState.Playing:
                     spriteBatch.Draw(Content.Load<Texture2D>("Background"), new Rectangle(0,0, screenWidth,screenHeight), Color.White);
-                    //spriteBatch.Draw(character, v2, Color.White);
-                    //human
-                    /// (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
-                    //spriteBatch.Draw(spriteHuman, charPos, blit, Color.White);
+                    
                     foreach (Rectangle plRec in plRecs)
                     {
                         spriteBatch.Draw(platTexture, plRec, Color.White);
@@ -338,7 +335,7 @@ namespace FallOfDivinity
                     }
                     //if water attack activated
                     
-                   // player.setCurrent();
+                  
                     break;
             }
             spriteBatch.End();

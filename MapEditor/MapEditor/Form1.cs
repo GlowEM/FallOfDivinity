@@ -29,6 +29,8 @@ namespace MapEditor
         private bool isPressedF = false;
         private bool isPressedB = false;
         private bool isPressedC = false;
+        private bool isPressedE = false;
+        private bool isPressedH = false;
         Image image;
         int p = 0;
         int l = 0;
@@ -36,6 +38,11 @@ namespace MapEditor
         int c = 0;
         int b = 0;
         int h = 0;
+        int countP = 0;
+        int countL = 0;
+        int countB = 0;
+        int countH = 0;
+        int countC = 0;
 
         public Form1()
         {
@@ -78,6 +85,14 @@ namespace MapEditor
                     {
                         isPressedC = true;
                     }
+                    if (e.KeyCode == Keys.E)
+                    {
+                        isPressedE = true;
+                    }
+                    if (e.KeyCode == Keys.H)
+                    {
+                        isPressedH = true;
+                    }
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -104,6 +119,14 @@ namespace MapEditor
                     if (e.KeyCode == Keys.C)
                     {
                         isPressedC = true;
+                    }
+                    if (e.KeyCode == Keys.E)
+                    {
+                        isPressedE = true;
+                    }
+                    if (e.KeyCode == Keys.H)
+                    {
+                        isPressedH = true;
                     }
                 }
             }
@@ -231,6 +254,14 @@ namespace MapEditor
                     {
                         isPressedC = false;
                     }
+                    if (e.KeyCode == Keys.E)
+                    {
+                        isPressedE = false;
+                    }
+                    if (e.KeyCode == Keys.H)
+                    {
+                        isPressedH = false;
+                    }
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -260,6 +291,14 @@ namespace MapEditor
                     if (e.KeyCode == Keys.C)
                     {
                         isPressedC = false;
+                    }
+                    if (e.KeyCode == Keys.E)
+                    {
+                        isPressedE = false;
+                    }
+                    if (e.KeyCode == Keys.H)
+                    {
+                        isPressedH = false;
                     }
                 }
             }
@@ -401,11 +440,26 @@ namespace MapEditor
                     }
                     if (isPressedC)
                     {
-                        if (charStuff[0] != null)
+                        charButton.PerformClick();
                         {
-                            charStuff[0].Location = new Point(picP.Location.X, picP.Location.Y - charStuff[0].Size.Height);
+                            charStuff[countC - 1].Location = new Point(picP.Location.X, picP.Location.Y - charStuff[countC - 1].Size.Height);
                         }
                     }
+                    if (isPressedE)
+                    {
+                        basicButton.PerformClick();
+                        {
+                            basicStuff[countB-1].Location = new Point(picP.Location.X, picP.Location.Y - basicStuff[countB-1].Size.Height);
+                        }
+                    }
+                    if (isPressedH)
+                    {
+                        homingButton.PerformClick();
+                        {
+                            homingStuff[countH - 1].Location = new Point(picP.Location.X, picP.Location.Y - homingStuff[countH - 1].Size.Height);
+                        }
+                    }
+                 
                 }
             }
             foreach (PictureBox picL in longPlatStuff)
@@ -438,9 +492,23 @@ namespace MapEditor
                     }
                     if (isPressedC)
                     {
-                        if (charStuff[0] != null)
+                        charButton.PerformClick();
                         {
-                            charStuff[0].Location = new Point(picL.Location.X, picL.Location.Y - charStuff[0].Size.Height);
+                            charStuff[countC - 1].Location = new Point(picL.Location.X, picL.Location.Y - charStuff[countC - 1].Size.Height);
+                        }
+                    }
+                    if (isPressedE)
+                    {
+                        basicButton.PerformClick();
+                        {
+                            basicStuff[countB - 1].Location = new Point(picL.Location.X, picL.Location.Y - basicStuff[countB - 1].Size.Height);
+                        }
+                    }
+                    if (isPressedH)
+                    {
+                        homingButton.PerformClick();
+                        {
+                            homingStuff[countH - 1].Location = new Point(picL.Location.X, picL.Location.Y - homingStuff[countH - 1].Size.Height);
                         }
                     }
                 }
@@ -943,6 +1011,7 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(platformStuff[p]);
             p++;
+            countP++;
         }
 
 
@@ -1012,6 +1081,7 @@ namespace MapEditor
                             //string[] vine = V.Split(',');
                         }
                         c++;
+                        countC++;
                     }
                     foreach (PictureBox picB in basicStuff)
                     {
@@ -1023,6 +1093,7 @@ namespace MapEditor
                             //string[] vine = V.Split(',');
                         }
                         b++;
+                        countB++;
                     }
                     foreach (PictureBox picH in homingStuff)
                     {
@@ -1034,6 +1105,7 @@ namespace MapEditor
                             //string[] vine = V.Split(',');
                         }
                         h++;
+                        countH++;
                     }
                     output.Close();
                 }
@@ -1171,6 +1243,7 @@ namespace MapEditor
                             this.Controls.Add(charStuff[c]);
                             charStuff[c].BackColor = Color.Transparent;
                             c++;
+                            countC++;
                         }
                         if (ls[0].Contains("basic"))
                         {
@@ -1197,6 +1270,7 @@ namespace MapEditor
                             this.Controls.Add(basicStuff[b]);
                             basicStuff[b].BackColor = Color.Transparent;
                             b++;
+                            countB++;
                         }
                         if (ls[0].Contains("homing"))
                         {
@@ -1223,6 +1297,7 @@ namespace MapEditor
                             this.Controls.Add(homingStuff[h]);
                             homingStuff[h].BackColor = Color.Transparent;
                             h++;
+                            countH++;
                         }
                     }
                     input.Close();
@@ -1346,6 +1421,7 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(longPlatStuff[l]);
             l++;
+            countL++;
         }
 
         private void vinesButton_Click(object sender, EventArgs e)
@@ -1396,6 +1472,7 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(charStuff[c]);
             c++;
+            countC++;
         }
 
         private void basicButton_Click(object sender, EventArgs e)
@@ -1419,6 +1496,7 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(basicStuff[b]);
             b++;
+            countB++;
         }
 
         private void homingButton_Click(object sender, EventArgs e)
@@ -1442,6 +1520,7 @@ namespace MapEditor
             // adds pictureBox to form
             this.Controls.Add(homingStuff[h]);
             h++;
+            countH++;
         }
     }
 }

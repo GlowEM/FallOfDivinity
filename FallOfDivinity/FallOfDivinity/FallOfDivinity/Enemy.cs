@@ -47,20 +47,35 @@ namespace FallOfDivinity
         public void findPlatform() {
             //takes all rectangles of platforms and find the one that is under it
             //in testing still
+            Rectangle checkIntersect = location;
+
+            checkIntersect.Width += 10;
+            checkIntersect.Height += 10;
+            checkIntersect.Y -= 5;
                 foreach (Rectangle plRec in game.plRecs)
                 {
 
                     int widthCheck = (int)Math.Abs(plRec.X - charPos.X);
                     int heightCheck = (int)Math.Abs(charPos.Y - plRec.Top);
+                    int checkInt = (int)Math.Abs(charPos.X - plRec.Right);
                     //possible problem, platform is width distance AWAY from player
                     //still working on that
-                    bool check = (plRec.Intersects(Location));
+                    
+                    bool check = (plRec.Intersects(checkIntersect));
 
                     //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
                     if (check == true)
                     {
                         enemyZone = plRec;
 
+                    }
+
+                    
+                    else{
+                        if (checkInt > 0 && checkInt < 50)
+                        {
+                            enemyZone = plRec;
+                        }
                     }
                 }
            
@@ -71,7 +86,7 @@ namespace FallOfDivinity
                     int heightCheck = (int)Math.Abs(charPos.Y - lRec.Top);
                     //possible problem, platform is width distance AWAY from player
                     //still working on that
-                    bool check = (lRec.Intersects(Location));
+                    bool check = (lRec.Intersects(checkIntersect));
 
                     //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
                     if (check == true)

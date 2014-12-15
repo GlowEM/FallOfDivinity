@@ -49,6 +49,7 @@ namespace FallOfDivinity
         Texture2D basicTexture;
         Texture2D homingTexture;
         Texture2D homingSpriteSheet;
+        Texture2D basicSpriteSheet;
         int p = 0;
         public Rectangle[] plRecs = new Rectangle[1000];
         public Rectangle[] lRecs = new Rectangle[1000];
@@ -190,7 +191,7 @@ namespace FallOfDivinity
                         parsed = int.TryParse(ls[6], out w);
                         parsed = int.TryParse(ls[8], out h);
                         basicRecs[p] = new Rectangle(x, y, w, h);
-                        basicL.Push(new Basic(new Rectangle(x, y, w, h), player, basicTexture, this));
+                        basicL.Push(new Basic(new Rectangle(x, y, w, h), player, basicSpriteSheet, this));
                         basics[p] = basicL.Peek();
                         p++;
                     }
@@ -240,6 +241,7 @@ namespace FallOfDivinity
             basicTexture = this.Content.Load<Texture2D>("Basic Samurai");
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
             homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");
+            basicSpriteSheet = this.Content.Load<Texture2D>("spriteBasic");
 
             
             IsMouseVisible = true;
@@ -281,6 +283,11 @@ namespace FallOfDivinity
                     break;
             }
             foreach (Homing soldier in homingL)
+            {
+                soldier.Check(gameTime);
+                soldier.Move(gameTime);
+            }
+            foreach (Basic soldier in basicL)
             {
                 soldier.Check(gameTime);
                 soldier.Move(gameTime);
@@ -337,9 +344,13 @@ namespace FallOfDivinity
                         //when spritesheet done add blit as source rec
                         spriteBatch.Draw(charTexture, player.charPos, player.blit, Color.White);
                     }
-                    foreach (Rectangle basicRec in basicRecs)
+                   /* foreach (Rectangle basicRec in basicRecs)
                     {
                         spriteBatch.Draw(basicTexture, basicRec, Color.White);
+                    }*/
+                    foreach (Basic soldier in basicL)
+                    {
+                        spriteBatch.Draw(basicSpriteSheet, soldier.charPos, soldier.blit, Color.White);
                     }
                     foreach (Homing soldier in homingL)
                     {

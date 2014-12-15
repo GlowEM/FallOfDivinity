@@ -31,7 +31,7 @@ namespace FallOfDivinity
             charPos.X = loc.X;
             charPos.Y = loc.Y;
             findPlatform();
-            dir = rand.Next(2) - 1;
+            dir = rand.Next(0, 1);
 
             spriteSheetSize.X = spriteSheet.Bounds.Width;
             spriteSheetSize.Y = spriteSheet.Bounds.Height;
@@ -51,13 +51,16 @@ namespace FallOfDivinity
                 {
 
                     int widthCheck = (int)Math.Abs(plRec.X - charPos.X);
-                    int heightCheck = (int)Math.Abs(plRec.Y - charPos.Y);
+                    int heightCheck = (int)Math.Abs(charPos.Y - plRec.Top);
                     //possible problem, platform is width distance AWAY from player
                     //still working on that
+                    bool check = (plRec.Intersects(Location));
 
-                    if ((heightCheck < 15 && heightCheck >= 0) && (widthCheck <= plRec.Width))
+                    //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
+                    if (check == true)
                     {
                         enemyZone = plRec;
+
                     }
                 }
            
@@ -65,11 +68,13 @@ namespace FallOfDivinity
                 {
 
                     int widthCheck = (int)Math.Abs(lRec.X - charPos.X);
-                    int heightCheck = (int)Math.Abs(lRec.Top - charPos.Y);
+                    int heightCheck = (int)Math.Abs(charPos.Y - lRec.Top);
                     //possible problem, platform is width distance AWAY from player
                     //still working on that
+                    bool check = (lRec.Intersects(Location));
 
-                    if ((heightCheck < 15 && heightCheck >= 0) && (widthCheck <= lRec.Width))
+                    //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
+                    if (check == true)
                     {
                         enemyZone = lRec;
                         
@@ -80,7 +85,7 @@ namespace FallOfDivinity
 
         public override void Check(GameTime gameTime)
         {
-            charPos.Y = enemyZone.Y - blit.Height/2;
+            charPos.Y = enemyZone.Y - blit.Height;
 
             base.Check(gameTime);
         }
@@ -107,7 +112,7 @@ namespace FallOfDivinity
                 }
                 else if (charPos.X >= (maxDist - blit.Width)) { dir = 0; }
             }
-            if (dir == 0)//direction is left
+            else if (dir == 0)//direction is left
             {
                 if (charPos.X > minDist)
                 {

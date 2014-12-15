@@ -84,6 +84,7 @@ namespace FallOfDivinity
 
                     int widthCheck = (int)Math.Abs(lRec.X - charPos.X);
                     int heightCheck = (int)Math.Abs(charPos.Y - lRec.Top);
+                    int checkInt = (int)Math.Abs(charPos.X - lRec.Right);
                     //possible problem, platform is width distance AWAY from player
                     //still working on that
                     bool check = (lRec.Intersects(checkIntersect));
@@ -93,6 +94,13 @@ namespace FallOfDivinity
                     {
                         enemyZone = lRec;
                         
+                    }
+                    else
+                    {
+                        if (checkInt > 0 && checkInt < 50)
+                        {
+                            enemyZone = lRec;
+                        }
                     }
                 }
             

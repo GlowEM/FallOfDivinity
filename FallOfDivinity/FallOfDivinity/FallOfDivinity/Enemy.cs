@@ -46,58 +46,66 @@ namespace FallOfDivinity
         }
         public void findPlatform() {
             //takes all rectangles of platforms and find the one that is under it
-            //in testing still
+            //if enemy not bound to platform they'll be bound to the ground
             Rectangle checkIntersect = location;
 
             checkIntersect.Width += 10;
             checkIntersect.Height += 10;
             checkIntersect.Y -= 5;
                 foreach (Rectangle plRec in game.plRecs)
-                {
+                {//short platforms
 
-                    int widthCheck = (int)Math.Abs(plRec.X - charPos.X);
-                    int heightCheck = (int)Math.Abs(charPos.Y - plRec.Top);
+                    //checkint = distance of character position within bounds of platform (x coord)
+
                     int checkInt = (int)Math.Abs(charPos.X - plRec.Right);
-                    //possible problem, platform is width distance AWAY from player
-                    //still working on that
                     
+                    //check if rectangles interesect
                     bool check = (plRec.Intersects(checkIntersect));
 
-                    //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
+                    //if true then bind
                     if (check == true)
                     {
                         enemyZone = plRec;
 
                     }
 
-                    
+                    //backup
+                    //if the character isnt within the y coord bounds (human error)
+                    //but within x coord bounds, bind
+                    //basically puts it to the closest platform
                     else{
-                        if (checkInt > 0 && checkInt < 50)
+                        if (checkInt > 0 && checkInt < 15)
                         {
                             enemyZone = plRec;
+                        }
+                        else
+                        {
+
                         }
                     }
                 }
            
                 foreach (Rectangle lRec in game.lRecs)
-                {
+                {//long platforms
 
-                    int widthCheck = (int)Math.Abs(lRec.X - charPos.X);
-                    int heightCheck = (int)Math.Abs(charPos.Y - lRec.Top);
-                    int checkInt = (int)Math.Abs(charPos.X - lRec.Right);
-                    //possible problem, platform is width distance AWAY from player
-                    //still working on that
+                    //checkint = distance of character position within bounds of platform (x coord)
+                   int checkInt = (int)Math.Abs(charPos.X - lRec.Right);
+                    
                     bool check = (lRec.Intersects(checkIntersect));
 
-                    //if ((charPos.Y < lRec.Bottom && charPos.Y > (lRec.Y  - 25)) && (charPos.X < lRec.Left && charPos.X < lRec.Right))
+                    //check if rectangles interesect
                     if (check == true)
                     {
                         enemyZone = lRec;
                         
                     }
+                    //backup
+                    //if the character isnt within the y coord bounds (human error)
+                    //but within x coord bounds, bind
+                    //basically puts it to the closest
                     else
                     {
-                        if (checkInt > 0 && checkInt < 50)
+                        if (checkInt > 0 && checkInt < 15)
                         {
                             enemyZone = lRec;
                         }
@@ -108,7 +116,7 @@ namespace FallOfDivinity
 
         public override void Check(GameTime gameTime)
         {
-            charPos.Y = enemyZone.Y - blit.Height;
+            charPos.Y = enemyZone.Y - blit.Height + 5;
 
             base.Check(gameTime);
         }
@@ -133,7 +141,7 @@ namespace FallOfDivinity
                         charVel.X = 1.0f;
                      
                 }
-                else if (charPos.X >= (maxDist - blit.Width)) { dir = 0; }
+                else if (charPos.X >= (maxDist - blit.Width) || (charPos.X > maxAccess.X)) { dir = 0; }
             }
             else if (dir == 0)//direction is left
             {
@@ -144,7 +152,7 @@ namespace FallOfDivinity
                         charVel.X = -1.0f;
                      
                 }
-                else if (charPos.X <= minDist) { dir = 1; }
+                else if ((charPos.X <= minDist)||(charPos.X < minAccess.X)) { dir = 1; }
             }
         }
 

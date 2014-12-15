@@ -1,0 +1,35 @@
+Type: platforms 0, X Coord, 794, Y Coord, 360, Width, 100 , Height, 55
+Type: platforms 1, X Coord, 651, Y Coord, 359, Width, 100 , Height, 55
+Type: platforms 2, X Coord, 441, Y Coord, 541, Width, 100 , Height, 55
+Type: platforms 3, X Coord, 935, Y Coord, 361, Width, 100 , Height, 55
+Type: platforms 4, X Coord, 283, Y Coord, 304, Width, 100 , Height, 55
+Type: platforms 5, X Coord, 398, Y Coord, 256, Width, 100 , Height, 55
+Type: platforms 6, X Coord, 527, Y Coord, 236, Width, 100 , Height, 55
+Type: long platform 0, X Coord, 229, Y Coord, 641, Width, 300 , Height, 48
+Type: long platform 1, X Coord, 565, Y Coord, 563, Width, 300 , Height, 48
+Type: long platform 2, X Coord, 912, Y Coord, 530, Width, 300 , Height, 48
+Type: long platform 3, X Coord, 314, Y Coord, 407, Width, 300 , Height, 48
+Type: long platform 4, X Coord, 422, Y Coord, 158, Width, 300 , Height, 48
+Type: long platform 5, X Coord, 722, Y Coord, 158, Width, 300 , Height, 48
+Type: vines 0, X Coord, 472, Y Coord, 580, Width, 50 , Height, 60
+Type: vines 1, X Coord, 474, Y Coord, 539, Width, 50 , Height, 60
+Type: vines 2, X Coord, 956, Y Coord, 470, Width, 50 , Height, 60
+Type: vines 3, X Coord, 958, Y Coord, 416, Width, 50 , Height, 60
+Type: vines 4, X Coord, 960, Y Coord, 361, Width, 50 , Height, 60
+Type: vines 5, X Coord, 315, Y Coord, 350, Width, 50 , Height, 60
+Type: vines 6, X Coord, 317, Y Coord, 303, Width, 50 , Height, 60
+Type: vines 7, X Coord, 572, Y Coord, 179, Width, 50 , Height, 60
+Type: vines 8, X Coord, 573, Y Coord, 157, Width, 50 , Height, 60
+Type: vines 9, X Coord, 229, Y Coord, 641, Width, 50 , Height, 60
+Type: vines 10, X Coord, 230, Y Coord, 689, Width, 50 , Height, 60
+Type: vines 11, X Coord, 230, Y Coord, 719, Width, 50 , Height, 60
+Type: char 1, X Coord, 229, Y Coord, 591, Width, 20 , Height, 50
+Type: basic 5, X Coord, 345, Y Coord, 713, Width, 20 , Height, 50
+Type: basic 6, X Coord, 720, Y Coord, 521, Width, 20 , Height, 50
+Type: basic 7, X Coord, 823, Y Coord, 320, Width, 20 , Height, 50
+Type: basic 8, X Coord, 428, Y Coord, 212, Width, 20 , Height, 50
+Type: basic 9, X Coord, 294, Y Coord, 261, Width, 20 , Height, 50
+Type: homing 4, X Coord, 474, Y Coord, 362, Width, 20 , Height, 50
+Type: homing 5, X Coord, 503, Y Coord, 118, Width, 20 , Height, 50
+Type: homing 6, X Coord, 863, Y Coord, 110, Width, 20 , Height, 50
+Type: homing 7, X Coord, 1092, Y Coord, 491, Width, 20 , Height, 50

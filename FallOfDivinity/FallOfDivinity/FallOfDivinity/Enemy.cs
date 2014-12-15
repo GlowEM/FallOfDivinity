@@ -49,8 +49,8 @@ namespace FallOfDivinity
             //if enemy not bound to platform they'll be bound to the ground
             Rectangle checkIntersect = location;
 
-            checkIntersect.Width += 10;
-            checkIntersect.Height += 10;
+            checkIntersect.Width += 5;
+            checkIntersect.Height += 5;
             checkIntersect.Y -= 5;
                 foreach (Rectangle plRec in game.plRecs)
                 {//short platforms

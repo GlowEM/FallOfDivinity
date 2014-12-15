@@ -13,16 +13,16 @@ using System.IO;
 
 namespace FallOfDivinity
 {
-    class Homing:MovableGameObject
+    class Homing : Enemy
     {
-        //constructor
-        public Homing(Game1 game)
-            : base(new Rectangle(0,0,0,0), game)
-        { }
+       //constructor
+        //public Homing(Game1 game)
+          //  : base(new Rectangle(0,0,0,0), game)
+        //{ }
 
             //nondefault
-        public Homing(Rectangle location, Game1 game)
-            : base(location, game)
+        public Homing(Rectangle location, Player curPlayer,Texture2D sprite, Game1 game)
+            : base(location, curPlayer,sprite, game)
         { }
     }
 }

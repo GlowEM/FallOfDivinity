@@ -48,9 +48,10 @@ namespace FallOfDivinity
         Texture2D charTexture;
         Texture2D basicTexture;
         Texture2D homingTexture;
+        Texture2D homingSpriteSheet;
         int p = 0;
         public Rectangle[] plRecs = new Rectangle[1000];
-        Rectangle[] lRecs = new Rectangle[1000];
+        public Rectangle[] lRecs = new Rectangle[1000];
         Rectangle[] vineRecs = new Rectangle[1000];
         Rectangle[] charRecs = new Rectangle[1000];
         Rectangle[] basicRecs = new Rectangle[1000];
@@ -62,7 +63,8 @@ namespace FallOfDivinity
         Char[] chars = new Char[1000];
         Basic[] basics = new Basic[1000];
         Homing[] homings = new Homing[1000];
- 
+        Stack<Homing> homingL;
+        Stack<Basic> basicL;
 
         //Player
         Player player;
@@ -106,8 +108,11 @@ namespace FallOfDivinity
             maxX = graphics.PreferredBackBufferWidth;
             maxY = graphics.PreferredBackBufferHeight;
 
-
-
+            //PLAYER
+            player = new Player(new Rectangle(0, charTexture.Height, charTexture.Width, charTexture.Height),charTexture, this);
+            blitHuman = player.blit;
+             homingL = new Stack<Homing>();
+             basicL = new Stack<Basic>();
             try
             {
                 //Read in map
@@ -185,7 +190,8 @@ namespace FallOfDivinity
                         parsed = int.TryParse(ls[6], out w);
                         parsed = int.TryParse(ls[8], out h);
                         basicRecs[p] = new Rectangle(x, y, w, h);
-                        basics[p] = new Basic(new Rectangle(x, y, w, h), this);
+                        basicL.Push(new Basic(new Rectangle(x, y, w, h), player, basicTexture, this));
+                        basics[p] = basicL.Peek();
                         p++;
                     }
                     if (ls[0].Contains("homing"))
@@ -199,7 +205,8 @@ namespace FallOfDivinity
                         parsed = int.TryParse(ls[6], out w);
                         parsed = int.TryParse(ls[8], out h);
                         homingRecs[p] = new Rectangle(x, y, w, h);
-                        homings[p] = new Homing(new Rectangle(x, y, w, h), this);
+                        homingL.Push(new Homing(new Rectangle(x, y, w, h), player, homingSpriteSheet, this));
+                        homings[p] = homingL.Peek();
                         p++;
                     }
                 }
@@ -211,9 +218,7 @@ namespace FallOfDivinity
                 //needs a default map.
             }
 
-            //PLAYER
-            player = new Player(new Rectangle(0, charTexture.Height, charTexture.Width, charTexture.Height), this);
-            blitHuman = player.blit;
+           
         }
 
         /// <summary>
@@ -234,6 +239,7 @@ namespace FallOfDivinity
             charTexture = this.Content.Load<Texture2D>("Haruka");
             basicTexture = this.Content.Load<Texture2D>("Basic Samurai");
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
+            homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");
 
             
             IsMouseVisible = true;
@@ -273,6 +279,11 @@ namespace FallOfDivinity
                     break;
                 case GameState.Playing:
                     break;
+            }
+            foreach (Homing soldier in homingL)
+            {
+                soldier.Check(gameTime);
+                soldier.Move(gameTime);
             }
             player.Check(gameTime);
             player.setCurrent();
@@ -323,16 +334,21 @@ namespace FallOfDivinity
                     }
                     foreach (Rectangle charRec in charRecs)
                     {
-                        spriteBatch.Draw(charTexture, player.charPos,  Color.White);
+                        //when spritesheet done add blit as source rec
+                        spriteBatch.Draw(charTexture, player.charPos, player.blit, Color.White);
                     }
                     foreach (Rectangle basicRec in basicRecs)
                     {
                         spriteBatch.Draw(basicTexture, basicRec, Color.White);
                     }
-                    foreach (Rectangle homingRec in homingRecs)
+                    foreach (Homing soldier in homingL)
                     {
-                        spriteBatch.Draw(basicTexture, homingRec, Color.White);
+                        spriteBatch.Draw(homingSpriteSheet, soldier.charPos, soldier.blit, Color.White);
                     }
+                    /*foreach (Rectangle homingRec in homingRecs)
+                    {
+                        spriteBatch.Draw(homingTexture, homingRec, Color.White);
+                    }*/
                     //if water attack activated
                     
                   

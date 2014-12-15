@@ -34,8 +34,8 @@ namespace FallOfDivinity
             //no default
 
             //requires:  platform, player
-        public PlatformBoundEnemy(Platform platform, Player player, Game1 game)
-            :base(new Rectangle(0,0,0,0),player,game)       //location of enemy is replaced within constructor
+        public PlatformBoundEnemy(Platform platform, Player player,Texture2D sprite, Game1 game)
+            :base(new Rectangle(0,0,0,0),player,sprite,game)       //location of enemy is replaced within constructor
         {
                 //set attributes
             locPlatform = platform;

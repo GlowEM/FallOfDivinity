@@ -20,8 +20,8 @@ namespace FallOfDivinity
 
 
         //constructor
-        public Henchmen(Player player, Game1 game)
-            :base(new Rectangle(0,0,0,0),player, game)
+        public Henchmen(Player player,Texture2D sprite, Game1 game)
+            :base(new Rectangle(0,0,0,0),player,sprite, game)
         { }
 
 

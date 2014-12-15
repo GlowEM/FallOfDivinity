@@ -17,13 +17,13 @@ namespace FallOfDivinity
 
         //constructor
                 //no default
-        public RangedEnemy(Player player,Game1 game)
-            :base(new Rectangle(0,0,0,0), player, game)
+        public RangedEnemy(Player player,Texture2D sprite, Game1 game)
+            :base(new Rectangle(0,0,0,0), player,sprite, game)
         {}
 
             //requries:
-        public RangedEnemy(int x, int y, Player player, Game1 game)
-            :base(new Rectangle(x, y, 0,0), player, game)
+        public RangedEnemy(int x, int y, Player player,Texture2D sprite, Game1 game)
+            :base(new Rectangle(x, y, 0,0), player, sprite, game)
         { 
             
         }

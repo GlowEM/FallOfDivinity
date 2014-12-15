@@ -12,16 +12,16 @@ using System.IO;
 
 namespace FallOfDivinity
 {
-    class Basic:MovableGameObject
+    class Basic: Enemy
     {
         //constructor
-        public Basic(Game1 game)
-            : base(new Rectangle(0,0,0,0), game)
-        { }
+       // public Basic(Game1 game)
+       //     : base(new Rectangle(0,0,0,0), game)
+        //{ }
 
             //nondefault
-        public Basic(Rectangle location, Game1 game)
-            : base(location, game)
+        public Basic(Rectangle location, Player curPlayer,Texture2D sprite, Game1 game)
+            : base(location, curPlayer, sprite, game)
         { }
     }
 }

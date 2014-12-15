@@ -17,7 +17,7 @@ namespace FallOfDivinity
         protected GraphicsDeviceManager graphics;
         protected SpriteBatch spriteBatch;
 
-        
+        public Texture2D spriteSheet;
         public Rectangle blit;//blitting rectangle for spritesheet
                
         public Vector2 charPos;//character position
@@ -36,9 +36,11 @@ namespace FallOfDivinity
         protected Vector2 maxAccess;//edge of screen maximum X,Y
 
         //constructor
-        public Character(Rectangle loc, Player player, Game1 game)
-            : base(loc, player, game)
+        public Character(Rectangle loc, Texture2D sprite, Game1 game)
+            : base(loc, game)
         {
+            spriteSheet = sprite;
+            blit = loc;
             //limit of any character movement
             minAccess.X = 0;
             minAccess.Y = 0;
@@ -74,7 +76,7 @@ namespace FallOfDivinity
             if (charPos.X < minAccess.X) { charPos.X = minAccess.X; }//far left of screen
             if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; }//bottom of screen
             if (charPos.X > maxAccess.X) { charPos.X = maxAccess.X; }//far right of screen
-            if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
+            if (contact == true) { charAcc.Y = (float)0.0;  }
             else if (contact == false) { charAcc.Y = (float)0.3; }
             
         }

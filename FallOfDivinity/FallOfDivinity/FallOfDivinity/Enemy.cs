@@ -15,70 +15,108 @@ namespace FallOfDivinity
     {
         //fields
         protected Rectangle enemyZone;
-        
+        protected int maxDist;
+        protected int minDist;
+       
         //gets either 1 or zero
         Random rand = new Random();
         int dir;//0 is left, 1 is right.
         
         //constructor
-        public Enemy(Rectangle loc, Player curPlayer, Game1 game)
+        public Enemy(Rectangle loc, Player curPlayer,Texture2D sprite, Game1 game)
             : base(loc, game)
         {
+            spriteSheet = sprite;
             player = curPlayer;
             charPos.X = loc.X;
             charPos.Y = loc.Y;
             findPlatform();
             dir = rand.Next(2) - 1;
+
+            spriteSheetSize.X = spriteSheet.Bounds.Width;
+            spriteSheetSize.Y = spriteSheet.Bounds.Height;
+            columnCount = 0;
+            rowcount = 3;
+            blit.Height = (int)spriteSheetSize.Y / 7;
+            blit.Width = (int)spriteSheetSize.X / 12;
+            maxDist = enemyZone.X + enemyZone.Width;
+            minDist = enemyZone.X;
+            base.contact = true;
+
         }
         public void findPlatform() {
             //takes all rectangles of platforms and find the one that is under it
             //in testing still
-            foreach (Rectangle plRec in game.plRecs){
+                foreach (Rectangle plRec in game.plRecs)
+                {
 
-                int widthCheck = (int)Math.Abs(plRec.X - charPos.X);
-                int heightCheck = (int)Math.Abs(plRec.Y - charPos.Y);
-                //possible problem, platform is width distance AWAY from player
-                //still working on that
+                    int widthCheck = (int)Math.Abs(plRec.X - charPos.X);
+                    int heightCheck = (int)Math.Abs(plRec.Y - charPos.Y);
+                    //possible problem, platform is width distance AWAY from player
+                    //still working on that
 
-                if ((heightCheck < 5 && heightCheck >= 0) && (widthCheck <= plRec.Width)) {
-                    enemyZone = plRec;
+                    if ((heightCheck < 15 && heightCheck >= 0) && (widthCheck <= plRec.Width))
+                    {
+                        enemyZone = plRec;
+                    }
                 }
-               }
+           
+                foreach (Rectangle lRec in game.lRecs)
+                {
+
+                    int widthCheck = (int)Math.Abs(lRec.X - charPos.X);
+                    int heightCheck = (int)Math.Abs(lRec.Top - charPos.Y);
+                    //possible problem, platform is width distance AWAY from player
+                    //still working on that
+
+                    if ((heightCheck < 15 && heightCheck >= 0) && (widthCheck <= lRec.Width))
+                    {
+                        enemyZone = lRec;
+                        
+                    }
+                }
+            
+        }
+
+        public override void Check(GameTime gameTime)
+        {
+            charPos.Y = enemyZone.Y - blit.Height/2;
+
+            base.Check(gameTime);
+        }
             
             
-            
-            } 
             
             
     //basic movement along platform within bounds
         
-        public void Move(){
-            int maxDist = enemyZone.X + enemyZone.Width;
-            int minDist = enemyZone.X;
+        public void Move(GameTime gameTime){
+            
+            charPos.X += charVel.X + (float)charAcc.X / 2;
+            charPos.Y += charVel.Y + (float)charAcc.Y / 2;
+            charVel.X += charAcc.X;
+            charVel.Y += charAcc.Y;
 
-            if (dir == 1)
+            if (dir == 1)//direction is right
             {
-                if (charPos.X < maxDist)
+                if (charPos.X < (maxDist - blit.Width))
                 {
-                    if (msdel < msAnim)
-                    {
-                        charPos.X++;
-
-                    }
+                    rowcount = 3;
+                        charVel.X = 1.0f;
+                     
                 }
-                else if (charPos.X >= maxDist) { dir = 0; }
+                else if (charPos.X >= (maxDist - blit.Width)) { dir = 0; }
             }
-            else if (dir == 0)
+            if (dir == 0)//direction is left
             {
-                if (charPos.X < minDist)
+                if (charPos.X > minDist)
                 {
-                    if (msdel < msAnim)
-                    {
-                        charPos.X--;
-
-                    }
+                    rowcount = 2;
+                    
+                        charVel.X = -1.0f;
+                     
                 }
-                else if (charPos.X >= minDist) { dir = 1; }
+                else if (charPos.X <= minDist) { dir = 1; }
             }
         }
 

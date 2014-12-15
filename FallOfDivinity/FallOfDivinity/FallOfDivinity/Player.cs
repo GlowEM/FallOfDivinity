@@ -52,9 +52,10 @@ namespace FallOfDivinity
             projActive = false;
         }
 
-        public Player(Rectangle loc, Game1 game)
-            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game)
+        public Player(Rectangle loc, Texture2D sprite, Game1 game)
+            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), sprite, game)
         {
+
             health = 10;  //for now
             lastTime = 0f;
 
@@ -63,10 +64,18 @@ namespace FallOfDivinity
             charPos.Y = loc.Y;
             //spriteSheetSize.Y = spriteHuman.Bounds.Height;
             //spriteSheetSize.X = spriteHuman.Bounds.Width;
+            //below will change with completed spritesheet
+            spriteSheetSize.X = spriteSheet.Width;
+            spriteSheetSize.Y = spriteSheet.Height;
+            rowcount = 0;
+            columnCount = 0;
+            blit.Width = (int)spriteSheetSize.X;
+            blit.Height = (int)spriteSheetSize.Y;
+            /*
             columnCount = 0;
             rowcount = 3;
             blit.Height = (int)spriteSheetSize.Y / 7;
-            blit.Width = (int)spriteSheetSize.X / 12;
+            blit.Width = (int)spriteSheetSize.X / 12;*/
             msdel = 0;
             charAcc.Y = (float)0.3;
             charVel.Y = (float)0.0;
@@ -88,6 +97,7 @@ namespace FallOfDivinity
         public void setCurrent()
         {
             previousState = ks;
+            if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
             //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
             //else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
             //water attack animation

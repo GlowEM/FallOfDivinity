@@ -23,7 +23,7 @@ namespace FallOfDivinity
         protected Vector2 maxScreenAccess;
 
         //location
-        private Rectangle location;
+        public Rectangle location;
 
         //property
         public Rectangle Location { get { return location; } set { location = value; } }  

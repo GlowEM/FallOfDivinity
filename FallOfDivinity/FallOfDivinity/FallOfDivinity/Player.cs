@@ -96,6 +96,8 @@ namespace FallOfDivinity
 
         public void setCurrent()
         {
+           
+           
             previousState = ks;
             if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
             //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
@@ -111,6 +113,14 @@ namespace FallOfDivinity
         {
             ks = Keyboard.GetState();
 
+            foreach (Rectangle vineRec in game.vineRecs)
+            {
+                if (vineRec.Intersects(Location))
+                {
+                    this.vine = true;
+                }
+            }
+
             charPos.X += charVel.X + (float)charAcc.X / 2;
             charPos.Y += charVel.Y + (float)charAcc.Y / 2;
             charVel.X += charAcc.X;
@@ -119,12 +129,17 @@ namespace FallOfDivinity
             //W key = Up
             //jump if not near vine
             //climb if near vine
-            if (previousState.IsKeyDown(Keys.Space))
+            if (ks.IsKeyDown(Keys.W))
             {
                 //climb
+                while (vine == true)
+                {
+                    charVel.Y = 0.0f;
+                }
                 if (vine == true)
                 {
                     charPos.Y = charPos.Y - 1;
+                    
                     rowcount = 4;
                     //columnCountH = 0;
                     if (msdel > msAnim)
@@ -135,6 +150,11 @@ namespace FallOfDivinity
                         msdel = 0;
                     }
                 }
+            }
+
+            if (previousState.IsKeyDown(Keys.Space))
+            {
+                
 
                 //jump
                 if (contact == true)//no double jumps

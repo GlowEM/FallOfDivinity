@@ -26,6 +26,7 @@ namespace FallOfDivinity
             MainMenu,
             Options,
             Playing,
+            GameOver,
         }
         GameState CurrentGameState = GameState.MainMenu;
 
@@ -38,7 +39,10 @@ namespace FallOfDivinity
         public int MaxX { get { return maxX; } }
         public int MaxY { get { return maxY; } }
 
+        private bool isPressedQ = false;
+
         Button playButton;
+        Button playButton2;
 
         // Attribute
         //Map Assets
@@ -342,7 +346,9 @@ namespace FallOfDivinity
 
             // Brings in button and places at top left corner
             playButton = new Button(Content.Load <Texture2D>("Play"), graphics.GraphicsDevice);
+            playButton2 = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             playButton.SetPosition(new Vector2(20, 20));
+            playButton2.SetPosition(new Vector2(20, 20));
         }
 
         /// <summary>
@@ -362,6 +368,7 @@ namespace FallOfDivinity
         protected override void Update(GameTime gameTime)
         {
             MouseState mouse = Mouse.GetState();
+            KeyboardState kbState = Keyboard.GetState();
 
             // TODO: Add your update logic here
             switch (CurrentGameState)
@@ -374,7 +381,19 @@ namespace FallOfDivinity
                     playButton.Update(mouse);
                     break;
                 case GameState.Playing:
+                    if (kbState.IsKeyDown(Keys.Q))
+                    {
+                        CurrentGameState = GameState.GameOver;
+                    }
                     break;
+                case GameState.GameOver:
+                    {
+                        if (playButton2.isClicked == true)
+                        {
+                            CurrentGameState = GameState.Playing;
+                        }
+                        break;
+                    }
             }
             foreach (Homing soldier in homingL)
             {
@@ -457,6 +476,10 @@ namespace FallOfDivinity
                     //if water attack activated
                     
                   
+                    break;
+                case GameState.GameOver:
+                    spriteBatch.Draw(Content.Load<Texture2D>("GameOver"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    playButton2.Draw(spriteBatch);
                     break;
             }
             spriteBatch.End();

@@ -15,6 +15,7 @@ namespace FallOfDivinity
     {
         //fields
         protected Rectangle enemyZone;
+        Rectangle bounds;
         protected int maxDist;
         protected int minDist;
        
@@ -39,6 +40,10 @@ namespace FallOfDivinity
             rowcount = 3;
             blit.Height = (int)spriteSheetSize.Y / 7;
             blit.Width = (int)spriteSheetSize.X / 12;
+            //bounds = new Rectangle(0, 0, (int)maxAccess.X, (int)maxAccess.Y);
+            //enemyZone.Y = (int)maxAccess.Y+blit.Height;
+            //enemyZone.X = 0;
+            //enemyZone.Width = (int)maxAccess.X;
             maxDist = enemyZone.X + enemyZone.Width;
             minDist = enemyZone.X;
             base.contact = true;
@@ -56,7 +61,7 @@ namespace FallOfDivinity
                 {//short platforms
 
                     //checkint = distance of character position within bounds of platform (x coord)
-
+                    bool bound = false; //set to true when its bound
                     int checkInt = (int)Math.Abs(charPos.X - plRec.Right);
                     
                     //check if rectangles interesect
@@ -65,8 +70,8 @@ namespace FallOfDivinity
                     //if true then bind
                     if (check == true)
                     {
-                        enemyZone = plRec;
-
+                        this.enemyZone = plRec;
+                        bound = true;
                     }
 
                     //backup
@@ -76,27 +81,26 @@ namespace FallOfDivinity
                     else{
                         if (checkInt > 0 && checkInt < 15)
                         {
-                            enemyZone = plRec;
+                            this.enemyZone = plRec;
+                            bound = true;
                         }
-                        else
-                        {
-
-                        }
-                    }
-                }
+                        
+                         }
+                                    }
            
                 foreach (Rectangle lRec in game.lRecs)
                 {//long platforms
 
                     //checkint = distance of character position within bounds of platform (x coord)
-                   int checkInt = (int)Math.Abs(charPos.X - lRec.Right);
+                   int checkIntX = (int)Math.Abs(charPos.X - lRec.Right);
+                   int checkIntY = (int)Math.Abs(charPos.Y - lRec.Y);
                     
                     bool check = (lRec.Intersects(checkIntersect));
 
                     //check if rectangles interesect
                     if (check == true)
                     {
-                        enemyZone = lRec;
+                        this.enemyZone = lRec;
                         
                     }
                     //backup
@@ -105,10 +109,12 @@ namespace FallOfDivinity
                     //basically puts it to the closest
                     else
                     {
-                        if (checkInt > 0 && checkInt < 15)
+                        if ((checkIntX > 0 && checkIntX < 15)&&(checkIntY > 0 && checkIntY <15))
                         {
-                            enemyZone = lRec;
+                            this.enemyZone = lRec;
                         }
+                            //enemy on ground otherwise
+                        
                     }
                 }
             
@@ -117,6 +123,13 @@ namespace FallOfDivinity
         public override void Check(GameTime gameTime)
         {
             charPos.Y = enemyZone.Y - blit.Height + 5;
+            if (charPos.Y < 5) {
+                enemyZone.Y = (int)maxAccess.Y+blit.Height;
+                enemyZone.X = 0;
+                enemyZone.Width = (int)maxAccess.X;
+                maxDist = enemyZone.X + enemyZone.Width;
+                minDist = enemyZone.X;
+            }
 
             base.Check(gameTime);
         }

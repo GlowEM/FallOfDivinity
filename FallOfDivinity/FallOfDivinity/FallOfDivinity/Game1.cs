@@ -42,7 +42,6 @@ namespace FallOfDivinity
         private bool isPressedQ = false;
 
         Button playButton;
-        Button playButton2;
 
         // Attribute
         //Map Assets
@@ -346,9 +345,7 @@ namespace FallOfDivinity
 
             // Brings in button and places at top left corner
             playButton = new Button(Content.Load <Texture2D>("Play"), graphics.GraphicsDevice);
-            playButton2 = new Button(Content.Load<Texture2D>("Play"), graphics.GraphicsDevice);
             playButton.SetPosition(new Vector2(20, 20));
-            playButton2.SetPosition(new Vector2(20, 20));
         }
 
         /// <summary>
@@ -381,6 +378,7 @@ namespace FallOfDivinity
                     playButton.Update(mouse);
                     break;
                 case GameState.Playing:
+                    playButton.isClicked = false;
                     if (kbState.IsKeyDown(Keys.Q))
                     {
                         CurrentGameState = GameState.GameOver;
@@ -388,9 +386,9 @@ namespace FallOfDivinity
                     break;
                 case GameState.GameOver:
                     {
-                        if (playButton2.isClicked == true)
+                        if (mouse.LeftButton == ButtonState.Pressed)
                         {
-                            CurrentGameState = GameState.Playing;
+                            CurrentGameState = GameState.MainMenu;
                         }
                         break;
                     }
@@ -479,7 +477,6 @@ namespace FallOfDivinity
                     break;
                 case GameState.GameOver:
                     spriteBatch.Draw(Content.Load<Texture2D>("GameOver"), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
-                    playButton2.Draw(spriteBatch);
                     break;
             }
             spriteBatch.End();

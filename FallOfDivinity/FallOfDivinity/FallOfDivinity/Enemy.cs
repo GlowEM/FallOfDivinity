@@ -21,7 +21,7 @@ namespace FallOfDivinity
        
         //gets either 1 or zero
         Random rand = new Random();
-        int dir;//0 is left, 1 is right.
+        protected int dir;//0 is left, 1 is right.
         
         //constructor
         public Enemy(Rectangle loc, Player curPlayer,Texture2D sprite, Game1 game)
@@ -40,11 +40,8 @@ namespace FallOfDivinity
             rowcount = 3;
             blit.Height = (int)spriteSheetSize.Y / 7;
             blit.Width = (int)spriteSheetSize.X / 12;
-            //bounds = new Rectangle(0, 0, (int)maxAccess.X, (int)maxAccess.Y);
-            //enemyZone.Y = (int)maxAccess.Y+blit.Height;
-            //enemyZone.X = 0;
-            //enemyZone.Width = (int)maxAccess.X;
-            maxDist = enemyZone.X + enemyZone.Width;
+
+            maxDist = (enemyZone.X + enemyZone.Width) - blit.Width;
             minDist = enemyZone.X;
             base.contact = true;
 
@@ -148,13 +145,13 @@ namespace FallOfDivinity
 
             if (dir == 1)//direction is right
             {
-                if (charPos.X < (maxDist - blit.Width))
+                if (charPos.X < maxDist)
                 {
                     rowcount = 3;
                         charVel.X = 1.0f;
                      
                 }
-                else if (charPos.X >= (maxDist - blit.Width) || (charPos.X > maxAccess.X)) { dir = 0; }
+                else if ((charPos.X >= maxDist ) || (charPos.X > maxAccess.X)) { dir = 0; }
             }
             else if (dir == 0)//direction is left
             {

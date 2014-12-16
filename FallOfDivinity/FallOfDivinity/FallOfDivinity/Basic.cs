@@ -31,11 +31,11 @@ namespace FallOfDivinity
             //makes movement slower for basic
             if (dir == 1)
             {
-                charAcc.X = (float)-0.5;
+                charAcc.X = (float)-1.0;
             }
             if (dir == 0)
             {
-                charAcc.X = (float)0.5;
+                charAcc.X = (float)1.0;
             }
             base.Move(gameTime);
        

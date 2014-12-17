@@ -16,8 +16,10 @@ namespace FallOfDivinity
         //fields
         private Projectile earthProj;
         private bool projActive;
+        protected int maxDist;
+        protected int minDist;
 
-
+        Rectangle enemyZone;
         public KeyboardState ks;
         public KeyboardState previousState;
         public bool vine; //contact with vine (climb)
@@ -87,7 +89,10 @@ namespace FallOfDivinity
             watBlit.Width = 1500;
             watBlit.Height = 1500;
             watBlit.Y = 0;
-            watCount = 0;        }
+            watCount = 0;
+            maxDist = (enemyZone.X + enemyZone.Width) - blit.Width;
+            minDist = enemyZone.X;
+        }
 
         public string Dir { get { return dir; } }
 
@@ -97,23 +102,12 @@ namespace FallOfDivinity
         public void setCurrent()
         {
 
-            foreach (Rectangle lRec in game.lRecs)
-            {//short platforms
-                int checkIntX = (int)Math.Abs(charPos.X - lRec.Right);
-                int checkIntY = (int)Math.Abs(charPos.Y - lRec.Y);
-                if (location.Intersects(lRec)) {
-                    maxAccess.Y = lRec.Y;
-                }
-                if ((checkIntX > 0 && checkIntX < 15) && (checkIntY > 0 && checkIntY < 15))
-                {
-                    maxAccess.Y = lRec.Y;
-                }
-                
-            }      
+            findPlat();
+      
            
             previousState = ks;
             if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
-            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
+            //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
             //else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
             //water attack animation
             watBlit.X = watCount * watBlit.Width;
@@ -382,6 +376,76 @@ namespace FallOfDivinity
             if (health <= 0)
             { 
                 //game over
+            }
+        }
+        public void findPlat() {
+            Rectangle checkIntersect = location;
+
+            checkIntersect.Width += 5;
+            checkIntersect.Height += 5;
+            checkIntersect.Y -= 5;
+            foreach (Rectangle plRec in game.plRecs)
+            {//short platforms
+
+                //checkint = distance of character position within bounds of platform (x coord)
+                bool bound = false; //set to true when its bound
+                int checkInt = (int)Math.Abs(charPos.X - plRec.Right);
+
+                //check if rectangles interesect
+                bool check = (plRec.Intersects(checkIntersect));
+
+                //if true then bind
+                if (check == true)
+                {
+                    this.enemyZone = plRec;
+                    bound = true;
+                }
+
+                //backup
+                //if the character isnt within the y coord bounds (human error)
+                //but within x coord bounds, bind
+                //basically puts it to the closest platform
+                else
+                {
+                    if (checkInt > 0 && checkInt < 15)
+                    {
+                        this.enemyZone = plRec;
+                        bound = true;
+                    }
+
+                }
+            }
+
+            foreach (Rectangle lRec in game.lRecs)
+            {//long platforms
+
+                //checkint = distance of character position within bounds of platform (x coord)
+                int checkIntX = (int)Math.Abs(charPos.X - lRec.Right);
+                int checkIntY = (int)Math.Abs(charPos.Y - lRec.Y);
+
+                bool check = (lRec.Intersects(checkIntersect));
+
+                //check if rectangles interesect
+                if (check == true)
+                {
+                    this.enemyZone = lRec;
+
+                }
+                //backup
+                //if the character isnt within the y coord bounds (human error)
+                //but within x coord bounds, bind
+                //basically puts it to the closest
+                else
+                {
+                    if ((checkIntX > 0 && checkIntX < 15) && (checkIntY > 0 && checkIntY < 15))
+                    {
+                        this.enemyZone = lRec;
+                    }
+                    //enemy on ground otherwise
+
+                }
+                charPos.Y = enemyZone.Y - blit.Height + 5;
+                
             }
         }
     }

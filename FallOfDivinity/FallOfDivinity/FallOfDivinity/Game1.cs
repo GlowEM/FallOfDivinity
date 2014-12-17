@@ -425,17 +425,12 @@ namespace FallOfDivinity
 
                     foreach (Homing soldier in homingL)
                     {
-                        soldier.Check(gameTime);
-                        soldier.Move(gameTime);
-                        soldier.Attack();
-                        //projec.Attack(soldier);
+                        player.Attack(soldier);
+
                     }
                     foreach (Basic soldier in basicL)
                     {
-                        soldier.Check(gameTime);
-                        soldier.Move(gameTime);
-                        soldier.Attack();
-                        //projec.Attack(soldier);
+                        player.Attack(soldier);
                     }
                 }
             }

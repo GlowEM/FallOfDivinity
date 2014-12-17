@@ -396,6 +396,7 @@ namespace FallOfDivinity
             foreach (Homing soldier in homingL)
             {
                 soldier.Check(gameTime);
+                soldier.findPlayer();
                 soldier.Move(gameTime);
             }
             foreach (Basic soldier in basicL)

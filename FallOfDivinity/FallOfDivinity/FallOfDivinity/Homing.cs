@@ -24,5 +24,29 @@ namespace FallOfDivinity
         public Homing(Rectangle location, Player curPlayer,Texture2D sprite, Game1 game)
             : base(location, curPlayer,sprite, game)
         { }
+
+
+
+        public void findPlayer(){
+            int checkY = (int)player.charPos.Y;
+            int checkX = (int)player.charPos.X;
+
+            if (checkY <= charPos.Y) { 
+            int checkOnce = (int)(charPos.X - player.charPos.X);
+                int newX = (int)charPos.X++;
+                int checkNew = newX - (int)player.charPos.X;
+
+                if(checkOnce < checkNew){
+                    dir = 1;
+                }
+                else{
+                    dir = 0;
+                }
+                
+            
+            }
+        
+        
+        }
     }
 }

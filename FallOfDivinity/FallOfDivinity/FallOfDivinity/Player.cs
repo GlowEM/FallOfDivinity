@@ -97,24 +97,23 @@ namespace FallOfDivinity
         public void setCurrent()
         {
 
-            foreach (Rectangle plRec in game.plRecs)
+            foreach (Rectangle lRec in game.lRecs)
             {//short platforms
-                while (charPos.Y <= plRec.Y && ((charPos.X > plRec.X) && (charPos.X < (plRec.X + plRec.Width))))
-                {
-                    maxAccess.Y = plRec.Y; 
+                int checkIntX = (int)Math.Abs(charPos.X - lRec.Right);
+                int checkIntY = (int)Math.Abs(charPos.Y - lRec.Y);
+                if (location.Intersects(lRec)) {
+                    maxAccess.Y = lRec.Y;
                 }
-            }
-                foreach (Rectangle lRec in game.lRecs)
-                {//long platforms
-                    while (charPos.Y <= lRec.Y && ((charPos.X > lRec.X) && (charPos.X < (lRec.X + lRec.Width))))
-                    {
-                        maxAccess.Y = lRec.Y;
-                    }
-                }          
+                if ((checkIntX > 0 && checkIntX < 15) && (checkIntY > 0 && checkIntY < 15))
+                {
+                    maxAccess.Y = lRec.Y;
+                }
+                
+            }      
            
             previousState = ks;
             if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
-            //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
+            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
             //else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
             //water attack animation
             watBlit.X = watCount * watBlit.Width;
@@ -125,6 +124,7 @@ namespace FallOfDivinity
 
         public void ProcessInput(GameTime gameTime)
         {
+            setCurrent();
             ks = Keyboard.GetState();
      
             charPos.X += charVel.X + (float)charAcc.X / 2;
@@ -138,26 +138,29 @@ namespace FallOfDivinity
             
                 //climb
 
-                foreach (Rectangle vineRec in game.vineRecs)
+           
+            if(ks.IsKeyDown(Keys.W))
+            {
+
+                charVel.Y = 0.0f;
+                contact = false;
+                charPos.Y = charPos.Y - 1;
+
+                rowcount = 4;
+
+                if (msdel > msAnim)
                 {
-                    while (vineRec.Intersects(this.location) && ks.IsKeyDown(Keys.W))
-                    {
-                        charVel.Y = 0.0f;
 
-                        charPos.Y = charPos.Y - 1;
-
-                        rowcount = 4;
-
-                        if (msdel > msAnim)
-                        {
-
-                            columnCount++;
-                            if (columnCount > 7) { columnCount = 0; }
-                            msdel = 0;
-                        }
-                    }
+                    columnCount++;
+                    if (columnCount > 7) { columnCount = 0; }
+                    msdel = 0;
                 }
-            
+            }
+            if (previousState.IsKeyDown(Keys.W))
+            {
+                charVel.Y = 0.3f;
+            }
+
 
             if (previousState.IsKeyDown(Keys.Space))
             {
@@ -295,6 +298,7 @@ namespace FallOfDivinity
                 //change for attack
                 dir = "right";
             }
+            
         }
         //methods
         ///<summary>
@@ -327,36 +331,37 @@ namespace FallOfDivinity
         { 
             //check timer to see if character can attack
             currentTime += elapsedGameTime;
-
-            if ((currentTime - lastTime) >= animationTime)
-            {
-                //ATTACK
-                if (contact == true)
+            
+                if ((currentTime - lastTime) >= animationTime)
                 {
-                    //check for direction
-                    switch (dir)
+                    //ATTACK
+                    if (contact == true)
                     {
-                        case "left":
-                            rowcount = 6;
-                            break;
-                        case "right":
-                            rowcount = 7;
-                            break;
-                        default://default face left
-                            rowcount = 6;
-                            break;
+                        //check for direction
+                        switch (dir)
+                        {
+                            case "left":
+                                rowcount = 6;
+                                break;
+                            case "right":
+                                rowcount = 7;
+                                break;
+                            default://default face left
+                                rowcount = 6;
+                                break;
+                        }
+
+                        if (msdel > msAnim)
+                        {
+                            columnCount++;
+                            if (columnCount > 7) { columnCount = 0; }
+                            msdel = 0;
+                        }
                     }
-                    
-                    if (msdel > msAnim)
-                    {
-                        columnCount++;
-                        if (columnCount > 7) { columnCount = 0; }
-                        msdel = 0;
-                    }
+                    //reset Timer
+                    lastTime = currentTime;
                 }
-                //reset Timer
-                lastTime = currentTime;
-            }
+            
         }
 
         //earth attack

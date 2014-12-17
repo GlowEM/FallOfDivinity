@@ -419,32 +419,8 @@ namespace FallOfDivinity
             foreach (Rectangle lRec in game.lRecs)
             {//long platforms
 
-                //checkint = distance of character position within bounds of platform (x coord)
-                int checkIntX = (int)Math.Abs(charPos.X - lRec.Right);
-                int checkIntY = (int)Math.Abs(charPos.Y - lRec.Y);
+               
 
-                bool check = (lRec.Intersects(checkIntersect));
-
-                //check if rectangles interesect
-                if (check == true)
-                {
-                    this.enemyZone = lRec;
-
-                }
-                //backup
-                //if the character isnt within the y coord bounds (human error)
-                //but within x coord bounds, bind
-                //basically puts it to the closest
-                else
-                {
-                    if ((checkIntX > 0 && checkIntX < 15) && (checkIntY > 0 && checkIntY < 15))
-                    {
-                        this.enemyZone = lRec;
-                    }
-                    //enemy on ground otherwise
-
-                }
-                charPos.Y = enemyZone.Y - blit.Height + 5;
                 
             }
         }

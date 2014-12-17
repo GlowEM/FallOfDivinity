@@ -1,0 +1,8 @@
+Type: platforms 0, X Coord, 109, Y Coord, 437, Width, 100 , Height, 55
+Type: platforms 1, X Coord, 268, Y Coord, 371, Width, 100 , Height, 55
+Type: platforms 2, X Coord, 421, Y Coord, 312, Width, 100 , Height, 55
+Type: platforms 3, X Coord, 593, Y Coord, 278, Width, 100 , Height, 55
+Type: char 1, X Coord, 109, Y Coord, 387, Width, 20 , Height, 50
+Type: basic 1, X Coord, 421, Y Coord, 262, Width, 20 , Height, 50
+Type: homing 1, X Coord, 268, Y Coord, 321, Width, 20 , Height, 50
+Type: end 1, X Coord, 800, Y Coord, 85, Width, 150 , Height, 200

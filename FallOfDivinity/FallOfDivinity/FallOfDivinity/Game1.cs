@@ -53,6 +53,7 @@ namespace FallOfDivinity
         Texture2D homingTexture;
         Texture2D homingSpriteSheet;
         Texture2D basicSpriteSheet;
+        Texture2D endTexture;
         int p = 0;
         public Rectangle[] plRecs = new Rectangle[1000];
         public Rectangle[] lRecs = new Rectangle[1000];
@@ -60,6 +61,7 @@ namespace FallOfDivinity
         Rectangle playerRec;
         Rectangle[] basicRecs = new Rectangle[1000];
         Rectangle[] homingRecs = new Rectangle[1000];
+        Rectangle[] endRecs = new Rectangle[1000];
 
         Platform[] platforms = new Platform[1000];
         Platform[] lPlatforms = new Platform[1000];
@@ -215,6 +217,19 @@ namespace FallOfDivinity
                         homings[p] = homingL.Peek();
                         p++;
                     }
+                    if (ls[0].Contains("end"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        endRecs[p] = new Rectangle(x, y, w, h);
+                        p++;
+                    }
                     //projec = new Projectile(1, player, this);
                 }
             }
@@ -316,6 +331,19 @@ namespace FallOfDivinity
                         homings[p] = homingL.Peek();
                         p++;
                     }
+                    if (ls[0].Contains("end"))
+                    {
+                        int x;
+                        int y;
+                        int w;
+                        int h;
+                        Boolean parsed = int.TryParse(ls[2], out x);
+                        parsed = int.TryParse(ls[4], out y);
+                        parsed = int.TryParse(ls[6], out w);
+                        parsed = int.TryParse(ls[8], out h);
+                        endRecs[p] = new Rectangle(x, y, w, h);
+                        p++;
+                    }
                 }
             }
 
@@ -342,6 +370,7 @@ namespace FallOfDivinity
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
             homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");
             basicSpriteSheet = this.Content.Load<Texture2D>("spriteBasic");
+            endTexture = this.Content.Load<Texture2D>("end");
 
             
             IsMouseVisible = true;
@@ -487,6 +516,10 @@ namespace FallOfDivinity
                     foreach (Homing soldier in homingL)
                     {
                         spriteBatch.Draw(homingSpriteSheet, soldier.charPos, soldier.blit, Color.White);
+                    }
+                    foreach (Rectangle endRec in endRecs)
+                    {
+                        spriteBatch.Draw(endTexture, endRec, Color.White);
                     }
                     /*foreach (Rectangle homingRec in homingRecs)
                     {

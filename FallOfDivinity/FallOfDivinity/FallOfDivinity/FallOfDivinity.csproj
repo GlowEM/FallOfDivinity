@@ -76,7 +76,6 @@
     <Compile Include="Basic.cs" />
     <Compile Include="Boss.cs" />
     <Compile Include="Button.cs" />
-    <Compile Include="Char.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameObject.cs" />

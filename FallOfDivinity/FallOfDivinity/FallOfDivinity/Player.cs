@@ -52,8 +52,8 @@ namespace FallOfDivinity
             projActive = false;
         }
 
-        public Player(Rectangle loc, Texture2D sprite, Game1 game)
-            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), sprite, game)
+        public Player(Rectangle loc, Game1 game)
+            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game.spriteHuman, game)
         {
 
             health = 5;  //for now

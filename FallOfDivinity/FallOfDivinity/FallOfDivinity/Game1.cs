@@ -56,22 +56,21 @@ namespace FallOfDivinity
         int p = 0;
         public Rectangle[] plRecs = new Rectangle[1000];
         public Rectangle[] lRecs = new Rectangle[1000];
-        Rectangle[] vineRecs = new Rectangle[1000];
-        Rectangle[] charRecs = new Rectangle[1000];
+        public Rectangle[] vineRecs = new Rectangle[1000];
+        Rectangle playerRec;
         Rectangle[] basicRecs = new Rectangle[1000];
         Rectangle[] homingRecs = new Rectangle[1000];
 
         Platform[] platforms = new Platform[1000];
         Platform[] lPlatforms = new Platform[1000];
         Vine[] vines = new Vine[1000];
-        Char[] chars = new Char[1000];
+        Player player;
         Basic[] basics = new Basic[1000];
         Homing[] homings = new Homing[1000];
         Stack<Homing> homingL;
         Stack<Basic> basicL;
 
         //Player
-        Player player;
         public Texture2D spriteHuman;
         public Texture2D spriteWater;
         Rectangle blitHuman;//blitting rectangle for spritesheet for human
@@ -113,7 +112,7 @@ namespace FallOfDivinity
             maxY = graphics.PreferredBackBufferHeight;
 
             //PLAYER
-            player = new Player(new Rectangle(0, charTexture.Height, charTexture.Width, charTexture.Height),charTexture, this);
+            player = new Player(new Rectangle(0, charTexture.Height, charTexture.Width, charTexture.Height), this);
             blitHuman = player.blit;
              homingL = new Stack<Homing>();
              basicL = new Stack<Basic>();
@@ -179,8 +178,8 @@ namespace FallOfDivinity
                         parsed = int.TryParse(ls[4], out y);
                         parsed = int.TryParse(ls[6], out w);
                         parsed = int.TryParse(ls[8], out h);
-                        charRecs[p] = new Rectangle(x, y, w, h);
-                        chars[p] = new Char(new Rectangle(x, y, w, h), this);
+                        playerRec = new Rectangle(x, y, w, h);
+                        player = new Player(playerRec, this);
                         p++;
                     }
                     if (ls[0].Contains("basic"))
@@ -279,8 +278,8 @@ namespace FallOfDivinity
                         parsed = int.TryParse(ls[4], out y);
                         parsed = int.TryParse(ls[6], out w);
                         parsed = int.TryParse(ls[8], out h);
-                        charRecs[p] = new Rectangle(x, y, w, h);
-                        chars[p] = new Char(new Rectangle(x, y, w, h), this);
+                        playerRec = new Rectangle(x, y, w, h);
+                        player = new Player(new Rectangle(x, y, w, h), this);
                         p++;
                     }
                     if (ls[0].Contains("basic"))
@@ -450,15 +449,8 @@ namespace FallOfDivinity
                     {
                         spriteBatch.Draw(vineTexture, vineRec, Color.White);
                     }
-                    foreach (Rectangle charRec in charRecs)
-                    {
-                        //when spritesheet done add blit as source rec
+                    //player
                         spriteBatch.Draw(charTexture, player.charPos, player.blit, Color.White);
-                    }
-                   /* foreach (Rectangle basicRec in basicRecs)
-                    {
-                        spriteBatch.Draw(basicTexture, basicRec, Color.White);
-                    }*/
                     foreach (Basic soldier in basicL)
                     {
                         spriteBatch.Draw(basicSpriteSheet, soldier.charPos, soldier.blit, Color.White);

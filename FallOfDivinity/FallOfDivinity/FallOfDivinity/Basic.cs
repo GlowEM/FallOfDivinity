@@ -20,8 +20,6 @@ namespace FallOfDivinity
         private Random rand = new Random();
         private bool isAlive;
         protected bool hasAttacked;
-
-        public bool IsAlive { get { return isAlive; } }
         
         //constructor
             //nondefault

@@ -59,7 +59,7 @@ namespace FallOfDivinity
             health = 10;  //for now
             lastTime = 0f;
 
-            vine = false;
+            //vine = false;
             charPos.X = loc.X;
             charPos.Y = loc.Y;
             //spriteSheetSize.Y = spriteHuman.Bounds.Height;
@@ -71,11 +71,11 @@ namespace FallOfDivinity
             columnCount = 0;
             blit.Width = (int)spriteSheetSize.X;
             blit.Height = (int)spriteSheetSize.Y;
-            /*
+            
             columnCount = 0;
             rowcount = 3;
             blit.Height = (int)spriteSheetSize.Y / 7;
-            blit.Width = (int)spriteSheetSize.X / 12;*/
+            blit.Width = (int)spriteSheetSize.X / 12;
             msdel = 0;
             charAcc.Y = (float)0.3;
             charVel.Y = (float)0.0;
@@ -96,7 +96,21 @@ namespace FallOfDivinity
 
         public void setCurrent()
         {
-           
+
+            foreach (Rectangle plRec in game.plRecs)
+            {//short platforms
+                while (charPos.Y <= plRec.Y && ((charPos.X > plRec.X) && (charPos.X < (plRec.X + plRec.Width))))
+                {
+                    maxAccess.Y = plRec.Y; 
+                }
+            }
+                foreach (Rectangle lRec in game.lRecs)
+                {//long platforms
+                    while (charPos.Y <= lRec.Y && ((charPos.X > lRec.X) && (charPos.X < (lRec.X + lRec.Width))))
+                    {
+                        maxAccess.Y = lRec.Y;
+                    }
+                }          
            
             previousState = ks;
             if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
@@ -112,15 +126,7 @@ namespace FallOfDivinity
         public void ProcessInput(GameTime gameTime)
         {
             ks = Keyboard.GetState();
-
-            foreach (Rectangle vineRec in game.vineRecs)
-            {
-                if (vineRec.Intersects(Location))
-                {
-                    this.vine = true;
-                }
-            }
-
+     
             charPos.X += charVel.X + (float)charAcc.X / 2;
             charPos.Y += charVel.Y + (float)charAcc.Y / 2;
             charVel.X += charAcc.X;
@@ -129,28 +135,29 @@ namespace FallOfDivinity
             //W key = Up
             //jump if not near vine
             //climb if near vine
-            if (ks.IsKeyDown(Keys.W))
-            {
+            
                 //climb
-                while (vine == true)
-                {
-                    charVel.Y = 0.0f;
-                }
-                if (vine == true)
-                {
-                    charPos.Y = charPos.Y - 1;
-                    
-                    rowcount = 4;
-                    //columnCountH = 0;
-                    if (msdel > msAnim)
-                    {
 
-                        columnCount++;
-                        if (columnCount > 7) { columnCount = 0; }
-                        msdel = 0;
+                foreach (Rectangle vineRec in game.vineRecs)
+                {
+                    while (vineRec.Intersects(this.location) && ks.IsKeyDown(Keys.W))
+                    {
+                        charVel.Y = 0.0f;
+
+                        charPos.Y = charPos.Y - 1;
+
+                        rowcount = 4;
+
+                        if (msdel > msAnim)
+                        {
+
+                            columnCount++;
+                            if (columnCount > 7) { columnCount = 0; }
+                            msdel = 0;
+                        }
                     }
                 }
-            }
+            
 
             if (previousState.IsKeyDown(Keys.Space))
             {

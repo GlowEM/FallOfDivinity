@@ -56,7 +56,7 @@ namespace FallOfDivinity
         int p = 0;
         public Rectangle[] plRecs = new Rectangle[1000];
         public Rectangle[] lRecs = new Rectangle[1000];
-        Rectangle[] vineRecs = new Rectangle[1000];
+        public Rectangle[] vineRecs = new Rectangle[1000];
         Rectangle[] charRecs = new Rectangle[1000];
         Rectangle[] basicRecs = new Rectangle[1000];
         Rectangle[] homingRecs = new Rectangle[1000];
@@ -334,7 +334,7 @@ namespace FallOfDivinity
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
             vineTexture = this.Content.Load<Texture2D>("Vines");
-            charTexture = this.Content.Load<Texture2D>("Haruka");
+            charTexture = this.Content.Load<Texture2D>("playerTexture");
             basicTexture = this.Content.Load<Texture2D>("Basic Samurai");
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
             homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");

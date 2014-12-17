@@ -13,9 +13,10 @@ namespace FallOfDivinity
 {
     class Player : Character
     {
-        
-        private bool isAlive;
-        public bool IsAlive { get { return isAlive; } }
+        //fields
+        private Projectile earthProj;
+        private bool projActive;
+
 
         public KeyboardState ks;
         public KeyboardState previousState;
@@ -45,8 +46,8 @@ namespace FallOfDivinity
             :base(new Rectangle(0, game.GraphicsDevice.Viewport.Height, SizeWidth, SizeHeight), game)
                     //sets the character in the lower right hand corner
         {
-
-            isAlive = true;
+            
+            projActive = false;
         }
 
         public Player(Rectangle loc, Game1 game)
@@ -54,7 +55,7 @@ namespace FallOfDivinity
         {
 
             health = 10;  //for now
-            isAlive = true;
+            
 
             vine = false;
             charPos.X = loc.X;
@@ -364,8 +365,8 @@ namespace FallOfDivinity
             health = health - dammageTaken;
 
             if (health <= 0)
-            {
-                isAlive = false;
+            { 
+                //game over
             }
         }
     }

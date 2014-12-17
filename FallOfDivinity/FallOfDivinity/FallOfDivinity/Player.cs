@@ -68,11 +68,11 @@ namespace FallOfDivinity
             columnCount = 0;
             blit.Width = (int)spriteSheetSize.X;
             blit.Height = (int)spriteSheetSize.Y;
-            /*
+           
             columnCount = 0;
             rowcount = 3;
             blit.Height = (int)spriteSheetSize.Y / 7;
-            blit.Width = (int)spriteSheetSize.X / 12;*/
+            blit.Width = (int)spriteSheetSize.X / 12;
             msdel = 0;
             charAcc.Y = (float)0.3;
             charVel.Y = (float)0.0;
@@ -97,8 +97,8 @@ namespace FallOfDivinity
            
             previousState = ks;
             if (contact == true) { charAcc.Y = (float)0.0; charAcc.X = (float)0.0; charVel.X = (float)0.0; }
-            //if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
-            //else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
+            if (charPos.Y > maxAccess.Y) { charPos.Y = maxAccess.Y; contact = true; charAcc.Y = 0; charAcc.X = 0; }//bottom of screen
+            else if (charPos.Y < maxAccess.Y) { contact = false; charAcc.Y = (float)0.3; }
             //water attack animation
             watBlit.X = watCount * watBlit.Width;
         }
@@ -128,14 +128,9 @@ namespace FallOfDivinity
             //climb if near vine
             if (ks.IsKeyDown(Keys.W))
             {
-                //climb
-                while (vine == true)
-                {
-                    charVel.Y = 0.0f;
-                }
-                if (vine == true)
-                {
+                charVel.Y = 0.0f;
                     charPos.Y = charPos.Y - 1;
+                    contact = false;
                     
                     rowcount = 4;
                     //columnCountH = 0;
@@ -146,7 +141,7 @@ namespace FallOfDivinity
                         if (columnCount > 7) { columnCount = 0; }
                         msdel = 0;
                     }
-                }
+                
             }
 
             if (previousState.IsKeyDown(Keys.Space))
@@ -307,7 +302,10 @@ namespace FallOfDivinity
 
         public void Attack(Enemy en)
         { 
-           Point pt = new Point((Location.X + (Location.Width / 2)), Location.Y);
+           if (Location.Intersects(en.Location))
+           {
+             en.TakeDammage(1);
+           }
            //ATTACK
            if (contact == true)
            {
@@ -315,18 +313,10 @@ namespace FallOfDivinity
                     switch (dir)
                     {
                         case "left":
-                            rowcount = 6;
-                            if (en.Location.Contains(pt) && (en.Location.X < Location.X))
-                            {
-                                en.TakeDammage(1);
-                            }
-
-
-
-
-                            break;
+                            rowcount = 5;
+                             break;
                         case "right":
-                            rowcount = 7;
+                            rowcount = 6;
                             break;
                         default://default face left
                             rowcount = 6;
@@ -335,8 +325,16 @@ namespace FallOfDivinity
                     
                     if (msdel > msAnim)
                     {
-                        columnCount++;
-                        if (columnCount > 7) { columnCount = 0; }
+                        if (rowcount == 5)
+                        {
+                            columnCount++;
+                        }
+                        if (rowcount == 6)
+                        {
+                            columnCount--;
+                        }
+                        if (columnCount > 6) { columnCount = 0; }
+                        if (columnCount < 0) { columnCount = 6; }
                         msdel = 0;
                   }
             }

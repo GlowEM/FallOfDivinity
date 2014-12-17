@@ -121,7 +121,7 @@ namespace FallOfDivinity
             blitHuman = player.blit;
              homingL = new Stack<Homing>();
              basicL = new Stack<Basic>();
-            StreamReader input = new StreamReader("map.txt");
+             StreamReader input = new StreamReader("map_default.txt");
             if (input != null)
             {
                 //Read in map
@@ -236,7 +236,7 @@ namespace FallOfDivinity
             }
             else
             {
-                StreamReader inputs = new StreamReader("map_default.txt");
+                StreamReader inputs = new StreamReader("map.txt");
                 if (inputs != null)
                 {
                     //Read in map
@@ -481,7 +481,7 @@ namespace FallOfDivinity
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
             vineTexture = this.Content.Load<Texture2D>("Vines");
-             charTexture = this.Content.Load<Texture2D>("Haruka");
+             charTexture = this.Content.Load<Texture2D>("playerTexture");
             basicTexture = this.Content.Load<Texture2D>("Basic Samurai");
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
             homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");

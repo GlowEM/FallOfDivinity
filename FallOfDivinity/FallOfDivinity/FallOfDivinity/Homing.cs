@@ -25,7 +25,10 @@ namespace FallOfDivinity
             //nondefault
         public Homing(Rectangle location, Player curPlayer,Texture2D sprite, Game1 game)
             : base(location, curPlayer,sprite, game)
-        { }
+        {
+            health = 2;
+            isAlive = true;
+        }
 
         //attack player if within range.
         public override void Attack()
@@ -45,6 +48,28 @@ namespace FallOfDivinity
                 hasAttacked = false;
             }
 
+        }
+        public void findPlayer()
+        {
+            int checkY = (int)player.charPos.Y;
+            int checkX = (int)player.charPos.X;
+
+            if (checkY <= charPos.Y)
+            {
+                int chackOnce = (int)(charPos.X - player.charPos.X);
+                int newX = (int)charPos.X++;
+                int checkNew = newX - (int)player.charPos.X;
+
+                if (chackOnce < checkNew)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = 0;
+                }
+
+            }
         }
         public override void TakeDammage(int dammage)  //if hit by any player-attack, this henchmen dies.  Therefore:
         {

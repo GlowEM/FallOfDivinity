@@ -574,7 +574,7 @@ namespace FallOfDivinity
             }
 
             //check for gameover
-            if (enAlive > 0 /* && intersects with mask*/)
+            if (enAlive < 0 /* && intersects with mask*/)
             {
                 CurrentGameState = GameState.GameOver;
             }

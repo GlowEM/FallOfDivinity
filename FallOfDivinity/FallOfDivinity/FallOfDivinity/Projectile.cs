@@ -19,6 +19,8 @@ namespace FallOfDivinity
         private int dammage;  //
         private int yValue;  //if the yValue is constant, this is used, otherwise, yValue should be taken from Location.Y
                                         //if yValue = -1, then y value is dynamic
+
+        public bool IsActive { get{ return isActive;}}
         
 
 
@@ -33,7 +35,7 @@ namespace FallOfDivinity
             player = this.player;
             gdOrBd = 0;
 
-            isActive = true;
+            isActive = false;
         }
 
         
@@ -68,16 +70,16 @@ namespace FallOfDivinity
             }
         }
 
-        //attack player if within range.
-        public void Attack(float elapsedGameTime)
+        //attack enemy if within range.
+        public void Attack(Enemy en)
         {
             Point pt = new Point((Location.X + (Location.Width / 2)), Location.Y);
 
-            if (player.Location.Contains(pt))
+            if (en.Location.Contains(pt))
             {
                 
                 player.LoseHealth(1);
-                
+                isActive = false;
             }
 
         }

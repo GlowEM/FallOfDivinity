@@ -48,7 +48,7 @@ namespace FallOfDivinity
         Texture2D platTexture;
         Texture2D longTexture;
         Texture2D vineTexture;
-        Texture2D charTexture;
+        public Texture2D charTexture;
         Texture2D basicTexture;
         Texture2D homingTexture;
         Texture2D homingSpriteSheet;
@@ -69,6 +69,7 @@ namespace FallOfDivinity
         Homing[] homings = new Homing[1000];
         Stack<Homing> homingL;
         Stack<Basic> basicL;
+        Projectile projectile;
 
         //Player
         public Texture2D spriteHuman;
@@ -212,6 +213,7 @@ namespace FallOfDivinity
                         homings[p] = homingL.Peek();
                         p++;
                     }
+                    projectile = new Projectile(1, player, this);
                 }
             }
             catch(Exception ex)
@@ -333,7 +335,7 @@ namespace FallOfDivinity
             platTexture = this.Content.Load<Texture2D>("Platform");
             longTexture = this.Content.Load<Texture2D>("Long Platform");
             vineTexture = this.Content.Load<Texture2D>("Vines");
-            charTexture = this.Content.Load<Texture2D>("Haruka");
+             charTexture = this.Content.Load<Texture2D>("Haruka");
             basicTexture = this.Content.Load<Texture2D>("Basic Samurai");
             homingTexture = this.Content.Load<Texture2D>("Homing Samurai");
             homingSpriteSheet = this.Content.Load<Texture2D>("spriteHoming");
@@ -396,12 +398,20 @@ namespace FallOfDivinity
             {
                 soldier.Check(gameTime);
                 soldier.Move(gameTime);
+                soldier.Attack();
             }
             foreach (Basic soldier in basicL)
             {
                 soldier.Check(gameTime);
                 soldier.Move(gameTime);
+                soldier.Attack();
             }
+            //projectile
+            //if (projectile.IsActive == true)
+            //{
+            //    projectile.Move();
+            //}
+
             player.Check(gameTime);
             player.setCurrent();
             player.ProcessInput(gameTime);

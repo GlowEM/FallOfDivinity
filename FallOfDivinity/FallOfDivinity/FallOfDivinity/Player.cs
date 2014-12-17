@@ -53,10 +53,10 @@ namespace FallOfDivinity
         }
 
         public Player(Rectangle loc, Game1 game)
-            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game.spriteHuman, game)
+            :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), game.charTexture, game)
         {
 
-            health = 5;  //for now
+            health = 10;  //for now
             lastTime = 0f;
 
             vine = false;

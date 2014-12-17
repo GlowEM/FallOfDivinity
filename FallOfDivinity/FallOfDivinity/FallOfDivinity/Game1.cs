@@ -555,8 +555,35 @@ namespace FallOfDivinity
                 soldier.Attack();
                 //projec.Attack(soldier);
             }
-            //projectile
-            //
+            
+            //check to see if all enemies are dead.
+            int enAlive = 0;
+            foreach (Homing soldier in homingL)
+            {
+                if (soldier.IsAlive != false)
+                {
+                    enAlive++;
+                }
+            }
+            foreach (Basic soldier in basicL)
+            {
+                if (soldier.IsAlive != false)
+                {
+                    enAlive++;
+                }
+            }
+
+            //check for gameover
+            if (enAlive > 0 /* && intersects with mask*/)
+            {
+                CurrentGameState = GameState.GameOver;
+            }
+            if (player.IsAlive != true)
+            {
+                CurrentGameState = GameState.GameOver;
+            }
+
+
 
             player.Check(gameTime);
             player.setCurrent();
@@ -627,11 +654,18 @@ namespace FallOfDivinity
                         spriteBatch.Draw(charTexture, player.charPos, player.blit, Color.White);
                     foreach (Basic soldier in basicL)
                     {
-                        spriteBatch.Draw(basicSpriteSheet, soldier.charPos, soldier.blit, Color.White);
+                        if (soldier.IsAlive)
+                        {
+                            spriteBatch.Draw(basicSpriteSheet, soldier.charPos, soldier.blit, Color.White);
+                        }
                     }
                     foreach (Homing soldier in homingL)
                     {
-                        spriteBatch.Draw(homingSpriteSheet, soldier.charPos, soldier.blit, Color.White);
+                        if (soldier.IsAlive)
+                        {
+                            spriteBatch.Draw(homingSpriteSheet, soldier.charPos, soldier.blit, Color.White);
+                        }
+                        
                     }
                     foreach (Rectangle endRec in endRecs)
                     {

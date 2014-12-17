@@ -56,7 +56,7 @@ namespace FallOfDivinity
             :base(new Rectangle(loc.X, loc.Y, SizeWidth, SizeHeight), sprite, game)
         {
 
-            health = 10;  //for now
+            health = 5;  //for now
             lastTime = 0f;
 
             vine = false;

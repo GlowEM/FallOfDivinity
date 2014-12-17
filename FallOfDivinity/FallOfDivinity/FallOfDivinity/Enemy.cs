@@ -18,6 +18,9 @@ namespace FallOfDivinity
         Rectangle bounds;
         protected int maxDist;
         protected int minDist;
+        
+
+
        
         //gets either 1 or zero
         Random rand = new Random();
@@ -27,12 +30,14 @@ namespace FallOfDivinity
         public Enemy(Rectangle loc, Player curPlayer,Texture2D sprite, Game1 game)
             : base(loc, game)
         {
+
+            
             spriteSheet = sprite;
             player = curPlayer;
             charPos.X = loc.X;
             charPos.Y = loc.Y;
             findPlatform();
-            dir = rand.Next(0, 1);
+            dir = rand.Next(0, 2);
 
             spriteSheetSize.X = spriteSheet.Bounds.Width;
             spriteSheetSize.Y = spriteSheet.Bounds.Height;
@@ -166,5 +171,6 @@ namespace FallOfDivinity
             }
         }
 
+        public abstract void Attack();
     }
 }

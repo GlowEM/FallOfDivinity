@@ -10,12 +10,18 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 namespace FallOfDivinity
 {
-    class Boss : Enemy
-    {
+    //class Boss : Enemy
+    //{
 
-        //constructor
-        public Boss(Player player,Texture2D sprite, Game1 game)
-            : base(new Rectangle(0,0,0,0),player,sprite,game)
-        { }
-    }
+    //    //constructor
+    //    public Boss(Player player,Texture2D sprite, Game1 game)
+    //        : base(new Rectangle(0,0,0,0),player,sprite,game)
+    //    {
+            
+
+
+    //    }
+
+    //    //attack
+    //}
 }

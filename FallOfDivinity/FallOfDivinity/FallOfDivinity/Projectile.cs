@@ -13,6 +13,7 @@ namespace FallOfDivinity
 {
     class Projectile : MovableGameObject
     {
+        private int gdOrBd;   //good or bad -- if spawned by player, 0 = good, if spawned by enemy 1 = bad.
         private bool isActive;
         private int speed;  ///tba
         private int dammage;  //
@@ -30,31 +31,27 @@ namespace FallOfDivinity
             yValue = player.Location.Y;
             dammage = this.dammage;
             player = this.player;
+            gdOrBd = 0;
 
             isActive = true;
         }
 
-            //if yValue is not constant
-        public Projectile(int x, int y, Player player, Game1 game)
-            : base(new Rectangle(x, y, 0, 0), player, game)
-        {
-            yValue = -1;
-        }
+        
 
         //methods
         public void Move()
         {
-            if (yValue != -1)
-            {
+            //if (yValue != -1)
+            //{
                 xMove();
-            }
-            else
-            {
-                xyMove();
-            }
+            //}
+            //else
+            //{
+            //    xyMove();
+            //}
         }
 
-        public void xMove()  //movement if in only once direction.
+        public void xMove()  //movement if in only one direction.
         {               ///currently no collision detection with side of screen.  
             if (player.Dir == "left")  //left
             {
@@ -71,9 +68,18 @@ namespace FallOfDivinity
             }
         }
 
-        public void xyMove()
-        { 
-            //TBA
+        //attack player if within range.
+        public void Attack(float elapsedGameTime)
+        {
+            Point pt = new Point((Location.X + (Location.Width / 2)), Location.Y);
+
+            if (player.Location.Contains(pt))
+            {
+                
+                player.LoseHealth(1);
+                
+            }
+
         }
     }
 }

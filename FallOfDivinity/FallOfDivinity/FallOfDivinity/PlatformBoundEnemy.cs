@@ -25,6 +25,8 @@ namespace FallOfDivinity
         private static int dammage = 1;     //amount of health player loses when attacked by this enemy
         private int direction;  //0 is left, 1 is right.
         private bool isAlive;
+        protected bool hasAttacked;
+
 
         //properites
         public Platform LocPlatform { get { return locPlatform; } }
@@ -56,13 +58,24 @@ namespace FallOfDivinity
 
 
         //methods
-        public void Attack()
-        { 
-            //this will likely change, but for now...a stub of sorts.
-            if (this.Location.Intersects(player.Location))
+        //attack player if within range.
+        public override void Attack()
+        {
+            Point pt = new Point((Location.X + (Location.Width / 2)), Location.Y);
+
+            if (player.Location.Contains(pt))
             {
-                player.LoseHealth(dammage);
+                if (hasAttacked == false)
+                {
+                    player.LoseHealth(1);
+                    hasAttacked = true;
+                }
             }
+            else
+            {
+                hasAttacked = false;
+            }
+        
         }
 
         public void TakeDammage()  //if hit by any player-attack, this henchmen dies.  Therefore:

@@ -349,6 +349,121 @@ namespace FallOfDivinity
                     }
                 }
             }
+            //catch(Exception ex)
+            //{}
+            //finally
+            //{
+            //    //Read in map
+            //    StreamReader input = new StreamReader("map_default.txt");
+            //    string text = "";
+            //    while ((text = input.ReadLine()) != null)
+            //    {
+            //        string[] ls = text.Split(',');
+
+            //        if (ls[0].Contains("platforms"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            plRecs[p] = new Rectangle(x, y, w, h);
+            //            platforms[p] = new Platform(new Rectangle(x, y, w, h), this);
+            //            p++;
+            //        }
+            //        if (ls[0].Contains("long platform"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            lRecs[p] = new Rectangle(x, y, w, h);
+            //            lPlatforms[p] = new Platform(new Rectangle(x, y, w, h), this);
+            //            p++;
+            //        }
+            //        if (ls[0].Contains("vines"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            vineRecs[p] = new Rectangle(x, y, w, h);
+            //            vines[p] = new Vine(new Rectangle(x, y, w, h), this);
+            //            p++;
+            //        }
+
+            //        if (ls[0].Contains("char"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            playerRec = new Rectangle(x, y, w, h);
+            //            player = new Player(new Rectangle(x, y, w, h), this);
+            //            p++;
+            //        }
+            //        if (ls[0].Contains("basic"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            basicRecs[p] = new Rectangle(x, y, w, h);
+            //            basicL.Push(new Basic(new Rectangle(x, y, w, h), player, basicSpriteSheet, this));
+            //            basics[p] = basicL.Peek();
+            //            p++;
+            //        }
+            //        if (ls[0].Contains("homing"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            homingRecs[p] = new Rectangle(x, y, w, h);
+            //            homingL.Push(new Homing(new Rectangle(x, y, w, h), player, homingSpriteSheet, this));
+            //            homings[p] = homingL.Peek();
+            //            p++;
+            //        }
+            //        if (ls[0].Contains("end"))
+            //        {
+            //            int x;
+            //            int y;
+            //            int w;
+            //            int h;
+            //            Boolean parsed = int.TryParse(ls[2], out x);
+            //            parsed = int.TryParse(ls[4], out y);
+            //            parsed = int.TryParse(ls[6], out w);
+            //            parsed = int.TryParse(ls[8], out h);
+            //            endRecs[p] = new Rectangle(x, y, w, h);
+            //            p++;
+            //        }
+            //    }
+            //}
+
+           
         }
 
         /// <summary>

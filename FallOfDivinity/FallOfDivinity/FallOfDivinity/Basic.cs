@@ -68,7 +68,7 @@ namespace FallOfDivinity
 
         }
 
-        public void TakeDammage()  //if hit by any player-attack, this henchmen dies.  Therefore:
+        public override void TakeDammage(int dammage)  //if hit by any player-attack, this henchmen dies.  Therefore:
         {
             //take dammage
             isAlive = false;

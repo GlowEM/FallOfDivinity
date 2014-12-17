@@ -36,9 +36,7 @@ namespace FallOfDivinity
         private static int SizeHeight = 0;
         private static int BaseDammage = 1;
             //attack timer  ---  NEEDS ACTUAL animationTime ADDED
-        private float lastTime;
-        private float animationTime = 1f;
-        private float currentTime = 0f;
+        
       
         
 
@@ -48,7 +46,7 @@ namespace FallOfDivinity
             :base(new Rectangle(0, game.GraphicsDevice.Viewport.Height, SizeWidth, SizeHeight), game)
                     //sets the character in the lower right hand corner
         {
-            lastTime = 0f;
+            
             projActive = false;
         }
 
@@ -57,7 +55,7 @@ namespace FallOfDivinity
         {
 
             health = 10;  //for now
-            lastTime = 0f;
+            
 
             vine = false;
             charPos.X = loc.X;
@@ -235,16 +233,8 @@ namespace FallOfDivinity
                 }
             }
 
-            //K key = attack
-            if (ks.IsKeyDown(Keys.K))
-            {
-                //on ground
-                if (contact == true)
-                {
-
-                    Attack((float)gameTime.ElapsedGameTime.TotalSeconds);
-                }
-            }
+            
+            
 
             //CAPSLOCK key, will be changed = water attack
             if (ks.Equals(Keys.CapsLock))
@@ -316,21 +306,25 @@ namespace FallOfDivinity
 
 
 
-        public void Attack(float elapsedGameTime)
+        public void Attack(Enemy en)
         { 
-            //check timer to see if character can attack
-            currentTime += elapsedGameTime;
-
-            if ((currentTime - lastTime) >= animationTime)
-            {
-                //ATTACK
-                if (contact == true)
-                {
-                    //check for direction
+           Point pt = new Point((Location.X + (Location.Width / 2)), Location.Y);
+           //ATTACK
+           if (contact == true)
+           {
+                //check for direction
                     switch (dir)
                     {
                         case "left":
                             rowcount = 6;
+                            if (en.Location.Contains(pt) && (en.Location.X < Location.X))
+                            {
+                                en.TakeDammage(1);
+                            }
+
+
+
+
                             break;
                         case "right":
                             rowcount = 7;
@@ -345,22 +339,25 @@ namespace FallOfDivinity
                         columnCount++;
                         if (columnCount > 7) { columnCount = 0; }
                         msdel = 0;
-                    }
-                }
-                //reset Timer
-                lastTime = currentTime;
+                  }
             }
-        }
-
-        //earth attack
-        public void projAttack()            ///no input triggers this attack as of yet.  TBA
-        {
-            if (projActive != true)
-            {
-                earthProj = new Projectile(BaseDammage, this, game);
-
+                
             }
-        }
+        
+
+        ////earth attack
+        //public void projAttack()            ///no input triggers this attack as of yet.  TBA
+        //{
+            
+        //    if (game.Projec.IsActive)
+        //    {
+        //        //nothing happens
+        //    }
+        //    else
+        //    {
+        //        game.Projec.Fire();
+        //    }
+        //}
         
         public void LoseHealth(int dammageTaken)
             //called by PlatformBoundEnemy.Attack, Henchmen.Attack

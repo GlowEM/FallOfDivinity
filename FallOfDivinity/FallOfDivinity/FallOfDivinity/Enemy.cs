@@ -135,6 +135,8 @@ namespace FallOfDivinity
 
             base.Check(gameTime);
         }
+
+        public abstract void TakeDammage(int dammage);
             
             
             

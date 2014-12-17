@@ -17,10 +17,10 @@ namespace FallOfDivinity
     {
         public bool hasAttacked;
 
-       //constructor
-        //public Homing(Game1 game)
-          //  : base(new Rectangle(0,0,0,0), game)
-        //{ }
+        private int health;
+        private bool isAlive;
+
+        public bool IsAlive { get { return isAlive; } }
 
             //nondefault
         public Homing(Rectangle location, Player curPlayer,Texture2D sprite, Game1 game)
@@ -43,6 +43,16 @@ namespace FallOfDivinity
             else
             {
                 hasAttacked = false;
+            }
+
+        }
+        public override void TakeDammage(int dammage)  //if hit by any player-attack, this henchmen dies.  Therefore:
+        {
+            health -= dammage;
+            if (health <= 0)
+            {
+                //take dammage
+                isAlive = false;
             }
 
         }

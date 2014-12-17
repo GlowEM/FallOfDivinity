@@ -69,7 +69,9 @@ namespace FallOfDivinity
         Homing[] homings = new Homing[1000];
         Stack<Homing> homingL;
         Stack<Basic> basicL;
-        Projectile projectile;
+        //Projectile projec;
+
+        
 
         //Player
         public Texture2D spriteHuman;
@@ -125,7 +127,7 @@ namespace FallOfDivinity
                 while ((text = input.ReadLine()) != null)
                 {
                     string[] ls = text.Split(',');
-
+                     
                     if (ls[0].Contains("platforms"))
                     {
                         int x;
@@ -213,7 +215,7 @@ namespace FallOfDivinity
                         homings[p] = homingL.Peek();
                         p++;
                     }
-                    projectile = new Projectile(1, player, this);
+                    //projec = new Projectile(1, player, this);
                 }
             }
             catch(Exception ex)
@@ -399,22 +401,44 @@ namespace FallOfDivinity
                 soldier.Check(gameTime);
                 soldier.Move(gameTime);
                 soldier.Attack();
+                //projec.Attack(soldier);
             }
             foreach (Basic soldier in basicL)
             {
                 soldier.Check(gameTime);
                 soldier.Move(gameTime);
                 soldier.Attack();
+                //projec.Attack(soldier);
             }
             //projectile
-            //if (projectile.IsActive == true)
-            //{
-            //    projectile.Move();
-            //}
+            //
 
             player.Check(gameTime);
             player.setCurrent();
             player.ProcessInput(gameTime);
+            //K key = attack
+            if (player.ks.IsKeyDown(Keys.K))
+            {
+                //on ground
+                if (player.contact == true)
+                {
+
+                    foreach (Homing soldier in homingL)
+                    {
+                        soldier.Check(gameTime);
+                        soldier.Move(gameTime);
+                        soldier.Attack();
+                        //projec.Attack(soldier);
+                    }
+                    foreach (Basic soldier in basicL)
+                    {
+                        soldier.Check(gameTime);
+                        soldier.Move(gameTime);
+                        soldier.Attack();
+                        //projec.Attack(soldier);
+                    }
+                }
+            }
 
             base.Update(gameTime);
           

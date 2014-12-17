@@ -13,7 +13,7 @@ namespace FallOfDivinity
 {
     class Projectile : MovableGameObject
     {
-        private int gdOrBd;   //good or bad -- if spawned by player, 0 = good, if spawned by enemy 1 = bad.
+        
         private bool isActive;
         private int speed;  ///tba
         private int dammage;  //
@@ -30,10 +30,8 @@ namespace FallOfDivinity
         public Projectile(int dammage, Player player, Game1 game)
             : base(new Rectangle(player.Location.X, player.Location.Y, /*width*/0, /*length*/0), player, game)
         {
-            yValue = player.Location.Y;
             dammage = this.dammage;
             player = this.player;
-            gdOrBd = 0;
 
             isActive = false;
         }
@@ -41,6 +39,17 @@ namespace FallOfDivinity
         
 
         //methods
+        public void Fire()
+        {
+            int x = player.Location.X;
+            int y = (player.Location.Y + (player.Location.Height / 2));
+            Location = new Rectangle(x, y, 0, 0);
+            yValue = y;
+
+            isActive = true;
+
+        }
+
         public void Move()
         {
             //if (yValue != -1)

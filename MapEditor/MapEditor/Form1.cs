@@ -1247,8 +1247,8 @@ namespace MapEditor
                         if (picE != null && picE.Visible == true)
                         {
                             // writes the type of image, the x and y coordinates with the width and height
-                            output.WriteLine("Type: end " + h + "," + " X Coord, " + picE.Left + ", Y Coord, " + picE.Top + ", Width, " + picE.Width + " , Height, " + picE.Height);
-                            string E = "Type: end " + h + "," + " X Coord, " + picE.Left + ", Y Coord, " + picE.Top + ", Width, " + picE.Width + " , Height, " + picE.Height;
+                            output.WriteLine("Type: end " + end + "," + " X Coord, " + picE.Left + ", Y Coord, " + picE.Top + ", Width, " + picE.Width + " , Height, " + picE.Height);
+                            string E = "Type: end " + end + "," + " X Coord, " + picE.Left + ", Y Coord, " + picE.Top + ", Width, " + picE.Width + " , Height, " + picE.Height;
                         }
                         end++;
                     }
@@ -1444,6 +1444,32 @@ namespace MapEditor
                             h++;
                             countH++;
                         }
+                        if (ls[0].Contains("end"))
+                        {
+                            int x;
+                            Boolean parsed = int.TryParse(ls[2], out x);
+                            int y;
+                            parsed = int.TryParse(ls[4], out y);
+                            // creates a new picturebox and puts
+                            // it into the endStuff array
+                            endStuff[end] = new PictureBox();
+                            endStuff[end].Visible = true;
+                            endStuff[end].Name = "end" + h;
+                            // sets the image to the pictureBox
+                            image = Properties.Resources.End;
+                            endStuff[end].Image = image;
+                            endStuff[end].Size = new System.Drawing.Size(image.Width, image.Height);
+                            // puts the pictureBox in the top left corner
+                            endStuff[end].Location = new Point(x, y);
+                            // mouseEvents
+                            endStuff[end].MouseDown += new MouseEventHandler(this.mouseDown);
+                            endStuff[end].MouseUp += new MouseEventHandler(this.mouseUp);
+                            endStuff[end].MouseMove += new MouseEventHandler(this.mouseMove);
+                            // adds pictureBox to form
+                            this.Controls.Add(endStuff[end]);
+                            endStuff[end].BackColor = Color.Transparent;
+                            end++;
+                        }
                     }
                     input.Close();
                 }
@@ -1542,6 +1568,20 @@ namespace MapEditor
             for (int i = 0; i < homingStuff.Length; ++i)
             {
                 homingStuff[i] = null;
+            }
+            foreach (PictureBox picE in endStuff)
+            {
+                if (picE != null)
+                {
+                    picE.Image = null;
+                    picE.Controls.Clear();
+                    picE.Dispose();
+                }
+            }
+
+            for (int i = 0; i < endStuff.Length; ++i)
+            {
+                endStuff[i] = null;
             }
         }
 
@@ -1647,7 +1687,7 @@ namespace MapEditor
         private void homingButton_Click(object sender, EventArgs e)
         {
             // creates a new picturebox and puts
-            // it into the basicStuff array
+            // it into the homingStuff array
             homingStuff[h] = new PictureBox();
             homingStuff[h].Visible = true;
             homingStuff[h].Name = "homing" + h;
@@ -1666,6 +1706,29 @@ namespace MapEditor
             this.Controls.Add(homingStuff[h]);
             h++;
             countH++;
+        }
+
+        private void endbutton_Click(object sender, EventArgs e)
+        {
+            // creates a new picturebox and puts
+            // it into the endStuff array
+            endStuff[end] = new PictureBox();
+            endStuff[end].Visible = true;
+            endStuff[end].Name = "end" + h;
+            // sets the image to the pictureBox
+            image = Properties.Resources.End;
+            endStuff[end].Image = image;
+            endStuff[end].Size = new System.Drawing.Size(image.Width, image.Height);
+            endStuff[end].BackColor = Color.Transparent;
+            // puts the pictureBox in the top left corner
+            endStuff[end].Location = new Point(1, 1);
+            // mouseEvents
+            endStuff[end].MouseDown += new MouseEventHandler(this.mouseDown);
+            endStuff[end].MouseUp += new MouseEventHandler(this.mouseUp);
+            endStuff[end].MouseMove += new MouseEventHandler(this.mouseMove);
+            // adds pictureBox to form
+            this.Controls.Add(endStuff[end]);
+            end++;
         }
     }
 }

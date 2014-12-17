@@ -38,6 +38,7 @@
             this.charButton = new System.Windows.Forms.Button();
             this.basicButton = new System.Windows.Forms.Button();
             this.homingButton = new System.Windows.Forms.Button();
+            this.endbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // saveButton
@@ -145,6 +146,17 @@
             this.homingButton.UseVisualStyleBackColor = true;
             this.homingButton.Click += new System.EventHandler(this.homingButton_Click);
             // 
+            // endbutton
+            // 
+            this.endbutton.BackgroundImage = global::MapEditor.Properties.Resources.End;
+            this.endbutton.Location = new System.Drawing.Point(221, 627);
+            this.endbutton.Name = "endbutton";
+            this.endbutton.Size = new System.Drawing.Size(69, 44);
+            this.endbutton.TabIndex = 9;
+            this.endbutton.Text = "End";
+            this.endbutton.UseVisualStyleBackColor = true;
+            this.endbutton.Click += new System.EventHandler(this.endbutton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,6 +164,7 @@
             this.BackgroundImage = global::MapEditor.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1264, 761);
+            this.Controls.Add(this.endbutton);
             this.Controls.Add(this.homingButton);
             this.Controls.Add(this.basicButton);
             this.Controls.Add(this.charButton);
@@ -180,6 +193,7 @@
         private System.Windows.Forms.Button charButton;
         private System.Windows.Forms.Button basicButton;
         private System.Windows.Forms.Button homingButton;
+        private System.Windows.Forms.Button endbutton;
     }
 }
 
